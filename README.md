@@ -32,3 +32,8 @@ r�cup�re la derni�re version du projet
 
 ## Comment �crire du MD ici :
 https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code
+
+## Useful links
+
+#Algorithme du plus court chemin (déplacement du monstre entre spawn et chateau)
+https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra 
