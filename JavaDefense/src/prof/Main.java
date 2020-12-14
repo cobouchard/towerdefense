@@ -9,6 +9,7 @@ public class Main {
 		int nbSquareY = 11;
 		int startX = 1;
 		int startY = 10;		
+		System.out.println("AAAA");
 		
 		World w = new World(width, height, nbSquareX, nbSquareY, startX, startY);
 		
