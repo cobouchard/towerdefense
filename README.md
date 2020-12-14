@@ -37,3 +37,10 @@ https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code
 
 #Algorithme du plus court chemin (déplacement du monstre entre spawn et chateau)
 https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra 
+
+## Sons
+https://freesound.org/
+
+## Images
+https://opengameart.org/
+Commentaire de mon frère : Et pour les "images" soit je savais ce que je voulais et je faisais une recherche google précise (genre "Cacodemon spritesheet" - pour la blague c'est vraiment une recherche que j'ai fait à l'époque)
