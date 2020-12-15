@@ -12,12 +12,12 @@ public class Graph {
     //The graph is defined normally by a set of vertices and a list of edges
     //It's in fact here a pseudo-multigraph
     protected HashSet<Vertex> vertices;
-    protected ArrayList<Edge> edges;
+    protected HashSet<Edge> edges;
 
     Graph()
     {
         vertices = new HashSet<>();
-        edges = new ArrayList<>();
+        edges = new HashSet<>();
     }
 
     public boolean addVertex(int id)
@@ -46,22 +46,22 @@ public class Graph {
 
     public boolean addEdge(int id_start, int id_end)
     {
-        Vertex v_start = null;
-        Vertex v_end = null;
+        Vertex v1 = null;
+        Vertex v2 = null;
 
         for(Vertex v : vertices)
         {
             if(id_start==v.getIdVertex())
-                v_start=v;
+                v1=v;
 
             if(id_end==v.getIdVertex())
-                v_end=v;
+                v2=v;
         }
 
-        if(v_start==null || v_end==null)
+        if(v1==null || v2==null)
             return false;
         else
-            return addEdge(v_start,v_end);
+            return addEdge(v1,v2);
 
     }
     
@@ -69,6 +69,8 @@ public class Graph {
     {
         return edges.add(new Edge(v1,v2));
     }
+    
+    
 
     public void displayVertices()
     {
@@ -143,6 +145,80 @@ public class Graph {
 
         }
     }
+    
+    public static Graph createGraphFromMatrix(int[][] matrix) 
+    {
+    	Graph foo = new Graph();
+    	
+    	//ajout des sommets inutile
+    	for(int ligne=0; ligne!= matrix.length; ligne++)
+    		for(int colonne=0; colonne!= matrix.length; colonne++)
+    			if(matrix[ligne][colonne]>0)
+    				foo.addVertex(matrix[ligne][colonne]);
+    	
+    	for(int ligne=0; ligne!= matrix.length; ligne++)
+    		for(int colonne=0; colonne!= matrix.length; colonne++) 
+    		{
+    			int id1 = matrix[ligne][colonne];
+    			if(id1>0)
+    			{
+    				//on regarde quels sont les cases adjacentes qui sont aussi des sommets
+    				try 
+    				{
+    					int id2 = matrix[ligne+1][colonne];
+    					if(id2>0) 
+    					{
+    						foo.addEdge(id1, id2);
+    					}
+    				}
+    				catch(ArrayIndexOutOfBoundsException e) 
+    				{
+    					// dans le vide
+    				}
+    				
+    				try 
+    				{
+    					int id2 = matrix[ligne-1][colonne];
+    					if(id2>0) 
+    					{
+    						foo.addEdge(id1, id2);
+    					}
+    				}
+    				catch(ArrayIndexOutOfBoundsException e) 
+    				{
+    					// dans le vide
+    				}
+    				
+    				try 
+    				{
+    					int id2 = matrix[ligne][colonne+1];
+    					if(id2>0) 
+    					{
+    						foo.addEdge(id1, id2);
+    					}
+    				}
+    				catch(ArrayIndexOutOfBoundsException e) 
+    				{
+    					// dans le vide
+    				}
+    				
+    				try 
+    				{
+    					int id2 = matrix[ligne][colonne-1];
+    					if(id2>0) 
+    					{
+    						foo.addEdge(id1, id2);
+    					}
+    				}
+    				catch(ArrayIndexOutOfBoundsException e) 
+    				{
+    					// dans le vide
+    				}
+    			}
+    		}
+    	
+    	return null;
+    }
 
     public static void main(String[] args)
     {
@@ -166,7 +242,7 @@ public class Graph {
         test.addEdge(4,5);
         test.addEdge(5,6);
 
-        test.saveGraph("sauvegarde");
+        //test.saveGraph("sauvegarde");
     }
 
 }

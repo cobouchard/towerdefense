@@ -11,7 +11,19 @@ class Edge{
         this.v2 = v2;
     }
 
-    public Vertex getV2() {
+    @Override
+	public int hashCode() {
+		return (v1.hashCode()+v2.hashCode())*97;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Edge other = (Edge) obj;
+		return ( other.v1.equals(v1) && other.v2.equals(v2) ) || ( other.v1.equals(v2) && other.v2.equals(v1) );
+		
+	}
+
+	public Vertex getV2() {
         return v2;
     }
 
