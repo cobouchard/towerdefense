@@ -35,8 +35,13 @@ https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code
 
 ## Useful links
 
-#Algorithme du plus court chemin (déplacement du monstre entre spawn et chateau)
+#Choix de l'algorithme du plus court chemin (déplacement du monstre entre spawn et chateau)
+
 https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra 
+https://cs.stackexchange.com/questions/42681/best-pathfinding-algorithm-for-undirected-unweighted-graph
+
+https://en.wikipedia.org/wiki/Breadth-first_search
+On va en fait utiliser un BFS, simple, déjà codé, assez efficace vu la taille de nos graphes.
 
 ## Sons
 https://freesound.org/
