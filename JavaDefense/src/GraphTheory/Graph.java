@@ -229,18 +229,17 @@ public class Graph {
      */
     public ArrayList<Vertex> plusCourtChemin(Vertex start, Vertex finish, Graph graph)
     {
-    	Graph graph2 = graph.BreadthFirstSearch(start);
-    	ArrayList<Vertex> chemin = new ArrayList<>();
-    	chemin.add(start);
-    	boolean found = false;
+    	Graph graph2 = graph.BreadthFirstSearch(start); // création du graphe à partir du start
+    	ArrayList<Vertex> chemin = new ArrayList<>(); //création du tanleau contenant le chemin
+    	chemin.add(start); //On ajoute le start qui fera forcément partie du chemin
+    	boolean found = false; //création d'une condition 
     	while(found == false)
     	{
-    		for (Edge e : edges)
+    		for (Edge e : edges) //On parcourt toutes les arrêtes 
     		{
-    	    	ArrayList<Vertex> chemin2 = chemin;
+    	    	ArrayList<Vertex> chemin2 = chemin; //On crée une liste pour chaque chemin et on retourne celle qui conduit au chateau
     			if (e.getV2().equals(finish))
     			{
-    				chemin2.add(e.getV1());
     				chemin2.add(e.getV2());
     				chemin = chemin2;
     				found = true;
@@ -298,7 +297,7 @@ public class Graph {
 			    {0,0,0,10,0,0}
 			};
 		Graph test2 = test.createGraphFromMatrix(matrix);
-		ArrayList<Vertex> nom = plusCourtChemin(start , finish , test2);
+		ArrayList<Vertex> nom = plusCourtChemin(start , finish , test2);//test et parcourt de la liste
 		for (int i = 0 ; i < nom.size() ; i++)
 		{
 			System.out.println(nom.get(i));
