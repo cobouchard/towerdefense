@@ -219,30 +219,91 @@ public class Graph {
     	
     	return null;
     }
+    
+    /**
+     * Permet d'obtenir le chemin le plus court entre 2 sommets d'un graphe
+     *@param start un sommet
+     *@param finish un sommet
+     *@param graph un graph
+     *@return le plus court chemin entre les sommets start et finish dans une ArrayList
+     */
+    public ArrayList<Vertex> plusCourtChemin(Vertex start, Vertex finish, Graph graph)
+    {
+    	Graph graph2 = graph.BreadthFirstSearch(start);
+    	ArrayList<Vertex> chemin = new ArrayList<>();
+    	chemin.add(start);
+    	boolean found = false;
+    	while(found == false)
+    	{
+    		for (Edge e : edges)
+    		{
+    	    	ArrayList<Vertex> chemin2 = chemin;
+    			if (e.getV2().equals(finish))
+    			{
+    				chemin2.add(e.getV1());
+    				chemin2.add(e.getV2());
+    				chemin = chemin2;
+    				found = true;
+    			}
+    			else
+    			{
+    				chemin2.add(e.getV2());
+    				plusCourtChemin(e.getV2(), finish , graph2);
+    			}
+    		}
+    	}
+    	return chemin;
+    }
+    /**
+     * Permet d'obtenir un sommet à partir d'un entier id dan sun graph
+     * @param id un entier 
+     * @param graph un Graph
+     * @return le Vertex associé à l'id dans le graph
+     */
+    public Vertex chercheVertex(Graph graph , Integer id)
+    {
+
+    }
 
     public static void main(String[] args)
     {
         Graph test = new Graph();
-        test.addVertex(1);
-        test.addVertex(2);
-        test.addVertex(3);
-        test.addVertex(4);
-        test.addVertex(5);
-        test.addVertex(6);
-        test.addVertex(7);
-
-        test.addEdge(1,2);
-        test.addEdge(1,3);
-        test.addEdge(2,3);
-        test.addEdge(3,6);
-        test.addEdge(4,6);
-        test.addEdge(2,4);
-        test.addEdge(2,7);
-        test.addEdge(4,7);
-        test.addEdge(4,5);
-        test.addEdge(5,6);
+//        test.addVertex(1);
+//        test.addVertex(2);
+//        test.addVertex(3);
+//        test.addVertex(4);
+//        test.addVertex(5);
+//        test.addVertex(6);
+//        test.addVertex(7);
+//
+//        test.addEdge(1,2);
+//        test.addEdge(1,3);
+//        test.addEdge(2,3);
+//        test.addEdge(3,6);
+//        test.addEdge(4,6);
+//        test.addEdge(2,4);
+//        test.addEdge(2,7);
+//        test.addEdge(4,7);
+//        test.addEdge(4,5);
+//        test.addEdge(5,6);
 
         //test.saveGraph("sauvegarde");
+		int[][] matrix =
+			{
+			    {0,16,1,0,0,0},
+			    {0,0,2,3,0,0},
+			    {0,0,0,4,14,0},
+			    {8,7,6,5,12,13},
+			    {0,15,9,11,0,0},
+			    {0,0,0,10,0,0}
+			};
+		Graph test2 = test.createGraphFromMatrix(matrix);
+		ArrayList<Vertex> nom = plusCourtChemin(start , finish , test2);
+		for (int i = 0 ; i < nom.size() ; i++)
+		{
+			System.out.println(nom.get(i));
+		}
+		
     }
 
 }
