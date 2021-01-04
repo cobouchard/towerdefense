@@ -43,6 +43,11 @@ https://cs.stackexchange.com/questions/42681/best-pathfinding-algorithm-for-undi
 https://en.wikipedia.org/wiki/Breadth-first_search
 On va en fait utiliser un BFS, simple, déjà codé, assez efficace vu la taille de nos graphes.
 
+
+https://www.youtube.com/watch?v=-L-WgKMFuhE
+https://en.wikipedia.org/wiki/A*_search_algorithm
+Voilà ce qu'on va vraiment utilisé.
+
 ## Sons
 https://freesound.org/
 
