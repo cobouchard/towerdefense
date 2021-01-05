@@ -17,4 +17,15 @@ public class BaseMonster extends Monster {
 		StdDraw.setPenColor(StdDraw.BLUE);
 		StdDraw.filledCircle(p.getX(), p.getY(), 0.01);
 	}
+
+	@Override
+	protected Monster createMonster(Position p) {
+		return new BaseMonster(p);
+	}
+
+	@Override
+	protected void updateStat(int difficulte) {
+		// TODO Auto-generated method stub
+		
+	}
 }

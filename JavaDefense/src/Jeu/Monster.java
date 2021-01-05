@@ -14,6 +14,8 @@ public abstract class Monster {
 	// Compteur de déplacement pour savoir si le monstre à atteint le chateau du joueur
 	int checkpoint = 0;
 	
+	protected int pdv;
+	
 	public Monster(Position p) {
 		this.p = p;
 		this.nextP = new Position(p);
@@ -70,4 +72,7 @@ public abstract class Monster {
 	 * Fonction abstraite qui sera instanciée dans les classes filles pour afficher le monstre sur le plateau de jeu.
 	 */
 	public abstract void draw();
+	
+	protected abstract Monster createMonster(Position p);
+	protected abstract void updateStat(int difficulte);
 }
