@@ -102,5 +102,7 @@ public abstract class Bisection
 
 ## Propositions images case
 https://opengameart.org/content/tower-defense-300-tilessprites
+
 https://www.pinterest.com/pin/446349013041737645/
+
 https://in.pinterest.com/pin/837317755694460457/
