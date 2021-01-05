@@ -1,6 +1,11 @@
-package prof;
+package Main;
 
 import java.util.List;
+
+import Interface.Position;
+import Interface.StdDraw;
+import Jeu.Monster;
+
 import java.util.LinkedList;
 
 import java.util.ArrayList;
@@ -68,7 +73,7 @@ public class World {
 	 public void drawPath() {
 		 Position p = new Position(spawn);
 		 StdDraw.setPenColor(StdDraw.YELLOW);
-		 StdDraw.filledRectangle(p.x, p.y, squareWidth / 2, squareHeight / 2);
+		 StdDraw.filledRectangle(p.getX(), p.getY(), squareWidth / 2, squareHeight / 2);
 	 }
 	 
 	 /**
@@ -109,8 +114,8 @@ public class World {
 		while (i.hasNext()) {
 			 m = i.next();
 			 m.update();
-			 if(m.p.y < 0) {
-				 m.p.y = 1;
+			 if(m.getP().getY() < 0) {
+				 m.getP().setY(1);
 			 }
 		 }
 	 }

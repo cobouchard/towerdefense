@@ -1,4 +1,4 @@
-package prof;
+package Interface;
 
 public class Bomb extends Projectile {
 	
@@ -20,6 +20,6 @@ public class Bomb extends Projectile {
 	//TODO
 	public void draw() {
 		StdDraw.setPenColor(StdDraw.BLUE);
-		StdDraw.filledCircle(p.x, p.y, 0.01);
+		StdDraw.filledCircle(p.getX(), p.getY(), 0.01);
 	}
 }

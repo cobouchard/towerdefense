@@ -1,6 +1,6 @@
 package AStar;
 
-public class Position {
+public class PositionTab {
 	private int x;
 	private int y;
 	
@@ -18,7 +18,7 @@ public class Position {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Position other = (Position) obj;
+		PositionTab other = (PositionTab) obj;
 		if (x != other.x)
 			return false;
 		if (y != other.y)
@@ -38,7 +38,7 @@ public class Position {
 	public void setY(int y) {
 		this.y = y;
 	}
-	public Position(int x, int y) {
+	public PositionTab(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}

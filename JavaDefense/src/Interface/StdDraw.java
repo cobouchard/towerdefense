@@ -1,4 +1,4 @@
-package prof;
+package Interface;
 /******************************************************************************
  *  Compilation:  javac StdDraw.java
  *  Execution:    java StdDraw

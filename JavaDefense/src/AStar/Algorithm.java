@@ -40,7 +40,7 @@ public class Algorithm {
 	 * @param y2 coordonnee y du deuxieme point
 	 * @return retourne la distance entre les 2 points
 	 */
-	private static int distance(Position depart, Position arrivee) 
+	private static int distance(PositionTab depart, PositionTab arrivee) 
 	{
 		return Math.abs(depart.getX()-arrivee.getX())+Math.abs(depart.getY()-arrivee.getY());
 		//return (int)Math.sqrt(Math.pow((double)(depart.getX()-arrivee.getX()),2.)+Math.pow((double)(depart.getY()-arrivee.getY()), 2.));
@@ -59,7 +59,7 @@ public class Algorithm {
 	 * @param p position
 	 * @return cellule
 	 */
-	private Cell findCell(Position p) 
+	private Cell findCell(PositionTab p) 
 	{
 		return table[p.getX()][p.getY()];
 	}
@@ -69,12 +69,12 @@ public class Algorithm {
 	 * @param c cellule à localiser
 	 * @return position de la cellule
 	 */
-	private Position findPosition(Cell c) 
+	private PositionTab findPosition(Cell c) 
 	{
 		for(int ligne=0; ligne!=TAILLE; ligne ++)
 			for(int colonne=0; colonne!=TAILLE; colonne++)
 				if(table[ligne][colonne].equals(c))
-					return new Position(ligne,colonne);
+					return new PositionTab(ligne,colonne);
 		return null;
 	}
 	
@@ -102,10 +102,10 @@ public class Algorithm {
 	 * @param p position actuelle
 	 * @return prochaine position dans le chemin
 	 */
-	private Position getMinCostAdjacentPosition(Position p) 
+	private PositionTab getMinCostAdjacentPosition(PositionTab p) 
 	{
 		Cell temp_cell = null;
-		Position best_posit = null;
+		PositionTab best_posit = null;
 		int best_cost = Integer.MAX_VALUE;
 		
 		//cellule du haut
@@ -114,7 +114,7 @@ public class Algorithm {
 			temp_cell = table[p.getX()-1][p.getY()];
 			if(temp_cell.getValue()>0 && temp_cell.getTotalCost()>0) //si le total cost est 0 la cellule n'a pas ete visité (mais ce n'est pas le bon chemin)
 			{
-				best_posit = new Position(p.getX()-1,p.getY());
+				best_posit = new PositionTab(p.getX()-1,p.getY());
 				best_cost = temp_cell.getgCost();
 			}
 		}
@@ -128,7 +128,7 @@ public class Algorithm {
 			{
 				if(best_posit==null || best_cost>temp_cell.getgCost()) 
 				{
-					best_posit=new Position(p.getX()+1,p.getY());
+					best_posit=new PositionTab(p.getX()+1,p.getY());
 					best_cost=temp_cell.getgCost();
 				}
 			}
@@ -142,7 +142,7 @@ public class Algorithm {
 			{
 				if(best_posit==null || best_cost>temp_cell.getgCost()) 
 				{
-					best_posit=new Position(p.getX(),p.getY()-1);
+					best_posit=new PositionTab(p.getX(),p.getY()-1);
 					best_cost=temp_cell.getgCost();
 				}
 			}
@@ -156,7 +156,7 @@ public class Algorithm {
 			{
 				if(best_posit==null || best_cost>temp_cell.getgCost()) 
 				{
-					best_posit=new Position(p.getX(),p.getY()+1);
+					best_posit=new PositionTab(p.getX(),p.getY()+1);
 					best_cost=temp_cell.getgCost();
 				}
 			}
@@ -171,7 +171,7 @@ public class Algorithm {
 	 * @param arrivee
 	 * @return liste des positions dans l'ordre inverse (de l'arrivee au depart)
 	 */
-	public ArrayList<Position> fastestWay(Position depart, Position arrivee) 
+	public ArrayList<PositionTab> fastestWay(PositionTab depart, PositionTab arrivee) 
 	{
 		for(int ligne=0; ligne!=TAILLE; ligne ++)
 			for(int colonne=0; colonne!=TAILLE; colonne++) 
@@ -182,15 +182,15 @@ public class Algorithm {
 				
 		open_cells = new HashSet<Cell>();
 		closed_cells = new HashSet<Cell>();
-		ArrayList<Position> chemin = new ArrayList<>();
+		ArrayList<PositionTab> chemin = new ArrayList<>();
 		
 		
 		Cell temp_cell = findCell(depart);
 		closed_cells.add(temp_cell);
-		temp_cell.sethCost(distance(new Position(depart.getX(),depart.getY()), arrivee));
+		temp_cell.sethCost(distance(new PositionTab(depart.getX(),depart.getY()), arrivee));
 		
 		Cell current_cell = temp_cell;
-		Position current_pos = depart;
+		PositionTab current_pos = depart;
 		
 		boolean test = true;
 		while(test) 
@@ -206,7 +206,7 @@ public class Algorithm {
 					temp_cell.setgCost(current_cell.getgCost()+1);
 					
 					if(temp_cell.gethCost()==0) //inutile de le recalculer
-						temp_cell.sethCost(distance(new Position(current_pos.getX()-1,current_pos.getY()), arrivee));
+						temp_cell.sethCost(distance(new PositionTab(current_pos.getX()-1,current_pos.getY()), arrivee));
 					open_cells.add(temp_cell);
 				}
 			}
@@ -220,7 +220,7 @@ public class Algorithm {
 				{
 					temp_cell.setgCost(current_cell.getgCost()+1);
 					if(temp_cell.gethCost()==0)
-						temp_cell.sethCost(distance(new Position(current_pos.getX()+1,current_pos.getY()), arrivee));
+						temp_cell.sethCost(distance(new PositionTab(current_pos.getX()+1,current_pos.getY()), arrivee));
 					open_cells.add(temp_cell);
 				}
 			}
@@ -233,7 +233,7 @@ public class Algorithm {
 				{
 					temp_cell.setgCost(current_cell.getgCost()+1);
 					if(temp_cell.gethCost()==0)
-						temp_cell.sethCost(distance(new Position(current_pos.getX(),current_pos.getY()-1), arrivee));
+						temp_cell.sethCost(distance(new PositionTab(current_pos.getX(),current_pos.getY()-1), arrivee));
 					open_cells.add(temp_cell);
 				}
 			}
@@ -246,7 +246,7 @@ public class Algorithm {
 				{
 					temp_cell.setgCost(current_cell.getgCost()+1);
 					if(temp_cell.gethCost()==0)
-						temp_cell.sethCost(distance(new Position(current_pos.getX(),current_pos.getY()+1), arrivee));
+						temp_cell.sethCost(distance(new PositionTab(current_pos.getX(),current_pos.getY()+1), arrivee));
 					open_cells.add(temp_cell);
 				}
 			}
@@ -268,7 +268,7 @@ public class Algorithm {
 		
 		//il faut maintenant re faire le chemin en partant de l'arrivee et en suivant les fcost décroissant
 		chemin.add(arrivee);
-		Position temp_posit = arrivee;
+		PositionTab temp_posit = arrivee;
 		while(!temp_posit.equals(depart)) 
 		{
 			temp_posit = getMinCostAdjacentPosition(temp_posit);

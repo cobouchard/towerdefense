@@ -1,6 +1,6 @@
-package prof;
+package Interface;
 
-public class Projectile {
+public abstract class Projectile {
 	// Position du projectile à l'instant t
 	Position p;
 	// Vitesse du projectile
@@ -35,14 +35,14 @@ public class Projectile {
 	 */
 	public void move() {
 		// Mesure sur quel axe le projectile se dirige.
-		double dx = nextP.x - p.x;
-		double dy = nextP.y - p.y;
+		double dx = nextP.getX() - p.getX();
+		double dy = nextP.getY() - p.getY();
 		if (dy + dx != 0){
 			// Mesure la distance à laquelle le projectile a pu se déplacer.
 			double ratioX = dx/(Math.abs(dx) + Math.abs(dy));
 			double ratioY = dy/(Math.abs(dx) + Math.abs(dy));
-			p.x += ratioX * speed;
-			p.y += ratioY * speed;
+			p.setX(ratioX * speed + p.getX());
+			p.setY(ratioY * speed + p.getY());
 		}
 	}
 	

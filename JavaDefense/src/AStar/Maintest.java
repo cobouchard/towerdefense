@@ -16,10 +16,10 @@ public class Maintest {
 		
 		Algorithm a_star = new Algorithm(matrix);
 		
-		ArrayList<Position> plusCourtChemin = a_star.fastestWay(new Position(0,1), new Position(4,3));
+		ArrayList<PositionTab> plusCourtChemin = a_star.fastestWay(new PositionTab(0,1), new PositionTab(4,3));
 		
 		System.out.println(plusCourtChemin);
-		System.out.println(a_star.fastestWay(new Position(4,3), new Position(0,1)));
+		System.out.println(a_star.fastestWay(new PositionTab(4,3), new PositionTab(0,1)));
 		
 	}
 }

@@ -1,4 +1,8 @@
-package prof;
+package Main;
+
+import Interface.Position;
+import Jeu.BaseMonster;
+import Jeu.Monster;
 
 public class Main {
 
@@ -18,8 +22,8 @@ public class Main {
 		
 		// Ajout d'un monstre "à la main" pour afficher comment un monstre se déplaçe. Vous ne devez pas faire pareil, mais ajouter une vague comportant plusieurs monstres 
 		Monster monster = new BaseMonster(new Position(startX * w.squareWidth + w.squareWidth / 2, startY * w.squareHeight + w.squareHeight / 2));
-		monster.nextP = new Position(startX * w.squareWidth + w.squareWidth / 2, 0);
-		monster.speed = 0.01;
+		monster.setNextP(new Position(startX * w.squareWidth + w.squareWidth / 2, 0)); 
+		monster.setSpeed(0.01);
 		w.monsters.add(monster);
 		
 		// Lancement de la boucle principale du jeu

@@ -1,6 +1,8 @@
-package prof;
+package Jeu;
 
-public class Tower {
+import Interface.Position;
+
+public abstract class Tower {
 
 	// Position de la tour
 	Position p;
