@@ -18,7 +18,8 @@ public abstract class Monster {
 	
 	public Monster(Position p) {
 		this.p = p;
-		this.nextP = new Position(p);
+		if(p!=null)
+			this.nextP = new Position(p);
 	}
 	
 	

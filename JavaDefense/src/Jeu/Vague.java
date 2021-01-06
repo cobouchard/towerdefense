@@ -1,17 +1,19 @@
 package Jeu;
 
+
 import Interface.Position;
 
-public class Vague<M extends Monster> {
+public class Vague {
 	private int nb_monstre_total;
 	private int nb_monstre_actuel;
 	
-	private M monster;
+	private Monster monster;
 	
 	private int difficulte;
 	
-	Vague(int nb_monstre_total, int difficulte)
+	public Vague(int nb_monstre_total, int difficulte, Monster monster)
 	{
+		this.monster=monster;
 		this.nb_monstre_total=nb_monstre_total;
 		nb_monstre_actuel=nb_monstre_total;
 		this.difficulte=difficulte;
@@ -37,5 +39,12 @@ public class Vague<M extends Monster> {
 		m.updateStat(difficulte);
 		return m;
 	}
+
+	@Override
+	public String toString() {
+		return "Vague [Nombre de monstre=" + nb_monstre_total + ", Type de Monstre=" + monster.getClass() + ", Difficulté=" + difficulte
+				+ "]";
+	}
+	
 	
 }

@@ -49,7 +49,7 @@ public class Position {
 	public double dist(Position p) {
 		return Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2));
 	}
-
+	
 	/**
 	 * Retourne la position du point sur l'axe des x et des y
 	 */
