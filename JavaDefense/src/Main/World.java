@@ -16,7 +16,7 @@ public class World {
 	List<Monster> monsters = new ArrayList<Monster>();
 	
 	// Position par laquelle les monstres vont venir
-	Position spawn;
+	ArrayList<Position> spawns;
 	
 	// Information sur la taille du plateau de jeu
 	int width;
@@ -51,7 +51,9 @@ public class World {
 		this.nbSquareY = nbSquareY;
 		squareWidth = (double) 1 / nbSquareX;
 		squareHeight = (double) 1 / nbSquareY;
-		spawn = new Position(startSquareX * squareWidth + squareWidth / 2, startSquareY * squareHeight + squareHeight / 2);
+		spawns = new ArrayList<>();
+		spawns.add(new Position(startSquareX * squareWidth + squareWidth / 2, startSquareY * squareHeight + squareHeight / 2));
+				
 		StdDraw.setCanvasSize(width, height);
 		StdDraw.enableDoubleBuffering();
 	}
@@ -60,6 +62,9 @@ public class World {
 	 * Définit le décors du plateau de jeu.
 	 */
 	 public void drawBackground() {	
+		 
+		 //à modifier
+		 
 		 StdDraw.setPenColor(StdDraw.LIGHT_GREEN);
 		 for (int i = 0; i < nbSquareX; i++)
 			 for (int j = 0; j < nbSquareY; j++)
@@ -67,14 +72,7 @@ public class World {
 				 //StdDraw.picture(i * squareWidth + squareWidth / 2, j * squareHeight + squareHeight / 2, "images/grass.jpg", squareWidth, squareHeight);
 	 }
 	 
-	 /**
-	  * Initialise le chemin sur la position du point de départ des monstres. Cette fonction permet d'afficher une route qui sera différente du décors.
-	  */
-	 public void drawPath() {
-		 Position p = new Position(spawn);
-		 StdDraw.setPenColor(StdDraw.YELLOW);
-		 StdDraw.filledRectangle(p.getX(), p.getY(), squareWidth / 2, squareHeight / 2);
-	 }
+	 
 	 
 	 /**
 	  * Affiche certaines informations sur l'écran telles que les points de vie du joueur ou son or
@@ -126,7 +124,6 @@ public class World {
 	  */
 	 public int update() {
 		drawBackground();
-		drawPath();
 		drawInfos();
 		updateMonsters();
 		drawMouse();
