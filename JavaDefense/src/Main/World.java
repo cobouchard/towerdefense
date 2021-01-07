@@ -2,9 +2,13 @@ package Main;
 
 import java.util.List;
 
+
 import Interface.Position;
 import Interface.StdDraw;
 import Jeu.Monster;
+import Jeu.Niveau;
+
+import Read.Reader;
 
 import java.util.LinkedList;
 
@@ -12,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class World {
+	// Variable static pour la taille d'un côté du monde
+	static final int taille = 15;
+	
 	// l'ensemble des monstres, pour gerer (notamment) l'affichage
 	List<Monster> monsters = new ArrayList<Monster>();
 	
@@ -61,15 +68,81 @@ public class World {
 	/**
 	 * Définit le décors du plateau de jeu.
 	 */
-	 public void drawBackground() {	
+	 public void drawBackground(int[][]world) {	// Tab en entrée
 		 
-		 //à modifier
+		 for (int i = 0 ; i < taille ; i++)
+		 {
+			 for (int j = 0 ; j < taille ; j++)
+			 {
+				 if (world[i][j] == 0)
+				 {
+					 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/EmptyTile.png");
+				 }
+				 else if (world[i][j] > 0)
+				 {
+					 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/Road.png");
+				 }
+				 else 
+				 {
+					 if ((i != 0)&&(j != 0)&&(i != taille -1)&&(j != taille - 1))
+					 {
+						 if ((world[i - 1][j] > 0)&&(world[i][j - 1] > 0)) // Top and left
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTopAndLeft.png");
+						 }
+						 else if ((world[i + 1][j] > 0)&&(world[i][j - 1] > 0)) // Top and right
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTopAndRight.png");
+						 }
+						 else if ((world[i - 1][j] > 0)&&(world[i][j + 1] > 0)) // Bot and left
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBotAndLeft.png");
+						 }
+						 else if ((world[i + 1][j] > 0)&&(world[i][j + 1] > 0)) // Bot and right
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBotAndRight.png");
+						 }
+						 else if (world[i - 1][j] > 0) // Left
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadLeft.png");
+						 }
+						 else if (world[i + 1][j] > 0) // Right
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+						 }
+						 else if (world[i][j - 1] > 0) //Top
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTop.png");
+						 }
+						 else if (world[i][j + 1] > 0) // Bot
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBot.png");
+						 }
+						 else if (world[i - 1][j - 1] > 0) // TopLeft
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTopLeft.png");
+						 }
+						 else if (world[i + 1][j - 1] > 0) // TopRight
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTopRight.png");
+						 }
+						 else if (world[i - 1][j + 1] > 0) // BotLeft
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBotLeft.png");
+						 }
+						 else if (world[i + 1][j + 1] > 0) // BotRight
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBotRight.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+				 } 
+			 }
+		 }
 		 
-		 StdDraw.setPenColor(StdDraw.LIGHT_GREEN);
-		 for (int i = 0; i < nbSquareX; i++)
-			 for (int j = 0; j < nbSquareY; j++)
-				 StdDraw.filledRectangle(i * squareWidth + squareWidth / 2, j * squareHeight + squareHeight / 2, squareWidth , squareHeight);
-				 //StdDraw.picture(i * squareWidth + squareWidth / 2, j * squareHeight + squareHeight / 2, "images/grass.jpg", squareWidth, squareHeight);
 	 }
 	 
 	 
@@ -123,7 +196,20 @@ public class World {
 	  * @return les points de vie restants du joueur
 	  */
 	 public int update() {
-		drawBackground();
+		Niveau n = null;
+		try {
+			n = Reader.func("../niveaux/niveau1.niveau");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		drawBackground(n.getGrille());
+		double x = 1/15;
+		double y = 7/15;
+		double d = (double) Math.round(x * 100) / 100;
+		double e = (double) Math.round(y * 100) / 100;
+		StdDraw.picture(e, e, "../images/tiles/RoadBotAndLeft.png");
+		StdDraw.picture(d,d, "../images/tiles/RoadTopAndLeft.png");
 		drawInfos();
 		updateMonsters();
 		drawMouse();
