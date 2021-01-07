@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import AStar.Algorithm;
 import AStar.PositionTab;
+import Interface.Converter;
 import Interface.Position;
 
 public abstract class Monster {
@@ -28,10 +29,10 @@ public abstract class Monster {
 			this.nextP = new Position(p);
 	}
 	
-	public void updateChemin(int[][] grille, PositionTab chateau) 
+	public void updateChemin(int[][] grille, Position chateau) 
 	{
 		Algorithm a = new Algorithm(grille);
-		chemin = a.fastestWay(new PositionTab(p), chateau);
+		chemin = a.fastestWay(Converter.positionToTab(p), Converter.positionToTab(chateau));
 	}
 	
 	

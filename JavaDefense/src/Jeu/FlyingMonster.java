@@ -1,6 +1,7 @@
 package Jeu;
 
 import Interface.Position;
+import Interface.StdDraw;
 
 public class FlyingMonster extends Monster{
 
@@ -11,7 +12,7 @@ public class FlyingMonster extends Monster{
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
+		StdDraw.picture(p.getX(),p.getY(),"../images/monsters/FlyingMonster1.png");
 		
 	}
 

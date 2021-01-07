@@ -2,6 +2,7 @@ package Jeu;
 
 import java.util.ArrayList;
 
+import AStar.PositionTab;
 import Read.Reader;
 
 public class Niveau {
@@ -9,6 +10,9 @@ public class Niveau {
 	private int[][] grille;
 	private ArrayList<Vague> vagues;
 	private final int or_depart;
+	
+	// Position par laquelle les monstres vont venir
+	private ArrayList<PositionTab> spawns;
 	
 	public String getNom() {
 		return nom;
@@ -33,11 +37,18 @@ public class Niveau {
 		return v;
 	}
 	
-	public Niveau(String nom, int[][] grille, ArrayList<Vague> vagues, int or_depart) {
+	public PositionTab getRandomSpawn() 
+	{
+		int rand = Randomizer.randomInt(0, spawns.size()-1);
+		return spawns.get(rand);
+	}
+	
+	public Niveau(String nom, int[][] grille, ArrayList<Vague> vagues, int or_depart, ArrayList<PositionTab> spawns) {
 		this.nom = nom;
 		this.grille = grille;
 		this.vagues = vagues;
 		this.or_depart=or_depart;
+		this.spawns=spawns;
 	}
 	
 	public void affiche() 

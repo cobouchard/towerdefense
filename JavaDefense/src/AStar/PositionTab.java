@@ -45,11 +45,4 @@ public class PositionTab {
 		this.y = y;
 	}
 	
-	public PositionTab(Position p) 
-	{
-		//need modificaiton
-		x=-1;
-		y=-1;
-	}
-	
 }

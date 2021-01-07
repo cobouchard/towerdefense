@@ -19,22 +19,18 @@ public class World {
 	// Variable static pour la taille d'un côté du monde
 	static final int taille = 15;
 	
-	// l'ensemble des monstres, pour gerer (notamment) l'affichage
+	// l'ensemble des monstres, pour gerer (notamment) l'affichage (finira par disparaitre)
 	List<Monster> monsters = new ArrayList<Monster>();
 	
-	// Position par laquelle les monstres vont venir
-	ArrayList<Position> spawns;
+	
 	
 	// Information sur la taille du plateau de jeu
 	public int width;
 	int height;
-	public int nbSquareX;
-	int nbSquareY;
 	double squareWidth;
 	double squareHeight;
 	
-	// Nombre de points de vie du joueur
-	int life = 20;
+	
 	
 	// Commande sur laquelle le joueur appuie (sur le clavier)
 	char key;
@@ -55,18 +51,14 @@ public class World {
 	 * @param startSquareX
 	 * @param startSquareY
 	 */
-	public World(int width, int height, int nbSquareX, int nbSquareY, int startSquareX, int startSquareY) {
+	public World(int width, int height) {
 		this.width = width;
 		this.height = height;
-		this.nbSquareX = nbSquareX;
-		this.nbSquareY = nbSquareY;
-		squareWidth = (double) 1 / nbSquareX;
-		squareHeight = (double) 1 / nbSquareY;
-		spawns = new ArrayList<>();
-		spawns.add(new Position(startSquareX * squareWidth + squareWidth / 2, startSquareY * squareHeight + squareHeight / 2));
+		squareWidth = (double) 1 / taille;
+		squareHeight = (double) 1 / taille;
 		
 		try {
-			niveau = Reader.func("../niveaux/niveau1.niveau");
+			niveau = Reader.func("../niveaux/niveau3.niveau");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -450,7 +442,7 @@ public class World {
 		drawInfos();
 		updateMonsters();
 		drawMouse();
-		return life;
+		return -1;
 	 }
 	 
 	/**

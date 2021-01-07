@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import AStar.PositionTab;
 import Jeu.BaseMonster;
 import Jeu.FlyingMonster;
 import Jeu.Niveau;
@@ -13,6 +14,8 @@ import Jeu.Vague;
 /**
  * Structure d'un fichier de niveau :
  * Nom du niveau
+ * Or de depart du niveau
+ * Numéros des spawns
  * Grille du jeu
  * Vague 1 (type de monstre, nombre, difficulté)
  * Vague 2
@@ -41,6 +44,16 @@ public final class Reader {
 		//on récupère l'or de départ du niveau
 		int or_depart = Integer.parseInt(sc.nextLine());
 		
+		//on récupère les numéros des spawns
+		String[] spawns_num_chaine = sc.nextLine().split(",");
+		int[] spawns_num = new int[spawns_num_chaine.length];
+		for(int i=0; i!=spawns_num_chaine.length; i++) 
+		{
+			spawns_num[i] = Integer.parseInt(spawns_num_chaine[i]);
+		}
+		ArrayList<PositionTab> spawns = new ArrayList<>();
+		
+		
 		//on récupère la grille
 		for(ligne=0; ligne!= TAILLE; ligne++) 
 		{
@@ -49,9 +62,19 @@ public final class Reader {
 			for(String s : chaine.split(","))
 			{
 				grille[ligne][colonne]=Integer.parseInt(s);
+				
+				//on peut grâce à la grille trouver l'emplacement des spawns
+				for(Integer i : spawns_num)
+					if(grille[ligne][colonne]==i)
+						spawns.add(new PositionTab(ligne,colonne));
+				
 				colonne++;
 			}
 		}
+		
+		
+		
+		
 		
 		//on récupère les vagues de monstre
 		while(sc.hasNextLine()) 
@@ -75,7 +98,7 @@ public final class Reader {
 		}
 		
 		sc.close();
-		return new Niveau(nom_niveau,grille,vagues, or_depart);
+		return new Niveau(nom_niveau,grille,vagues, or_depart, spawns);
 	}
 	
 	public static void main(String[] args) {
