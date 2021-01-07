@@ -88,11 +88,11 @@ public class World {
 			 {
 				 if (niveau.getGrille()[i][j] == 0)
 				 {
-					 StdDraw.picture(n*i,n*j,"../images/tiles/EmptyTile.png");
+					 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 				 }
 				 else if (niveau.getGrille()[i][j] > 0)
 				 {
-					 StdDraw.picture(n*i,n*j,"../images/tiles/Road.png");
+					 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/Road.png");
 				 }
 				 else 
 				 {
@@ -100,287 +100,287 @@ public class World {
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotAndLeft.png");
 						 }
 						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotAndRight.png");
 						 }
 						 else if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopAndLeft.png");
 						 }
 						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and right
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopAndRight.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadLeft.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadRight.png");
 						 }
 						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBot.png");
 						 }
 						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTop.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j - 1] > 0) // TopLeft
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotLeft.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j - 1] > 0) // TopRight
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotRight.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j + 1] > 0) // BotLeft
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopLeft.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadToPRight.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 					 else if ((i == 0)&&(j == 0))
 					 {
 						 if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and right
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopAndRight.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadRight.png");
 						 }
 						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTop.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopRight.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 					 else if ((i == 0)&&(j == taille -1))
 					 {
 						 if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotAndRight.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadRight.png");
 						 }
 						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBot.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j - 1] > 0) // TopRight
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotRight.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 					 else if ((i == taille - 1)&&(j == 0))
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopAndLeft.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadLeft.png");
 						 }
 						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTop.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j + 1] > 0) // BotLeft
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopLeft.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 					 else if ((i == taille - 1)&&(j == taille - 1))
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotAndLeft.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadLeft.png");
 						 }
 						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBot.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j - 1] > 0) // TopLeft
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotLeft.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 					 else if (i == 0)
 					 {
 						 if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotAndRight.png");
 						 }
 						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and right
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopAndRight.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadRight.png");
 						 }
 						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBot.png");
 						 }
 						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTop.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j - 1] > 0) // TopRight
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotRight.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopRight.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 					 else if (j == 0)
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopAndLeft.png");
 						 }
 						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and right
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopAndRight.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadLeft.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadRight.png");
 						 }
 						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTop.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j + 1] > 0) // BotLeft
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopLeft.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopRight.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 					 else if (i == taille - 1)
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotAndLeft.png");
 						 }
 						 else if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopAndLeft.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadLeft.png");
 						 }
 						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBot.png");
 						 }
 						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTop.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j - 1] > 0) // TopLeft
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotLeft.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j + 1] > 0) // BotLeft
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopLeft.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 					 else if (j == taille - 1)
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotAndLeft.png");
 						 }
 						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotAndRight.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadLeft.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadRight.png");
 						 }
 						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBot.png");
 						 }
 						 else if (niveau.getGrille()[i - 1][j - 1] > 0) // TopLeft
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopLeft.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotLeft.png");
 						 }
 						 else if (niveau.getGrille()[i + 1][j - 1] > 0) // TopRight
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadBotRight.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 				 } 
