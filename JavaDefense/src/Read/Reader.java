@@ -82,7 +82,6 @@ public final class Reader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		n.affiche();
 	}
 }
