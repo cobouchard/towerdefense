@@ -82,6 +82,7 @@ public final class Reader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		n.affiche();
+		//n.affiche();
+		System.out.println(((double)(1))/3);
 	}
 }
