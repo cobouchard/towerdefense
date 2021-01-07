@@ -27,4 +27,10 @@ public class FlyingMonster extends Monster{
 		
 	}
 
+	@Override
+	protected boolean perdrePv(int degats) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

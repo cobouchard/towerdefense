@@ -30,13 +30,16 @@ public final class Reader {
 		File niveau_file = new File(cheminNiveau);
 		Scanner sc = new Scanner(niveau_file);
 		String chaine;
-		
-		String nom_niveau = sc.nextLine();
 		int[][] grille = new int[TAILLE][TAILLE];
 		ArrayList<Vague> vagues = new ArrayList<>();
-		
 		int ligne;
 		int colonne;
+		
+		//on récupère le nom du niveau
+		String nom_niveau = sc.nextLine();
+		
+		//on récupère l'or de départ du niveau
+		int or_depart = Integer.parseInt(sc.nextLine());
 		
 		//on récupère la grille
 		for(ligne=0; ligne!= TAILLE; ligne++) 
@@ -72,7 +75,7 @@ public final class Reader {
 		}
 		
 		sc.close();
-		return new Niveau(nom_niveau,grille,vagues);
+		return new Niveau(nom_niveau,grille,vagues, or_depart);
 	}
 	
 	public static void main(String[] args) {
@@ -82,7 +85,6 @@ public final class Reader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//n.affiche();
-		System.out.println(((double)(1))/3);
+		n.affiche();
 	}
 }

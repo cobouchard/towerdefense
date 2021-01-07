@@ -8,6 +8,7 @@ public class Niveau {
 	private String nom;
 	private int[][] grille;
 	private ArrayList<Vague> vagues;
+	private final int or_depart;
 	
 	public String getNom() {
 		return nom;
@@ -16,6 +17,15 @@ public class Niveau {
 		return grille;
 	}
 	
+	public int getOrDepart() 
+	{
+		return this.or_depart;
+	}
+	
+	/**
+	 * 
+	 * @return renvoie la prochaine vague de monstre et la supprime de la liste, renvoie null si le niveau est terminé
+	 */
 	public Vague getNextVague() 
 	{
 		Vague v = vagues.get(0);
@@ -23,10 +33,11 @@ public class Niveau {
 		return v;
 	}
 	
-	public Niveau(String nom, int[][] grille, ArrayList<Vague> vagues) {
+	public Niveau(String nom, int[][] grille, ArrayList<Vague> vagues, int or_depart) {
 		this.nom = nom;
 		this.grille = grille;
 		this.vagues = vagues;
+		this.or_depart=or_depart;
 	}
 	
 	public void affiche() 

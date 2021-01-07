@@ -28,4 +28,10 @@ public class BaseMonster extends Monster {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	protected boolean perdrePv(int degats) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

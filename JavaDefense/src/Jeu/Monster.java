@@ -1,5 +1,9 @@
 package Jeu;
 
+import java.util.ArrayList;
+
+import AStar.Algorithm;
+import AStar.PositionTab;
 import Interface.Position;
 
 public abstract class Monster {
@@ -14,6 +18,8 @@ public abstract class Monster {
 	// Compteur de déplacement pour savoir si le monstre à atteint le chateau du joueur
 	int checkpoint = 0;
 	
+	ArrayList<PositionTab> chemin;
+	
 	protected int pdv;
 	
 	public Monster(Position p) {
@@ -22,6 +28,11 @@ public abstract class Monster {
 			this.nextP = new Position(p);
 	}
 	
+	public void updateChemin(int[][] grille, PositionTab chateau) 
+	{
+		Algorithm a = new Algorithm(grille);
+		chemin = a.fastestWay(new PositionTab(p), chateau);
+	}
 	
 	
 	public void setSpeed(double speed) {
@@ -76,4 +87,5 @@ public abstract class Monster {
 	
 	protected abstract Monster createMonster(Position p);
 	protected abstract void updateStat(int difficulte);
+	protected abstract boolean perdrePv(int degats);
 }

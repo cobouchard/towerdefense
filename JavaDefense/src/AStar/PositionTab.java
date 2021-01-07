@@ -1,5 +1,7 @@
 package AStar;
 
+import Interface.Position;
+
 public class PositionTab {
 	private int x;
 	private int y;
@@ -41,6 +43,13 @@ public class PositionTab {
 	public PositionTab(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public PositionTab(Position p) 
+	{
+		//need modificaiton
+		x=-1;
+		y=-1;
 	}
 	
 }
