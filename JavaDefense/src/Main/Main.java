@@ -7,10 +7,10 @@ import Jeu.Monster;
 public class Main {
 
 	public static void main(String[] args) {
-		int width = 1200;
-		int height = 800;
-		int nbSquareX = 11;
-		int nbSquareY = 11;
+		int width = 750;
+		int height = 750;
+		int nbSquareX = 15;
+		int nbSquareY = 15;
 		int startX = 1;
 		int startY = 10;		
 

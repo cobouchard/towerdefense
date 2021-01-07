@@ -42,6 +42,10 @@ public class World {
 	// Condition pour terminer la partie
 	boolean end = false;
 	
+	// Niveau
+	Niveau niveau = null;
+	
+	
 	/**
 	 * Initialisation du monde en fonction de la largeur, la hauteur et le nombre de cases données
 	 * @param width
@@ -60,6 +64,13 @@ public class World {
 		squareHeight = (double) 1 / nbSquareY;
 		spawns = new ArrayList<>();
 		spawns.add(new Position(startSquareX * squareWidth + squareWidth / 2, startSquareY * squareHeight + squareHeight / 2));
+		
+		try {
+			niveau = Reader.func("../niveaux/niveau1.niveau");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 				
 		StdDraw.setCanvasSize(width, height);
 		StdDraw.enableDoubleBuffering();
@@ -68,75 +79,308 @@ public class World {
 	/**
 	 * Définit le décors du plateau de jeu.
 	 */
-	 public void drawBackground(int[][]world) {	// Tab en entrée
-		 
+	 public void drawBackground() 
+	 {			 
+		 double n = (int)(1./taille / squareWidth) * squareWidth;//  + squareWidth / 2
 		 for (int i = 0 ; i < taille ; i++)
 		 {
 			 for (int j = 0 ; j < taille ; j++)
 			 {
-				 if (world[i][j] == 0)
+				 if (niveau.getGrille()[i][j] == 0)
 				 {
-					 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/EmptyTile.png");
+					 StdDraw.picture(n*i,n*j,"../images/tiles/EmptyTile.png");
 				 }
-				 else if (world[i][j] > 0)
+				 else if (niveau.getGrille()[i][j] > 0)
 				 {
-					 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/Road.png");
+					 StdDraw.picture(n*i,n*j,"../images/tiles/Road.png");
 				 }
 				 else 
 				 {
 					 if ((i != 0)&&(j != 0)&&(i != taille -1)&&(j != taille - 1))
 					 {
-						 if ((world[i - 1][j] > 0)&&(world[i][j - 1] > 0)) // Top and left
+						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTopAndLeft.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndLeft.png");
 						 }
-						 else if ((world[i + 1][j] > 0)&&(world[i][j - 1] > 0)) // Top and right
+						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTopAndRight.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndRight.png");
 						 }
-						 else if ((world[i - 1][j] > 0)&&(world[i][j + 1] > 0)) // Bot and left
+						 else if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBotAndLeft.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndLeft.png");
 						 }
-						 else if ((world[i + 1][j] > 0)&&(world[i][j + 1] > 0)) // Bot and right
+						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and right
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBotAndRight.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndRight.png");
 						 }
-						 else if (world[i - 1][j] > 0) // Left
+						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadLeft.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
 						 }
-						 else if (world[i + 1][j] > 0) // Right
+						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
 						 {
 							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
 						 }
-						 else if (world[i][j - 1] > 0) //Top
+						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTop.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
 						 }
-						 else if (world[i][j + 1] > 0) // Bot
+						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBot.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
 						 }
-						 else if (world[i - 1][j - 1] > 0) // TopLeft
+						 else if (niveau.getGrille()[i - 1][j - 1] > 0) // TopLeft
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTopLeft.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopLeft.png");
 						 }
-						 else if (world[i + 1][j - 1] > 0) // TopRight
+						 else if (niveau.getGrille()[i + 1][j - 1] > 0) // TopRight
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadTopRight.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopRight.png");
 						 }
-						 else if (world[i - 1][j + 1] > 0) // BotLeft
+						 else if (niveau.getGrille()[i - 1][j + 1] > 0) // BotLeft
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBotLeft.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotLeft.png");
 						 }
-						 else if (world[i + 1][j + 1] > 0) // BotRight
+						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadBotRight.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotRight.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+					 else if ((i == 0)&&(j == 0))
+					 {
+						 if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and right
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndRight.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+						 }
+						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotRight.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+					 else if ((i == 0)&&(j == taille -1))
+					 {
+						 if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndRight.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+						 }
+						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j - 1] > 0) // TopRight
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopRight.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+					 else if ((i == taille - 1)&&(j == 0))
+					 {
+						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndLeft.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+						 }
+						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j + 1] > 0) // BotLeft
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotLeft.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+					 else if ((i == taille - 1)&&(j == taille - 1))
+					 {
+						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndLeft.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+						 }
+						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j - 1] > 0) // TopLeft
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopLeft.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+					 else if (i == 0)
+					 {
+						 if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndRight.png");
+						 }
+						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and right
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndRight.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+						 }
+						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+						 }
+						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j - 1] > 0) // TopRight
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopRight.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotRight.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+					 else if (j == 0)
+					 {
+						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndLeft.png");
+						 }
+						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and right
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndRight.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+						 }
+						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j + 1] > 0) // BotLeft
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotLeft.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotRight.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+					 else if (i == taille - 1)
+					 {
+						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndLeft.png");
+						 }
+						 else if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotAndLeft.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+						 }
+						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+						 }
+						 else if (niveau.getGrille()[i][j + 1] > 0) // Bot
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBot.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j - 1] > 0) // TopLeft
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopLeft.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j + 1] > 0) // BotLeft
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadBotLeft.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
+						 }
+					 }
+					 else if (j == taille - 1)
+					 {
+						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndLeft.png");
+						 }
+						 else if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopAndRight.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j] > 0) // Left
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadLeft.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j] > 0) // Right
+						 {
+							 StdDraw.picture(1/taille*i,1/taille*j,"../images/tiles/RoadRight.png");
+						 }
+						 else if (niveau.getGrille()[i][j - 1] > 0) //Top
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTop.png");
+						 }
+						 else if (niveau.getGrille()[i - 1][j - 1] > 0) // TopLeft
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopLeft.png");
+						 }
+						 else if (niveau.getGrille()[i + 1][j - 1] > 0) // TopRight
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/RoadTopRight.png");
+						 }
+						 else // Others
+						 {
+							 StdDraw.picture(n*i,n*j,"../images/tiles/NotConstructible.png");
 						 }
 					 }
 				 } 
@@ -196,20 +440,13 @@ public class World {
 	  * @return les points de vie restants du joueur
 	  */
 	 public int update() {
-		Niveau n = null;
-		try {
-			n = Reader.func("../niveaux/niveau1.niveau");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		drawBackground(n.getGrille());
-		double x = 1/15;
-		double y = 7/15;
-		double d = (double) Math.round(x * 100) / 100;
-		double e = (double) Math.round(y * 100) / 100;
-		StdDraw.picture(e, e, "../images/tiles/RoadBotAndLeft.png");
-		StdDraw.picture(d,d, "../images/tiles/RoadTopAndLeft.png");
+		
+		drawBackground();
+		
+//        double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
+//        
+//		StdDraw.picture(normalizedX2, normalizedX2, "../images/tiles/RoadBotAndLeft.png");
+//		StdDraw.picture(normalizedY2,normalizedY2, "../images/tiles/RoadTopAndLeft.png");
 		drawInfos();
 		updateMonsters();
 		drawMouse();
