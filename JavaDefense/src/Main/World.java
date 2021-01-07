@@ -26,9 +26,9 @@ public class World {
 	ArrayList<Position> spawns;
 	
 	// Information sur la taille du plateau de jeu
-	int width;
+	public int width;
 	int height;
-	int nbSquareX;
+	public int nbSquareX;
 	int nbSquareY;
 	double squareWidth;
 	double squareHeight;
