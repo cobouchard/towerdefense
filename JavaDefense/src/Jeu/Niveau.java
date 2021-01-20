@@ -54,6 +54,7 @@ public class Niveau {
 	public void affiche() 
 	{
 		System.out.println("Niveau : " + nom);
+		System.out.println("Or de départ : " + or_depart);
 		for(int ligne=0;ligne!=Reader.TAILLE; ligne++) 
 		{
 			for(int colonne=0; colonne!=Reader.TAILLE; colonne++)
@@ -63,6 +64,16 @@ public class Niveau {
 		for(Vague v : vagues)
 			System.out.println(v);
 			
+	}
+	public void poserTourArcher(PositionTab position_tab) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public boolean peutConstruire(PositionTab pt) 
+	{
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 	

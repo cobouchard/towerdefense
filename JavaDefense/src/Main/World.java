@@ -1,34 +1,54 @@
 package Main;
 
 import java.util.List;
+import java.util.Scanner;
 
-
+import AStar.PositionTab;
+import Interface.Converter;
 import Interface.Position;
+import Interface.Projectile;
 import Interface.StdDraw;
+import Jeu.ArcherTower;
+import Jeu.BombTower;
+import Jeu.Joueur;
 import Jeu.Monster;
 import Jeu.Niveau;
-
+import Jeu.Tower;
+import Jeu.Vague;
 import Read.Reader;
 
-import java.util.LinkedList;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 
 public class World {
+	final static int NOMBRE_NIVEAU = 3;
 	// Variable static pour la taille d'un côté du monde
 	static final int taille = 15;
 	
 	// l'ensemble des monstres, pour gerer (notamment) l'affichage (finira par disparaitre)
-	List<Monster> monsters = new ArrayList<Monster>();
+	List<Monster> monsters = new ArrayList<>();
+	List<Tower> towers = new ArrayList<>();
+	List<Projectile> projectiles = new ArrayList<>();
 	
-	
+	private final static Scanner sc = new Scanner(System.in);
 	
 	// Information sur la taille du plateau de jeu
 	public int width;
 	int height;
 	double squareWidth;
 	double squareHeight;
+	
+	
+	// Informations sur les statistiques de départ des tours
+	private int prix_tour_archer = 10;
+	private double range_tour_archer = 3.;
+	private double speed_tour_archer = 3.;
+	
+	private int prix_tour_bombe = 20;
+	private double range_tour_bombe = 3.;
+	private double speed_tour_bombe = 3.;
 	
 	
 	
@@ -38,8 +58,19 @@ public class World {
 	// Condition pour terminer la partie
 	boolean end = false;
 	
-	// Niveau
+	
+	// Niveau et autres informations
 	Niveau niveau = null;
+	Joueur joueur = null;
+	boolean demarre = false;
+	
+	
+	//information des vagues pour l'apparition des monstres
+	Vague current_vague = null;
+	int compteur_apparition = 0;
+	final int apparition_temps = 5; //nombre d'update entre chaque apparition de monstre
+	
+	
 	
 	
 	/**
@@ -60,9 +91,10 @@ public class World {
 		try {
 			niveau = Reader.func("../niveaux/niveau3.niveau");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		joueur = new Joueur(niveau.getOrDepart(),20);
 				
 		StdDraw.setCanvasSize(width, height);
 		StdDraw.enableDoubleBuffering();
@@ -381,7 +413,13 @@ public class World {
 		 
 	 }
 	 
-	 
+	 public void drawTowers() 
+	 {
+		 for(Tower t : towers) 
+		 {
+			 t.draw();
+		 }
+	 }
 	 
 	 /**
 	  * Affiche certaines informations sur l'écran telles que les points de vie du joueur ou son or
@@ -394,7 +432,7 @@ public class World {
 	  * Fonction qui récupère le positionnement de la souris et permet d'afficher une image de tour en temps réél
 	  *	lorsque le joueur appuie sur une des touches permettant la construction d'une tour.
 	  */
-	 public void drawMouse() {
+	 public void drawMouse() { //a quoi nous sert cette fonction ??
 		double normalizedX = (int)(StdDraw.mouseX() / squareWidth) * squareWidth + squareWidth / 2;
 		double normalizedY = (int)(StdDraw.mouseY() / squareHeight) * squareHeight + squareHeight / 2;
 		String image = null;
@@ -435,13 +473,25 @@ public class World {
 		
 		drawBackground();
 		
-//        double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
+//      double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
 //        
 //		StdDraw.picture(normalizedX2, normalizedX2, "../images/tiles/RoadBotAndLeft.png");
 //		StdDraw.picture(normalizedY2,normalizedY2, "../images/tiles/RoadTopAndLeft.png");
+		if(demarre) 
+		{
+			updateMonsters();
+			if(current_vague==null)
+				current_vague = niveau.getNextVague();
+			else 
+			{
+				Position spawn = Converter.tabToPosition(niveau.getRandomSpawn());
+				current_vague.getMonster(spawn);
+			}
+		}
 		drawInfos();
-		updateMonsters();
+		
 		drawMouse();
+		drawTowers();
 		return -1;
 	 }
 	 
@@ -463,10 +513,53 @@ public class World {
 			System.out.println("Evolution selected (40g).");
 			break;
 		case 's':
-			System.out.println("Starting game!");
+			selectionNiveau();
+			break;
+		case 'r':
+			System.out.println("Le niveau démarre !");
+			demarre=true;
+			break;
 		case 'q':
 			System.out.println("Exiting.");
+			sc.close();
+		
 		}
+	}
+	
+	private void selectionNiveau() 
+	{
+		System.out.println("Selectionnez un niveau (entrez un nombre entre 1 et "+NOMBRE_NIVEAU+")");
+		
+		int numero_niveau=-1;
+		do 
+		{
+			int temp=-1;
+			try 
+			{
+				temp = sc.nextInt();
+				if(temp>=1 && temp <= NOMBRE_NIVEAU)
+				{
+					System.out.println("Vous avez séléctionnez le niveau :" + temp);
+					numero_niveau=temp;
+				}
+				else
+					throw new InputMismatchException();
+			}
+			catch(InputMismatchException e) 
+			{
+				System.out.println("Vous devez entrer un nombre entier entre 1 et "+NOMBRE_NIVEAU);
+			}
+		}while(numero_niveau==-1);
+		
+		String chemin = "../niveaux/niveau"+numero_niveau+".niveau";
+		try {
+			niveau = Reader.func(chemin);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 	
 	/**
@@ -481,13 +574,40 @@ public class World {
 		double normalizedX = (int)(x / squareWidth) * squareWidth + squareWidth / 2;
 		double normalizedY = (int)(y / squareHeight) * squareHeight + squareHeight / 2;
 		Position p = new Position(normalizedX, normalizedY);
+		PositionTab pt = Converter.positionToTab(p);
 		switch (key) {
 		case 'a':
-			System.out.println("il faut ajouter une tour d'archers si l'utilisateur à de l'or !!");
+			//on vérifie qu'il peut construire à cette endroit et qu'il a assez d'or
+			if(niveau.peutConstruire(pt))
+				if(joueur.payerOr(prix_tour_archer)) 
+				{
+					System.out.println("Une tour d'archer a été créé !");
+					ArcherTower tower = new ArcherTower(prix_tour_archer,range_tour_archer, speed_tour_archer, p);
+					towers.add(tower);
+				}
+				else
+					System.out.println("Vous n'avez pas assez d'or");
+					
+			else
+				System.out.println("Vous ne pouvez pas construire ici");
 			break;
+			
+			
 		case 'b':
-			System.out.println("Ici il faut ajouter une tour de bombes");
+			if(niveau.peutConstruire(pt))
+				if(joueur.payerOr(prix_tour_bombe)) 
+				{
+					System.out.println("Une tour de bombes a été créé !");
+					BombTower tower = new BombTower(prix_tour_bombe,range_tour_bombe, speed_tour_bombe, p);
+					towers.add(tower);
+				}
+				else
+					System.out.println("Vous n'avez pas assez d'or");
+					
+			else
+				System.out.println("Vous ne pouvez pas construire ici");
 			break;
+			
 		case 'e':
 			System.out.println("Ici il est possible de faire évolué une des tours");
 			break;
@@ -499,11 +619,12 @@ public class World {
 	 * offertes au joueur pour intéragir avec le clavier
 	 */
 	public void printCommands() {
-		System.out.println("Press A to select Arrow Tower (cost 50g).");
-		System.out.println("Press B to select Cannon Tower (cost 60g).");
+		System.out.println("Press A to select Arrow Tower (cost "+prix_tour_archer+"g).");
+		System.out.println("Press B to select Cannon Tower (cost "+prix_tour_bombe+"g).");
 		System.out.println("Press E to update a tower (cost 40g).");
 		System.out.println("Click on the grass to build it.");
-		System.out.println("Press S to start.");
+		System.out.println("Press S to select a level.");
+		System.out.println("Press R if you're ready so start the level");
 	}
 	
 	/**

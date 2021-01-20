@@ -1,6 +1,7 @@
 package Jeu;
 
 import Interface.Position;
+import Interface.StdDraw;
 
 public class BombTower extends Tower {
 
@@ -14,4 +15,11 @@ public class BombTower extends Tower {
 		
 	}
 
+	@Override
+	public void draw() {
+
+		StdDraw.setPenColor(StdDraw.RED);
+		StdDraw.filledCircle(p.getX(), p.getY(), 0.01);
+		
+	}
 }

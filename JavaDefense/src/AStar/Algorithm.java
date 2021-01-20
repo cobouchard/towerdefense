@@ -33,16 +33,13 @@ public class Algorithm {
 	
 	/**
 	 * 
-	 * @param x1 coordonnee x du premier point
-	 * @param y1 coordonnee y du premier point
-	 * @param x2 coordonnee x du deuxieme point
-	 * @param y2 coordonnee y du deuxieme point
+	 * @param depart
+	 * @param arrivee
 	 * @return retourne la distance entre les 2 points
 	 */
 	private static int distance(PositionTab depart, PositionTab arrivee) 
 	{
 		return Math.abs(depart.getX()-arrivee.getX())+Math.abs(depart.getY()-arrivee.getY());
-		//return (int)Math.sqrt(Math.pow((double)(depart.getX()-arrivee.getX()),2.)+Math.pow((double)(depart.getY()-arrivee.getY()), 2.));
 	}
 	
 	public Algorithm(int[][] int_table) 
@@ -66,7 +63,7 @@ public class Algorithm {
 	/**
 	 * cherche une position en fonction d'une cellule
 	 * @param c cellule à localiser
-	 * @return position de la cellule
+	 * @return position de la cellule dans le tableau
 	 */
 	private PositionTab findPosition(Cell c) 
 	{

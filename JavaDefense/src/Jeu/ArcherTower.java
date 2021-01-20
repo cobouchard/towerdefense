@@ -1,6 +1,7 @@
 package Jeu;
 
 import Interface.Position;
+import Interface.StdDraw;
 
 public class ArcherTower extends Tower {
 
@@ -11,6 +12,14 @@ public class ArcherTower extends Tower {
 	@Override
 	public void ameliorerTour() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void draw() {
+
+		StdDraw.setPenColor(StdDraw.BLUE);
+		StdDraw.filledCircle(p.getX(), p.getY(), 0.01);
 		
 	}
 	

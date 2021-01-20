@@ -1,6 +1,7 @@
 package Jeu;
 
 import Interface.Position;
+import Interface.StdDraw;
 
 public abstract class Tower {
 
@@ -29,5 +30,7 @@ public abstract class Tower {
 	}
 	
 	public abstract void ameliorerTour();
+	
+	public abstract void draw();
 	
 }

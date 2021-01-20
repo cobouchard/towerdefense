@@ -4,7 +4,7 @@ public class Joueur {
 	private int or;
 	private int pdv;
 	
-	Joueur(int or, int pdv)
+	public Joueur(int or, int pdv)
 	{
 		this.or=or;
 		this.pdv=pdv;

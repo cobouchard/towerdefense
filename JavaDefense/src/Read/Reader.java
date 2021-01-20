@@ -82,8 +82,6 @@ public final class Reader {
 			chaine=sc.nextLine();
 			String[] decoupe = chaine.split(",");
 			
-			System.out.println(decoupe[0]);
-			
 			switch(Integer.parseInt(decoupe[0])) 
 			{
 			case 1:
