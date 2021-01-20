@@ -67,13 +67,25 @@ public class Niveau {
 	}
 	public void poserTourArcher(PositionTab position_tab) {
 		// TODO Auto-generated method stub
-		
+		//On attribue la valeur -5 à une tour dans la grille
+		int x = position_tab.getX();
+		int y = position_tab.getY();
+		grille[x][y] = -5;
 	}
 	
 	public boolean peutConstruire(PositionTab pt) 
 	{
 		// TODO Auto-generated method stub
-		return true;
+		int x = pt.getX();
+		int y = pt.getY();
+		if ((grille[x][y] < 0)&&(grille[x][y] != -5))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	
