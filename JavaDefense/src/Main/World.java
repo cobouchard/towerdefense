@@ -20,7 +20,6 @@ import Read.Reader;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Iterator;
 
 public class World {
 	final static int NOMBRE_NIVEAU = 3;
@@ -453,16 +452,13 @@ public class World {
 	  * Modifie la position du monstre au cours du temps à l'aide du paramètre nextP.
 	  */
 	 public void updateMonsters() {
-	 
-		Iterator<Monster> i = monsters.iterator();
-		Monster m;
-		while (i.hasNext()) {
-			 m = i.next();
-			 m.update();
+		for(Monster m : monsters)
+		{
+			m.update();
 			 if(m.getP().getY() < 0) {
 				 m.getP().setY(1);
 			 }
-		 }
+		}
 	 }
 	 
 	 /**
@@ -479,19 +475,40 @@ public class World {
 //		StdDraw.picture(normalizedY2,normalizedY2, "../images/tiles/RoadTopAndLeft.png");
 		if(demarre) 
 		{
+			compteur_apparition = (compteur_apparition+1)%apparition_temps;
+			
 			updateMonsters();
-			if(current_vague==null)
+			if(current_vague==null) 
+			{
 				current_vague = niveau.getNextVague();
-			else 
+				if(current_vague==null) 
+				{
+					System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
+				}
+			}
+				
+			else if (compteur_apparition==0) 
 			{
 				Position spawn = Converter.tabToPosition(niveau.getRandomSpawn());
-				current_vague.getMonster(spawn);
+				Monster m = current_vague.getMonster(spawn);
+				if(m!=null) //un nouveau monstre apparait
+				{
+					monsters.add(m);
+				}
+				else //la vague est terminée 
+				{
+					System.out.println("Vague terminée !");
+				}
+				
 			}
 		}
 		drawInfos();
 		
 		drawMouse();
 		drawTowers();
+		
+		for(Monster m : monsters)
+			System.out.println(m);
 		return -1;
 	 }
 	 
