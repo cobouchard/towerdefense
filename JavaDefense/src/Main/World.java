@@ -58,7 +58,7 @@ public class World {
 		squareHeight = (double) 1 / taille;
 		
 		try {
-			niveau = Reader.func("../niveaux/niveau3.niveau");
+			niveau = Reader.func("../niveaux/niveau2.niveau");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,7 +80,7 @@ public class World {
 			 {
 				 if (niveau.getGrille()[i][j] == 0)
 				 {
-					 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
+					 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
 				 }
 				 else if (niveau.getGrille()[i][j] > 0)
 				 {
@@ -136,11 +136,11 @@ public class World {
 						 }
 						 else if (niveau.getGrille()[i + 1][j + 1] > 0) // BotRight
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadToPRight.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/RoadTopRight.png");
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 					 else if ((i == 0)&&(j == 0))
@@ -163,7 +163,7 @@ public class World {
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 					 else if ((i == 0)&&(j == taille -1))
@@ -186,7 +186,7 @@ public class World {
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 					 else if ((i == taille - 1)&&(j == 0))
@@ -209,7 +209,7 @@ public class World {
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 					 else if ((i == taille - 1)&&(j == taille - 1))
@@ -232,7 +232,7 @@ public class World {
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 					 else if (i == 0)
@@ -267,7 +267,7 @@ public class World {
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 					 else if (j == 0)
@@ -302,7 +302,7 @@ public class World {
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 					 else if (i == taille - 1)
@@ -337,7 +337,7 @@ public class World {
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 					 else if (j == taille - 1)
@@ -372,7 +372,7 @@ public class World {
 						 }
 						 else // Others
 						 {
-							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/NotConstructible.png");
+							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
 				 } 
