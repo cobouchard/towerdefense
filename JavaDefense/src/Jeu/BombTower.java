@@ -12,7 +12,9 @@ public class BombTower extends Tower {
 	@Override
 	public void ameliorerTour() {
 		// TODO Auto-generated method stub
-		
+		range = range*1.75;
+		speed = speed*1.50;
+		this.level++;
 	}
 
 	@Override

@@ -26,12 +26,20 @@ public class BaseMonster extends Monster {
 	@Override
 	protected void updateStat(int difficulte) {
 		// TODO Auto-generated method stub
-		
+		speed = speed+difficulte;
 	}
 
 	@Override
 	protected boolean perdrePv(int degats) {
 		// TODO Auto-generated method stub
-		return false;
+		if (degats == 0)
+		{
+			return false;
+		}
+		else
+		{
+			pdv = pdv - degats;
+			return true;
+		}
 	}
 }
