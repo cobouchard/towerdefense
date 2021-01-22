@@ -24,8 +24,8 @@ import java.util.InputMismatchException;
 public class World {
 	final static int NOMBRE_NIVEAU = 3;
 	// Variable static pour la taille d'un côté du monde
-	static final int taille = 15;
-	
+	public static final int taille = 15;
+
 	// l'ensemble des monstres, pour gerer (notamment) l'affichage (finira par disparaitre)
 	List<Monster> monsters = new ArrayList<>();
 	List<Tower> towers = new ArrayList<>();
@@ -34,8 +34,8 @@ public class World {
 	private final static Scanner sc = new Scanner(System.in);
 	
 	// Information sur la taille du plateau de jeu
-	public int width;
-	int height;
+	public static final int width = 750;
+	public static final int height = 750;
 	double squareWidth;
 	double squareHeight;
 	
@@ -81,9 +81,7 @@ public class World {
 	 * @param startSquareX
 	 * @param startSquareY
 	 */
-	public World(int width, int height) {
-		this.width = width;
-		this.height = height;
+	public World() {
 		squareWidth = (double) 1 / taille;
 		squareHeight = (double) 1 / taille;
 		

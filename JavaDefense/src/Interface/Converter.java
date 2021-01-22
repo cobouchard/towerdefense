@@ -9,8 +9,8 @@ public final class Converter {
 		// TODO Auto-generated method stub
 		double xp = p.getX();
 		double yp = p.getY();
-		int x = (int)(xp*750/15);
-		int y = (int)(yp*750/15);
+		int x = (int)(xp*World.width/(World.width/World.taille));
+		int y = (int)(yp*World.height/(World.height/World.taille));
 		return new PositionTab(x,y);
 	}
 	
@@ -19,8 +19,15 @@ public final class Converter {
 		// TODO Auto-generated method stub
 		int xpt = pt.getX();
 		int ypt = pt.getY();
-		double x = xpt*15/750;
-		double y = ypt*15/750;
+		double x = (xpt*(double)(World.width/World.taille))/(double)World.width;
+		double y = (ypt*(double)(World.height/World.taille))/(double)World.height;
 		return new Position(x,y);
 	}
+//	public static void main(String[] args) {
+//		Position p = new Position(0.5, 0.0);
+//		System.out.println(positionToTab(p).getX() + " " + positionToTab(p).getY());
+//		PositionTab pt = new PositionTab(0, 12);
+//		System.out.println(tabToPosition(pt).getX() + " " + tabToPosition(pt).getY());
+//	}
+
 }
