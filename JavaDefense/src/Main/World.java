@@ -427,6 +427,8 @@ public class World {
 	  */
 	 public void drawInfos() {
 		 StdDraw.setPenColor(StdDraw.BLACK);
+		 StdDraw.text(0.8,0.9,"Health : ");
+		 StdDraw.text(0.8,0.85,"Gold : ");		 
 	 }
 	 
 	 /**
@@ -470,7 +472,7 @@ public class World {
 	 public int update() {
 		
 		drawBackground();
-		
+		drawInfos();
 //      double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
 //        
 //		StdDraw.picture(normalizedX2, normalizedX2, "../images/tiles/RoadBotAndLeft.png");
