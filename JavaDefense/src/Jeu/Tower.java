@@ -20,6 +20,16 @@ public abstract class Tower {
 	//Vitesse de tir
 	double speed;
 	
+	public Position getP()
+	{
+		return p;
+	}
+	
+	public double getRange()
+	{
+		return range;
+	}
+	
 	Tower(int prix,double range,double speed, Position p)
 	{
 		this.prix=prix;

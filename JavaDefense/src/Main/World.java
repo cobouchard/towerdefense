@@ -41,7 +41,7 @@ public class World {
 	
 	
 	// Informations sur les statistiques de départ des tours
-	private int prix_tour_archer = 40;
+	private int prix_tour_archer = 50;
 	private double range_tour_archer = 3.;
 	private double speed_tour_archer = 3.;
 	
@@ -464,6 +464,44 @@ public class World {
 	 }
 	 
 	 /**
+	  * vérifie si les monstres sont à distance d'une tour et tire un projectile
+	  * 
+	  */
+	 public boolean shotMonster() {
+		 boolean b = false;
+		 for (Tower t : towers)
+		 {
+			 for (Monster m : monsters)
+			 {
+				 if (((t.getP().getX() >= m.getP().getX())&&(t.getP().getY() >= m.getP().getY()))&&
+					((t.getP().getX() - m.getP().getX() <= t.getRange())&&(t.getP().getY() - m. getP().getY() < t.getRange())))
+				 {
+						 b = true;
+				 }
+				 else if (((t.getP().getX() >= m.getP().getX())&&(t.getP().getY() < m.getP().getY()))&&
+						 ((t.getP().getX() - m.getP().getX() <= t.getRange())&&(m.getP().getY() - t. getP().getY() < t.getRange())))			 			
+				 {
+					 b = true;
+				 }		
+				 else if (((t.getP().getX() < m.getP().getX())&&(t.getP().getY() >= m.getP().getY()))&&
+						 ((m.getP().getX() - t.getP().getX() <= t.getRange())&&(t.getP().getY() - m. getP().getY() < t.getRange())))
+				 {
+					 b = true;
+				 }	
+				 else if (((t.getP().getX() < m.getP().getX())&&(t.getP().getY() < m.getP().getY()))&&
+						 ((m.getP().getX() - t.getP().getX() <= t.getRange())&&(m.getP().getY() - t. getP().getY() < t.getRange())))
+				 {
+					 b = true;
+				 }	
+				 else
+				 {
+					 b = false;
+				 }
+			 }
+		 }
+		 return b;
+	 }
+	 /**
 	  * Met à jour toutes les informations du plateau de jeu ainsi que les déplacements des monstres et les attaques des tours.
 	  * @return les points de vie restants du joueur
 	  */
@@ -471,6 +509,7 @@ public class World {
 		
 		drawBackground();
 		drawInfos();
+		shotMonster();
 //      double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
 //        
 //		StdDraw.picture(normalizedX2, normalizedX2, "../images/tiles/RoadBotAndLeft.png");
