@@ -114,6 +114,10 @@ public class World {
 				 else if (niveau.getGrille()[i][j] > 0)
 				 {
 					 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/Road.png");
+					 if (niveau.getGrille()[i][j] == 250) // Château
+					 {
+						 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/Tower2/Isometric/towerRound_crystals_E.png");
+					 }
 				 }
 				 else 
 				 {
