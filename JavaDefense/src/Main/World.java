@@ -445,8 +445,6 @@ public class World {
 			// TODO Ajouter une image pour représenter une tour à canon
 			 break;
 		}
-		 if (image != null)
-			 StdDraw.picture(normalizedX, normalizedY, image, squareWidth, squareHeight);
 	 }
 		 
 	 /**
@@ -497,7 +495,7 @@ public class World {
 				{
 					monsters.add(m);
 				}
-				else //la vague est terminée 
+				else if (monsters.isEmpty()) //la vague est terminée 
 				{
 					System.out.println("Vague terminée !");
 				}
@@ -509,8 +507,6 @@ public class World {
 		drawMouse();
 		drawTowers();
 		
-		for(Monster m : monsters)
-			System.out.println(m);
 		return -1;
 	 }
 	 
