@@ -25,7 +25,8 @@ public class FlyingMonster extends Monster{
 	@Override
 	protected void updateStat(int difficulte) {
 		// TODO Auto-generated method stub
-		speed = speed+difficulte+0.5;
+		speed = 0.02;
+		degats=2;
 	}
 
 	@Override

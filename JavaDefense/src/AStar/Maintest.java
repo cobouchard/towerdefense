@@ -35,7 +35,7 @@ public class Maintest {
 		
 		Algorithm a_star = new Algorithm(n.getGrille());
 		
-		ArrayList<PositionTab> plusCourtChemin = a_star.fastestWay(new PositionTab(6,5), new PositionTab(11,5));
+		ArrayList<PositionTab> plusCourtChemin = a_star.fastestWay(new PositionTab(0,5), new PositionTab(11,5));
 		
 		System.out.println(plusCourtChemin);
 	}

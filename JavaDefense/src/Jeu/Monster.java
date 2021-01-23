@@ -21,6 +21,8 @@ public abstract class Monster {
 	
 	int endroit_chemin =1;
 	
+	protected int degats;
+	
 	ArrayList<PositionTab> chemin;
 	
 	protected int pdv;
@@ -36,14 +38,7 @@ public abstract class Monster {
 		Algorithm a = new Algorithm(grille);
 		
 		chemin = a.fastestWay(Converter.positionToTab(p), Converter.positionToTab(chateau));
-		System.out.println(chemin);
 		nextP = Converter.tabToPosition(chemin.get(chemin.size()-1-endroit_chemin));
-		System.out.println(nextP);
-	}
-	
-	
-	public void setSpeed(double speed) {
-		this.speed = speed;
 	}
 
 
@@ -57,6 +52,10 @@ public abstract class Monster {
 		return nextP;
 	}
 
+	public int getDegats() 
+	{
+		return degats;
+	}
 
 
 
@@ -86,8 +85,9 @@ public abstract class Monster {
 		
 		if(Converter.positionToTab(nextP).equals(Converter.positionToTab(p)) ) //si il est arrivé à la nouvelle case, on change sa direction
 		{
-			System.out.println("test");
-			endroit_chemin++;
+			
+			if(endroit_chemin!=chemin.size()-1)
+				endroit_chemin++;
 			nextP = Converter.tabToPosition( pt  );
 			
 		}

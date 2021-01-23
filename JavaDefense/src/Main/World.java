@@ -19,6 +19,7 @@ import Read.Reader;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 
 public class World {
@@ -27,7 +28,7 @@ public class World {
 	public static final int taille = 15;
 
 	// l'ensemble des monstres, pour gerer (notamment) l'affichage (finira par disparaitre)
-	List<Monster> monsters = new ArrayList<>();
+	HashSet<Monster> monsters = new HashSet<>();
 	List<Tower> towers = new ArrayList<>();
 	List<Projectile> projectiles = new ArrayList<>();
 	
@@ -455,13 +456,17 @@ public class World {
 	  * Modifie la position du monstre au cours du temps à l'aide du paramètre nextP.
 	  */
 	 public void updateMonsters() {
+		HashSet<Monster> monstres_arrives = new HashSet<>();
 		for(Monster m : monsters)
 		{
 			m.update();
-			 if(m.getP().getY() < 0) {
-				 m.getP().setY(1);
-			 }
+			if(m.getP().dist(niveau.getPChateau()) < 0.005)
+			{
+				joueur.perdrePv(m.getDegats());
+				monstres_arrives.add(m);
+			}
 		}
+		monsters.removeAll(monstres_arrives);
 	 }
 	 
 	 /**
@@ -483,7 +488,6 @@ public class World {
 			if(current_vague==null) 
 			{
 				current_vague = niveau.getNextVague();
-				System.out.println(current_vague.getNbMonstreTotal());
 				if(current_vague==null) 
 				{
 					System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
@@ -499,11 +503,11 @@ public class World {
 					monsters.add(m);
 					m.updateChemin(niveau.getGrille(), niveau.getPChateau());
 					
-					System.out.println("nouveau monstre");
 				}
 				else if (monsters.isEmpty()) //la vague est terminée 
 				{
 					System.out.println("Vague terminée !");
+					current_vague=null;
 				}
 				
 			}

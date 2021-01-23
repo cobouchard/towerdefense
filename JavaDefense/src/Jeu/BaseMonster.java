@@ -26,6 +26,7 @@ public class BaseMonster extends Monster {
 	protected void updateStat(int difficulte) {
 		// TODO Auto-generated method stub
 		speed = 0.01;
+		degats = 1;
 	}
 
 	@Override
