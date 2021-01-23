@@ -19,9 +19,6 @@ public class BombTower extends Tower {
 
 	@Override
 	public void draw() {
-
-		StdDraw.setPenColor(StdDraw.RED);
-		StdDraw.filledCircle(p.getX(), p.getY(), 0.01);
-		
+		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower2/Isometric/towerBomb.png");		
 	}
 }
