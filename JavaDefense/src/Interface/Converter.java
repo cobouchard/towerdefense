@@ -19,8 +19,8 @@ public final class Converter {
 		// TODO Auto-generated method stub
 		int xpt = pt.getX();
 		int ypt = pt.getY();
-		double x = (xpt*(double)(World.width/World.taille))/(double)World.width;
-		double y = (ypt*(double)(World.height/World.taille))/(double)World.height;
+		double x = ((double)xpt*(double)(World.width/World.taille))/(double)World.width + (double)(1/(double)(World.taille*2));
+		double y = ((double)ypt*(double)(World.height/World.taille))/(double)World.height + (double)(1/(double)(World.taille*2));
 		return new Position(x,y);
 	}
 //	public static void main(String[] args) {
