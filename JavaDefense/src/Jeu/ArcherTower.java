@@ -1,12 +1,13 @@
 package Jeu;
 
 import Interface.Position;
+import Interface.Projectile;
 import Interface.StdDraw;
 
 public class ArcherTower extends Tower {
 
-	public ArcherTower(int prix, double range, double speed, Position p) {
-		super(prix, range, speed, p);
+	public ArcherTower(int prix, double range, double speed, Position p,Projectile projectile) {
+		super(prix, range, speed, p,projectile);
 	}
 
 	@Override

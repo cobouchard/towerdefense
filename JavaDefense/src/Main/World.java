@@ -16,6 +16,8 @@ import Jeu.Niveau;
 import Jeu.Tower;
 import Jeu.Vague;
 import Read.Reader;
+import Interface.Bomb;
+import Interface.Arrow;
 
 
 import java.util.ArrayList;
@@ -504,7 +506,7 @@ public class World {
 		
 		drawBackground();
 		drawInfos();
-		shotMonster();
+//		shotMonster();
 //      double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
 //        
 //		StdDraw.picture(normalizedX2, normalizedX2, "../images/tiles/RoadBotAndLeft.png");
@@ -636,7 +638,7 @@ public class World {
 				if(joueur.payerOr(prix_tour_archer)) 
 				{
 					System.out.println("Une tour d'archer a été créé !");
-					ArcherTower tower = new ArcherTower(prix_tour_archer,range_tour_archer, speed_tour_archer, p);
+					ArcherTower tower = new ArcherTower(prix_tour_archer,range_tour_archer, speed_tour_archer, p, new Arrow(p));
 					towers.add(tower);
 				}
 				else
@@ -652,7 +654,7 @@ public class World {
 				if(joueur.payerOr(prix_tour_bombe)) 
 				{
 					System.out.println("Une tour de bombes a été créé !");
-					BombTower tower = new BombTower(prix_tour_bombe,range_tour_bombe, speed_tour_bombe, p);
+					BombTower tower = new BombTower(prix_tour_bombe,range_tour_bombe, speed_tour_bombe, p,new Bomb(p));
 					towers.add(tower);
 				}
 				else
