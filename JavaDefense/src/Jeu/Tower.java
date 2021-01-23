@@ -2,9 +2,12 @@ package Jeu;
 
 import Interface.Position;
 import Interface.StdDraw;
+import Interface.Projectile;
 
 public abstract class Tower {
 
+	//Projectile
+	Projectile projectile;
 	// Position de la tour
 	Position p;
 	// Entier donnant le prix de la tour
@@ -20,7 +23,22 @@ public abstract class Tower {
 	//Vitesse de tir
 	double speed;
 	
-	Tower(int prix,double range,double speed, Position p)
+	public Position getP()
+	{
+		return p;
+	}
+	
+	public double getRange()
+	{
+		return range;
+	}
+	
+	public Projectile getProjectile()
+	{
+		return projectile;
+	}
+	
+	Tower(int prix,double range,double speed, Position p, Projectile projectile)
 	{
 		this.prix=prix;
 		this.level=1;
