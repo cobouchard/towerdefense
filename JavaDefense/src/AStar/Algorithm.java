@@ -13,7 +13,7 @@ import java.util.HashSet;
  */
 public class Algorithm {
 	private Cell[][] table;
-	private final int TAILLE=6;
+	private final int TAILLE=15;
 	
 	private HashSet<Cell> open_cells;
 	private HashSet<Cell> closed_cells;
@@ -207,7 +207,6 @@ public class Algorithm {
 				}
 			}
 			
-			
 			//cellule du bas
 			if(current_pos.getX()+1 >=0 && current_pos.getX()+1 < TAILLE) 
 			{
@@ -252,6 +251,7 @@ public class Algorithm {
 			current_cell = min;
 			current_pos = findPosition(current_cell); 
 			closed_cells.add(current_cell);
+			open_cells.remove(current_cell);
 			
 			
 			if(current_cell.equals(findCell(arrivee))) // si on est arrivé
@@ -259,8 +259,9 @@ public class Algorithm {
 			
 			if(open_cells.isEmpty())
 				return null;
+			
+			
 		}
-		System.out.println(this);
 		
 		//il faut maintenant re faire le chemin en partant de l'arrivee et en suivant les fcost décroissant
 		chemin.add(arrivee);
@@ -270,7 +271,6 @@ public class Algorithm {
 			temp_posit = getMinCostAdjacentPosition(temp_posit);
 			chemin.add(temp_posit);
 		}
-		
 		
 		
 		return chemin;

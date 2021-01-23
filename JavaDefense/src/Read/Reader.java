@@ -102,7 +102,7 @@ public final class Reader {
 	public static void main(String[] args) {
 		Niveau n = null;
 		try {
-			n=func("../niveaux/niveau1.niveau");
+			n=func("../niveaux/niveau2.niveau");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

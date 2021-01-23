@@ -3,6 +3,8 @@ package Jeu;
 import java.util.ArrayList;
 
 import AStar.PositionTab;
+import Interface.Converter;
+import Interface.Position;
 import Read.Reader;
 
 public class Niveau {
@@ -10,6 +12,8 @@ public class Niveau {
 	private int[][] grille;
 	private ArrayList<Vague> vagues;
 	private final int or_depart;
+	
+	private Position pChateau;
 	
 	// Position par laquelle les monstres vont venir
 	private ArrayList<PositionTab> spawns;
@@ -25,6 +29,12 @@ public class Niveau {
 	{
 		return this.or_depart;
 	}
+	
+	public Position getPChateau() 
+	{
+		return pChateau;
+	}
+	
 	
 	/**
 	 * 
@@ -49,6 +59,11 @@ public class Niveau {
 		this.vagues = vagues;
 		this.or_depart=or_depart;
 		this.spawns=spawns;
+		
+		for(int i=0; i!=grille.length; i++)
+			for(int j=0; j!=grille.length; j++)
+				if(grille[i][j]==250)
+					pChateau = Converter.tabToPosition(new PositionTab(i,j));
 	}
 	
 	public void affiche() 

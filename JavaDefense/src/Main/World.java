@@ -67,7 +67,7 @@ public class World {
 	//information des vagues pour l'apparition des monstres
 	Vague current_vague = null;
 	int compteur_apparition = 0;
-	final int apparition_temps = 5; //nombre d'update entre chaque apparition de monstre
+	final int apparition_temps = 50; //nombre d'update entre chaque apparition de monstre
 	
 	
 	
@@ -102,6 +102,7 @@ public class World {
 	 */
 	 public void drawBackground() 
 	 {			 
+		
 		 double n = (int)(1./taille / squareWidth) * squareWidth;//  + squareWidth / 2
 		 for (int i = 0 ; i < taille ; i++)
 		 {
@@ -476,11 +477,11 @@ public class World {
 		if(demarre) 
 		{
 			compteur_apparition = (compteur_apparition+1)%apparition_temps;
-			
 			updateMonsters();
 			if(current_vague==null) 
 			{
 				current_vague = niveau.getNextVague();
+				System.out.println(current_vague.getNbMonstreTotal());
 				if(current_vague==null) 
 				{
 					System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
@@ -494,6 +495,9 @@ public class World {
 				if(m!=null) //un nouveau monstre apparait
 				{
 					monsters.add(m);
+					m.updateChemin(niveau.getGrille(), niveau.getPChateau());
+					
+					System.out.println("nouveau monstre");
 				}
 				else if (monsters.isEmpty()) //la vague est terminée 
 				{

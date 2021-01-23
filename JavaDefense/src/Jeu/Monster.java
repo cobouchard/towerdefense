@@ -19,6 +19,8 @@ public abstract class Monster {
 	// Compteur de déplacement pour savoir si le monstre à atteint le chateau du joueur
 	int checkpoint = 0;
 	
+	int endroit_chemin =1;
+	
 	ArrayList<PositionTab> chemin;
 	
 	protected int pdv;
@@ -32,17 +34,16 @@ public abstract class Monster {
 	public void updateChemin(int[][] grille, Position chateau) 
 	{
 		Algorithm a = new Algorithm(grille);
+		
 		chemin = a.fastestWay(Converter.positionToTab(p), Converter.positionToTab(chateau));
+		System.out.println(chemin);
+		nextP = Converter.tabToPosition(chemin.get(chemin.size()-1-endroit_chemin));
+		System.out.println(nextP);
 	}
 	
 	
 	public void setSpeed(double speed) {
 		this.speed = speed;
-	}
-	
-	public void setNextP(Position new_p) 
-	{
-		nextP = new_p;
 	}
 
 
@@ -50,12 +51,13 @@ public abstract class Monster {
 	public Position getP() {
 		return p;
 	}
-
-
-
-	public void setP(Position p) {
-		this.p = p;
+	
+	public Position getNextP() 
+	{
+		return nextP;
 	}
+
+
 
 
 
@@ -73,12 +75,29 @@ public abstract class Monster {
 			p.setX(ratioX * speed + p.getX());
 			p.setY(ratioY * speed + p.getY());
 		}
+		
+		updateNextP();
+			
+	}
+	
+	private void updateNextP() 
+	{
+		PositionTab pt = chemin.get(chemin.size()-1-endroit_chemin);
+		
+		if(Converter.positionToTab(nextP).equals(Converter.positionToTab(p)) ) //si il est arrivé à la nouvelle case, on change sa direction
+		{
+			System.out.println("test");
+			endroit_chemin++;
+			nextP = Converter.tabToPosition( pt  );
+			
+		}
 	}
 
 	public void update() {
 		move();
+			
+		
 		draw();
-		checkpoint++;
 	}
 	
 	/**
