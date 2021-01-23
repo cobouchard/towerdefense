@@ -34,7 +34,7 @@ public class Joueur {
 	{
 		boolean test =false;
 		
-		if(prix<or) 
+		if(prix<=or) 
 		{
 			test=true;
 			or-=prix;

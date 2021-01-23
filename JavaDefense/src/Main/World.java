@@ -465,43 +465,37 @@ public class World {
 	 }
 	 
 	 /**
-	  * vérifie si les monstres sont à distance d'une tour et tire un projectile
-	  * 
+	  * @param m un monstre
+	  * @param t une tour
+	  * @return un booléen indiquant si le monstre est à portée de la tour
 	  */
-	 public boolean shotMonster() {
-		 boolean b = false;
+	 public boolean checkMonster(Tower t, Monster m) {
+		 if (t.getP().dist(m.getP()) <= t.getRange())
+		 {
+			 return true;
+		 }	
+		 else
+		 {
+			 return false;
+		 }
+	 }
+	 
+	 /**
+	  * Vérifie si des monstres sont à portée de chaque tour et tire si c'est le cas
+	  */
+	 public void shotMonster() {
 		 for (Tower t : towers)
 		 {
 			 for (Monster m : monsters)
 			 {
-				 if (((t.getP().getX() >= m.getP().getX())&&(t.getP().getY() >= m.getP().getY()))&&
-					((t.getP().getX() - m.getP().getX() <= t.getRange())&&(t.getP().getY() - m. getP().getY() < t.getRange())))
-				 {
-						 b = true;
-				 }
-				 else if (((t.getP().getX() >= m.getP().getX())&&(t.getP().getY() < m.getP().getY()))&&
-						 ((t.getP().getX() - m.getP().getX() <= t.getRange())&&(m.getP().getY() - t. getP().getY() < t.getRange())))			 			
-				 {
-					 b = true;
-				 }		
-				 else if (((t.getP().getX() < m.getP().getX())&&(t.getP().getY() >= m.getP().getY()))&&
-						 ((m.getP().getX() - t.getP().getX() <= t.getRange())&&(t.getP().getY() - m. getP().getY() < t.getRange())))
-				 {
-					 b = true;
-				 }	
-				 else if (((t.getP().getX() < m.getP().getX())&&(t.getP().getY() < m.getP().getY()))&&
-						 ((m.getP().getX() - t.getP().getX() <= t.getRange())&&(m.getP().getY() - t. getP().getY() < t.getRange())))
-				 {
-					 b = true;
-				 }	
-				 else
-				 {
-					 b = false;
+				 if (checkMonster(t,m)) {
+					 
 				 }
 			 }
 		 }
-		 return b;
 	 }
+	 
+	 
 	 /**
 	  * Met à jour toutes les informations du plateau de jeu ainsi que les déplacements des monstres et les attaques des tours.
 	  * @return les points de vie restants du joueur
