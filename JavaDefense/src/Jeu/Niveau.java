@@ -70,7 +70,10 @@ public class Niveau {
 		//On attribue la valeur -5 à une tour dans la grille
 		int x = position_tab.getX();
 		int y = position_tab.getY();
-		grille[x][y] = -5;
+		if (peutConstruire(new PositionTab(x,y)))
+		{
+			grille[x][y] = -5;
+		}
 	}
 	
 	public boolean peutConstruire(PositionTab pt) 
@@ -80,7 +83,22 @@ public class Niveau {
 		int y = pt.getY();
 		if ((grille[x][y] < 0)&&(grille[x][y] != -5))
 		{
-			return true;
+			if ((x > 0)&&(x < Reader.TAILLE- 1)&&(y > 0)&&(y < Reader.TAILLE -1))
+			{
+				if ((grille[x][y + 1] <= 0)&&(grille[x][y-1] <= 0)&&(grille[x+1][y] <= 0)&&(grille[x-1][y] <= 0)
+						&&(grille[x+1][y+1] <= 0)&&(grille[x+1][y-1] <= 0)&&(grille[x-1][y+1] <= 0)&&(grille[x-1][y-1] <= 0))
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else 
+			{
+				return false;
+			}
 		}
 		else
 		{
