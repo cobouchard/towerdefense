@@ -14,8 +14,7 @@ public class BaseMonster extends Monster {
 	 * Le monstre est représenté par un cercle de couleur bleue ou grise
 	 */
 	public void draw() {
-		StdDraw.setPenColor(StdDraw.BLUE);
-		StdDraw.filledCircle(p.getX(), p.getY(), 0.01);
+		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower2/Isometric/baseMonster.png");		
 	}
 
 	@Override
