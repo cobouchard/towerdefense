@@ -10,6 +10,16 @@ public class Joueur {
 		this.pdv=pdv;
 	}
 	
+	public int getOr()
+	{
+		return or;
+	}
+	
+	public int getPdv()
+	{
+		return pdv;
+	}
+	
 	public void gagnerOr(int or_supp) 
 	{
 		or=or_supp;

@@ -41,11 +41,11 @@ public class World {
 	
 	
 	// Informations sur les statistiques de départ des tours
-	private int prix_tour_archer = 10;
+	private int prix_tour_archer = 40;
 	private double range_tour_archer = 3.;
 	private double speed_tour_archer = 3.;
 	
-	private int prix_tour_bombe = 20;
+	private int prix_tour_bombe = 60;
 	private double range_tour_bombe = 3.;
 	private double speed_tour_bombe = 3.;
 	
@@ -427,8 +427,8 @@ public class World {
 	  */
 	 public void drawInfos() {
 		 StdDraw.setPenColor(StdDraw.BLACK);
-		 StdDraw.text(0.8,0.9,"Health : ");
-		 StdDraw.text(0.8,0.85,"Gold : ");		 
+		 StdDraw.text(0.8,0.9,"Health : " + joueur.getPdv());
+		 StdDraw.text(0.8,0.85,"Gold : " + joueur.getOr());		 
 	 }
 	 
 	 /**
