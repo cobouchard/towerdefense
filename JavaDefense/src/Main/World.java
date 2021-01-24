@@ -500,14 +500,13 @@ public class World {
 	 /**
 	  * 
 	  */
+
 	 public void lose() {
 		 StdDraw.setPenColor(StdDraw.BLACK);
 		 StdDraw.text(0.5,0.5,"PERDU");
-	 }
+	}
 	 
-	 /**
-	  * 
-	  */
+
 	 public void win() {
 		 StdDraw.setPenColor(StdDraw.BLACK);
 		 StdDraw.text(0.5,0.5,"GAGNÉ");
