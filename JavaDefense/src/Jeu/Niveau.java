@@ -66,6 +66,7 @@ public class Niveau {
 			for(int j=0; j!=grille.length; j++)
 				if(grille[i][j]==250)
 					pChateau = Converter.tabToPosition(new PositionTab(i,j));
+		
 	}
 	
 	public void affiche() 

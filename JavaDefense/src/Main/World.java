@@ -1,6 +1,5 @@
 package Main;
 
-import java.util.List;
 import java.util.Scanner;
 
 import AStar.PositionTab;
@@ -20,7 +19,6 @@ import Interface.Bomb;
 import Interface.Arrow;
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 
@@ -31,8 +29,8 @@ public class World {
 
 	// l'ensemble des monstres, pour gerer (notamment) l'affichage (finira par disparaitre)
 	HashSet<Monster> monsters = new HashSet<>();
-	List<Tower> towers = new ArrayList<>();
-	List<Projectile> projectiles = new ArrayList<>();
+	HashSet<Tower> towers = new HashSet<>();
+	HashSet<Projectile> projectiles = new HashSet<>();
 	
 	private final static Scanner sc = new Scanner(System.in);
 	
@@ -89,7 +87,7 @@ public class World {
 		squareHeight = (double) 1 / taille;
 		
 		try {
-			niveau = Reader.func("../niveaux/niveau2.niveau");
+			niveau = Reader.func("../niveaux/niveau3.niveau");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -462,7 +460,7 @@ public class World {
 		for(Monster m : monsters)
 		{
 			m.update();
-			if(m.getP().dist(niveau.getPChateau()) < 0.005)
+			if(m.getP().dist(niveau.getPChateau()) < 0.008)
 			{
 				joueur.perdrePv(m.getDegats());
 				monstres_arrives.add(m);
