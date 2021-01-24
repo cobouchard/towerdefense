@@ -32,4 +32,6 @@ public class Informations {
 	//taille du plateau
 	public static final int taille = 15;
 	public final static int NOMBRE_NIVEAU = 3;
+	
+	public static int cout_mur = 2;
 }

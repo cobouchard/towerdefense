@@ -257,6 +257,8 @@ public class Algorithm {
 			
 			
 			
+			if(current_cell==null)
+				return null;
 			
 			if(current_cell.equals(findCell(arrivee))) // si on est arrivé
 				test=false;

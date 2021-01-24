@@ -616,6 +616,9 @@ public class World {
 		case 's':
 			selectionNiveau();
 			break;
+		case 'm':
+			System.out.println("Mur séléctionné (" + Informations.cout_mur + "g).");
+			break;
 		case 'r':
 			System.out.println("Le niveau démarre !");
 			demarre=true;
@@ -710,6 +713,18 @@ public class World {
 				System.out.println("Vous ne pouvez pas construire ici");
 			break;
 			
+		case 'm':
+			if(niveau.peutConstruireMur(pt, monsters))
+				if(joueur.payerOr(Informations.cout_mur))
+				{
+					niveau.pose_mur(pt);
+					System.out.println("Un mur a été créé");
+					
+				}
+				else
+					System.out.println("Pas le droit de faire un mur ici");
+			break;
+			
 		case 'e':
 			System.out.println("Ici il est possible de faire évolué une des tours");
 			break;
@@ -727,6 +742,7 @@ public class World {
 		System.out.println("Click on the grass to build it.");
 		System.out.println("Press S to select a level.");
 		System.out.println("Press R if you're ready so start the level");
+		System.out.println("Appuez sur m pour selectionner les murs");
 	}
 	
 	/**
