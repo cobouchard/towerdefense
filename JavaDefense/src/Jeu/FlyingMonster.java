@@ -24,6 +24,7 @@ public class FlyingMonster extends Monster{
 	protected void updateStat(int difficulte) {
 		speed = 0.02;
 		degats=2;
+		or = 3;
 	}
 
 	@Override

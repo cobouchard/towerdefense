@@ -26,18 +26,12 @@ public class BaseMonster extends Monster {
 	protected void updateStat(int difficulte) {
 		speed = 0.01;
 		degats = 1;
+		or = 3;
 	}
 
 	@Override
 	public boolean perdrePv(int degats) {
-		if (degats == 0)
-		{
-			return false;
-		}
-		else
-		{
-			pdv = pdv - degats;
-			return true;
-		}
+		pdv-=degats;
+		return pdv<=0;
 	}
 }

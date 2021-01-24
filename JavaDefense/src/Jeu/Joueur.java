@@ -22,7 +22,7 @@ public class Joueur {
 	
 	public void gagnerOr(int or_supp) 
 	{
-		or=or_supp;
+		or+=or_supp;
 	}
 	
 	/**
