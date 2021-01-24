@@ -4,7 +4,7 @@ import Jeu.Monster;
 
 public class Arrow extends Projectile {
 
-	//Entier donnant l'orientation de la flèche
+	//Float donnant l'orientation de la flèche
 	float angle;
 	// Entier donnant le nombre de points de vie retiré par la bombe
 	int damage;

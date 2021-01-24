@@ -14,7 +14,7 @@ public class ArcherTower extends Tower {
 	public static float angleEntreDeuxPoints(float x1, float x2, float y1, float y2) {
         float xDiff = x2 - x1;
         float yDiff = y2 - y1;
-        float angle = (float) ((Math.atan2(yDiff, xDiff) * (180 / Math.PI))+270);
+        float angle = (float) ((Math.atan2(yDiff, xDiff) * (180 / Math.PI))+Math.PI);
         if (angle < 0)
         {
         	angle += 360;
