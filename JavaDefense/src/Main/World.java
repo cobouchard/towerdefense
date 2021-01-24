@@ -101,6 +101,7 @@ public class World {
 				 }
 				 else if (niveau.getGrille()[i][j] == -10)
 				 {
+					 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/tiles/EmptyTile.png");
 					 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/Rock Pile.png");
 				 }
 				 else if (niveau.getGrille()[i][j] > 0)
@@ -115,7 +116,7 @@ public class World {
 				 {
 					 if ((i != 0)&&(j != 0)&&(i != Informations.taille -1)&&(j != Informations.taille - 1))
 					 {
-						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
+						 if (((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0))) // Top and left
 						 {
 							 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/tiles/RoadBotAndLeft.png");
 						 }
