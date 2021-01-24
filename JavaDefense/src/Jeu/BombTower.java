@@ -17,7 +17,8 @@ public class BombTower extends Tower {
 
 	@Override
 	public void ameliorerTour() {
-		range = range*1.75;
+		range = range*1.25;
+		speed = (int)(speed * 88. / 100.);
 		this.level++;
 	}
 
