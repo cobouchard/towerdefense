@@ -40,6 +40,11 @@ public abstract class Tower {
 		return speed;
 	}
 	
+	public int getLevel() 
+	{
+		return level;
+	}
+	
 	
 	
 	public int getCompteur()
@@ -61,6 +66,8 @@ public abstract class Tower {
 		this.p=p;
 		this.projectile_compteur=projectile_compteur;
 	}
+	
+	public abstract int coutAmelioration();
 	
 	public abstract void ameliorerTour();
 	
