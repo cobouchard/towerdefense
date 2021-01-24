@@ -38,11 +38,19 @@ public class ArcherTower extends Tower {
 		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower/towerArcher.png");		
 	}
 	
+	/**
+	 * renvoie les degats infliges par la tour
+	 * @return la quantite de degats d'un projectile
+	 */
 	protected int degatInfliges() 
 	{
 		return degats*level;
 	}
 
+	/**
+	 * @param m monstre associé à la projectile
+	 * @return renvoie un nouveau projectile
+	 */
 	@Override
 	public Projectile getProjectile(Monster m) {
 		return new Arrow(new Position(p),m, degatInfliges(), angleEntreDeuxPoints((float)(p.getX()), 

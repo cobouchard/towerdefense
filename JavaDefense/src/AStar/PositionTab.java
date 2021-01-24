@@ -44,6 +44,9 @@ public class PositionTab {
 		this.y = y;
 	}
 	
+	/**
+	 * Interchange les coordonées x et y (pour l'affichage)
+	 */
 	public void inversion() 
 	{
 		int temp_x = x;

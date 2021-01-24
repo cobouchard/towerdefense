@@ -28,7 +28,7 @@ import Jeu.Vague;
  */
 public final class Reader {
 	
-	
+	// lit un fichier pour renvoyer les données du niveau correspondantes
 	public static Niveau func(String cheminNiveau) throws Exception
 	{
 		File niveau_file = new File(cheminNiveau);

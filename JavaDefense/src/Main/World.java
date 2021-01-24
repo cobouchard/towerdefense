@@ -480,11 +480,21 @@ public class World {
 		 return (t.getP().dist(m.getP()) <= t.getRange());
 	 }
 	 
+	 /**
+	  * 
+	  * @param proj
+	  * @return renvoie vrai si le projectile est assez proche du monstre pour considerer qu'il est touche
+	  */
 	 public boolean checkProjectileHit(Projectile proj) 
 	 {
 		 return proj.getP().dist(proj.getMonster().getP())<0.03;
 	 }
 	 
+	 /**
+	  * verifie le statut de chaque projectile :
+	  *  - si le projectile touche un monstre
+	  *  - si le monstre du projectile a atteint le chateau
+	  */
 	 public void checkProjectiles() 
 	 {
 		 HashSet<Projectile> proj_touches = new HashSet<>();
@@ -550,6 +560,9 @@ public class World {
 		 System.out.println("Vous avez battu le niveau : " + niveau.getNom());
 	 }
 	 
+	 /**
+	  * fonction de nettoyage quand le niveau est terminé
+	  */
 	 public void clean() 
 	 {
 		 demarre=false;
@@ -663,6 +676,9 @@ public class World {
 		}
 	}
 	
+	/**
+	 * séléctionne le niveau sur lequel le joueur va jouer en fonction de ce qu'il souhaite (ce qu'il entre au clavier)
+	 */
 	private void selectionNiveau() 
 	{
 		System.out.println("Selectionnez un niveau (entrez un nombre entre 1 et "+Informations.NOMBRE_NIVEAU+")");

@@ -11,7 +11,7 @@ public class Bomb extends Projectile {
 	
 	/**
 	 * Affiche un projectile
-	 * Le projectile est représenté par un triangle de couleur grise
+	 * Le projectile est représenté par une bombe
 	 */
 	public void draw() {
 		StdDraw.picture(p.getX(),p.getY(),"../images/projectiles/bomb.png");

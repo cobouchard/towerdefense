@@ -9,14 +9,12 @@ public class Vague {
 	
 	private Monster monster;
 	
-	private int difficulte;
 	
 	public Vague(int nb_monstre_total, int difficulte, Monster monster)
 	{
 		this.monster=monster;
 		this.nb_monstre_total=nb_monstre_total;
 		nb_monstre_actuel=nb_monstre_total;
-		this.difficulte=difficulte;
 	}
 	
 	public int getNbMonstreTotal() 
@@ -36,14 +34,13 @@ public class Vague {
 		
 		nb_monstre_actuel--;
 		Monster m = monster.createMonster(p);
-		m.updateStat(difficulte);
+		m.updateStat();
 		return m;
 	}
 
 	@Override
 	public String toString() {
-		return "Vague [Nombre de monstre=" + nb_monstre_total + ", Type de Monstre=" + monster.getClass() + ", Difficulté=" + difficulte
-				+ "]";
+		return "Vague [Nombre de monstre=" + nb_monstre_total + ", Type de Monstre=" + monster.getClass();
 	}
 	
 	
