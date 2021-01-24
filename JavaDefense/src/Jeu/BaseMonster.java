@@ -24,9 +24,9 @@ public class BaseMonster extends Monster {
 
 	@Override
 	protected void updateStat(int difficulte) {
-		speed = 0.01;
-		degats = 1;
-		or = 3;
+		speed = Informations.speedBase;
+		degats = Informations.degatsBase;
+		or = Informations.orBase;
 	}
 
 	@Override
