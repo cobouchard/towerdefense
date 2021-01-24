@@ -428,7 +428,7 @@ public class World {
 	 {
 		 for(Projectile p : projectiles) 
 		 {
-			 p.draw();
+			 p.update();
 		 }
 	 }
 	 
@@ -499,8 +499,8 @@ public class World {
 					 {
 						 Projectile projectile = t.getProjectile();
 						 projectiles.add(projectile);
-						 t.setCompteur(t.getCompteur()+1);
 					 }
+					 t.setCompteur(t.getCompteur()+1);
 					 if (t.getCompteur() >= t.getSpeed())
 					 {
 						 t.setCompteur(0);

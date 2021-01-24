@@ -59,6 +59,7 @@ public abstract class Projectile {
 	
 	public void update() {
 		move();
+		this.nextP = monstre.getP();
 		draw();
 		checkpoint++;
 	}
