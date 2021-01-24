@@ -33,6 +33,11 @@ public class Informations {
 	public static int orBase = 5;
 	public static double speedBase = 0.01;
 	
+	//monstre Boss
+	public static int degatsBoss = 15;
+	public static int orBoss = 150;
+	public static double speedBoss = 0.002;
+	
 	
 	//taille du plateau
 	public static final int taille = 20;
