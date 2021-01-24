@@ -30,7 +30,7 @@ public class ArcherTower extends Tower {
 
 	@Override
 	public void draw() {
-		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower2/Isometric/towerArcher.png");		
+		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower/towerArcher.png");		
 	}
 	
 	private int degatInfliges() 

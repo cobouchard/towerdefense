@@ -11,7 +11,7 @@ public class FlyingMonster extends Monster{
 
 	@Override
 	public void draw() {
-		StdDraw.picture(p.getX(),p.getY(),"../images/monsters/FlyingMonster1.png");
+		StdDraw.picture(p.getX(),p.getY(),"../images/monsters/FlyingMonster.png");
 	}
 
 	@Override
