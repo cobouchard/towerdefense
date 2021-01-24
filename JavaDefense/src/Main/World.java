@@ -99,6 +99,10 @@ public class World {
 				 {
 					 StdDraw.picture(n*i+squareWidth/width,n*j+squareWidth/width,"../images/tiles/NotConstructible.png");
 				 }
+				 else if (niveau.getGrille()[i][j] == -10)
+				 {
+					 StdDraw.picture(n*i+squareWidth/width,n*j+squareWidth/width,"../images/Rock Pile.png");
+				 }
 				 else if (niveau.getGrille()[i][j] > 0)
 				 {
 					 StdDraw.picture(n*i+squareWidth/width,n*j+squareWidth/width,"../images/tiles/Road.png");
