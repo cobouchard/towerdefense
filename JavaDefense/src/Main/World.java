@@ -9,6 +9,7 @@ import Interface.Projectile;
 import Interface.StdDraw;
 import Jeu.ArcherTower;
 import Jeu.BombTower;
+import Jeu.Informations;
 import Jeu.Joueur;
 import Jeu.Monster;
 import Jeu.Niveau;
@@ -21,9 +22,6 @@ import java.util.HashSet;
 import java.util.InputMismatchException;
 
 public class World {
-	final static int NOMBRE_NIVEAU = 3;
-	// Variable static pour la taille d'un côté du monde
-	public static final int taille = 15;
 
 	// l'ensemble des monstres, pour gerer (notamment) l'affichage (finira par disparaitre)
 	HashSet<Monster> monsters = new HashSet<>();
@@ -36,19 +34,7 @@ public class World {
 	public static final int width = 750;
 	public static final int height = 750;
 	double squareWidth;
-	double squareHeight;
-	
-	
-	// Informations sur les statistiques de départ des tours
-	private int prix_tour_archer = 50;
-	private double range_tour_archer = 0.2;
-	private int speed_tour_archer = 20;
-	
-	private int prix_tour_bombe = 60;
-	private double range_tour_bombe = 0.2;
-	private int speed_tour_bombe = 20;
-
-	
+	double squareHeight;	
 	
 	// Commande sur laquelle le joueur appuie (sur le clavier)
 	char key;
@@ -66,11 +52,7 @@ public class World {
 	
 	//information des vagues pour l'apparition des monstres
 	Vague current_vague = null;
-	int compteur_apparition = 0;
-	final int apparition_temps = 50; //nombre d'update entre chaque apparition de monstre
-	
-	
-	
+
 	
 	/**
 	 * Initialisation du monde en fonction de la largeur, la hauteur et le nombre de cases données
@@ -82,8 +64,8 @@ public class World {
 	 * @param startSquareY
 	 */
 	public World() {
-		squareWidth = (double) 1 / taille;
-		squareHeight = (double) 1 / taille;
+		squareWidth = (double) 1 / Informations.taille;
+		squareHeight = (double) 1 / Informations.taille;
 		
 		try {
 			niveau = Reader.func("../niveaux/niveau2.niveau");
@@ -103,10 +85,10 @@ public class World {
 	 public void drawBackground() 
 	 {			 
 		
-		 double n = (int)(1./taille / squareWidth) * squareWidth;//  + squareWidth / 2
-		 for (int i = 0 ; i < taille ; i++)
+		 double n = (int)(1./Informations.taille / squareWidth) * squareWidth;//  + squareWidth / 2
+		 for (int i = 0 ; i < Informations.taille ; i++)
 		 {
-			 for (int j = 0 ; j < taille ; j++)
+			 for (int j = 0 ; j < Informations.taille ; j++)
 			 {
 				 if (niveau.getGrille()[i][j] == 0)
 				 {
@@ -122,7 +104,7 @@ public class World {
 				 }
 				 else 
 				 {
-					 if ((i != 0)&&(j != 0)&&(i != taille -1)&&(j != taille - 1))
+					 if ((i != 0)&&(j != 0)&&(i != Informations.taille -1)&&(j != Informations.taille - 1))
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
@@ -200,7 +182,7 @@ public class World {
 							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
-					 else if ((i == 0)&&(j == taille -1))
+					 else if ((i == 0)&&(j == Informations.taille -1))
 					 {
 						 if ((niveau.getGrille()[i + 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and right
 						 {
@@ -223,7 +205,7 @@ public class World {
 							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
-					 else if ((i == taille - 1)&&(j == 0))
+					 else if ((i == Informations.taille - 1)&&(j == 0))
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j + 1] > 0)) // Bot and left
 						 {
@@ -246,7 +228,7 @@ public class World {
 							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
-					 else if ((i == taille - 1)&&(j == taille - 1))
+					 else if ((i == Informations.taille - 1)&&(j == Informations.taille - 1))
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
@@ -339,7 +321,7 @@ public class World {
 							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
-					 else if (i == taille - 1)
+					 else if (i == Informations.taille - 1)
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
@@ -374,7 +356,7 @@ public class World {
 							 StdDraw.picture(n*i+25./750.,n*j+25./750.,"../images/tiles/EmptyTile.png");
 						 }
 					 }
-					 else if (j == taille - 1)
+					 else if (j == Informations.taille - 1)
 					 {
 						 if ((niveau.getGrille()[i - 1][j] > 0)&&(niveau.getGrille()[i][j - 1] > 0)) // Top and left
 						 {
@@ -478,7 +460,7 @@ public class World {
 	 
 	 public boolean checkProjectileHit(Projectile proj) 
 	 {
-		 return proj.getP().dist(proj.getMonster().getP())<0.05;
+		 return proj.getP().dist(proj.getMonster().getP())<0.03;
 	 }
 	 
 	 public void checkProjectiles() 
@@ -489,11 +471,13 @@ public class World {
 			 if(checkProjectileHit(proj)) 
 			 {
 				 Monster m = proj.getMonster();
-				 if( m.perdrePv(proj.getDegats()) ) //si le monstre est mort
-				 {
-					 joueur.gagnerOr(m.getOr());
-					 monsters.remove(m);
-				 }
+				 
+				 if(m!=null) //si jamais un monstre arrive au chateau avant de se faire toucher		 
+					 if( m.perdrePv(proj.getDegats()) ) //si le monstre est mort
+					 {
+						 joueur.gagnerOr(m.getOr());
+						 monsters.remove(m);
+					 }
 				 proj_touches.add(proj);
 				 
 			 }
@@ -553,7 +537,7 @@ public class World {
 
 		 if(demarre) 
 		 {
-			 compteur_apparition = (compteur_apparition+1)%apparition_temps;
+			 Informations.compteur_apparition = (Informations.compteur_apparition+1)%Informations.apparition_temps;
 			 updateMonsters();
 			 checkProjectiles();
 			 if(current_vague==null) 
@@ -567,7 +551,7 @@ public class World {
 				 }
 			 }
 
-			 else if (compteur_apparition==0) 
+			 else if (Informations.compteur_apparition==0) 
 			 {
 				 Position spawn = Converter.tabToPosition(niveau.getRandomSpawn());
 				 Monster m = current_vague.getMonster(spawn);
@@ -635,7 +619,7 @@ public class World {
 	
 	private void selectionNiveau() 
 	{
-		System.out.println("Selectionnez un niveau (entrez un nombre entre 1 et "+NOMBRE_NIVEAU+")");
+		System.out.println("Selectionnez un niveau (entrez un nombre entre 1 et "+Informations.NOMBRE_NIVEAU+")");
 		
 		int numero_niveau=-1;
 		do 
@@ -644,7 +628,7 @@ public class World {
 			try 
 			{
 				temp = sc.nextInt();
-				if(temp>=1 && temp <= NOMBRE_NIVEAU)
+				if(temp>=1 && temp <= Informations.NOMBRE_NIVEAU)
 				{
 					System.out.println("Vous avez séléctionnez le niveau :" + temp);
 					numero_niveau=temp;
@@ -654,7 +638,7 @@ public class World {
 			}
 			catch(InputMismatchException e) 
 			{
-				System.out.println("Vous devez entrer un nombre entier entre 1 et "+NOMBRE_NIVEAU);
+				System.out.println("Vous devez entrer un nombre entier entre 1 et "+Informations.NOMBRE_NIVEAU);
 			}
 		}while(numero_niveau==-1);
 		
@@ -686,10 +670,10 @@ public class World {
 		case 'a':
 			//on vérifie qu'il peut construire à cette endroit et qu'il a assez d'or
 			if(niveau.peutConstruire(pt))
-				if(joueur.payerOr(prix_tour_archer)) 
+				if(joueur.payerOr(Informations.prix_tour_archer)) 
 				{
 					System.out.println("Une tour d'archer a été créé !");
-					ArcherTower tower = new ArcherTower(prix_tour_archer,range_tour_archer, speed_tour_archer, new Position(p), 0);
+					ArcherTower tower = new ArcherTower(Informations.prix_tour_archer,Informations.range_tour_archer, Informations.speed_tour_archer, new Position(p), 0);
 					towers.add(tower);
 				}
 				else
@@ -702,10 +686,10 @@ public class World {
 			
 		case 'b':
 			if(niveau.peutConstruire(pt))
-				if(joueur.payerOr(prix_tour_bombe)) 
+				if(joueur.payerOr(Informations.prix_tour_bombe)) 
 				{
 					System.out.println("Une tour de bombes a été créé !");
-					BombTower tower = new BombTower(prix_tour_bombe,range_tour_bombe, speed_tour_bombe, new Position(p), 0);
+					BombTower tower = new BombTower(Informations.prix_tour_bombe,Informations.range_tour_bombe, Informations.speed_tour_bombe, new Position(p), 0);
 					
 					towers.add(tower);
 				}
@@ -727,8 +711,8 @@ public class World {
 	 * offertes au joueur pour intéragir avec le clavier
 	 */
 	public void printCommands() {
-		System.out.println("Press A to select Arrow Tower (cost "+prix_tour_archer+"g).");
-		System.out.println("Press B to select Cannon Tower (cost "+prix_tour_bombe+"g).");
+		System.out.println("Press A to select Arrow Tower (cost "+Informations.prix_tour_archer+"g).");
+		System.out.println("Press B to select Cannon Tower (cost "+Informations.prix_tour_bombe+"g).");
 		System.out.println("Press E to update a tower (cost 40g).");
 		System.out.println("Click on the grass to build it.");
 		System.out.println("Press S to select a level.");
