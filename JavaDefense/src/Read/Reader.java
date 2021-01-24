@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import AStar.PositionTab;
 import Jeu.BaseMonster;
+import Jeu.BossMonster;
 import Jeu.FlyingMonster;
 import Jeu.Informations;
 import Jeu.Niveau;
@@ -86,6 +87,9 @@ public final class Reader {
 				break;
 			case 2:
 				vagues.add(new Vague(Integer.parseInt(decoupe[1]),Integer.parseInt(decoupe[2]), new FlyingMonster(null)));
+				break;
+			case 3:
+				vagues.add(new Vague(Integer.parseInt(decoupe[1]),Integer.parseInt(decoupe[2]), new BossMonster(null)));
 				break;
 			}
 			
