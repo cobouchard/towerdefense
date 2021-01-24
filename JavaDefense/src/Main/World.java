@@ -53,6 +53,10 @@ public class World {
 	
 	//information des vagues pour l'apparition des monstres
 	Vague current_vague = null;
+	
+	// empeche le double clic
+	private int temps=0;
+	private final int temps_entre_2_clic = 10;
 
 	
 	/**
@@ -541,6 +545,10 @@ public class World {
 	  * @return les points de vie restants du joueur
 	  */
 	 public int update() {
+		 
+		 if(temps!=0)
+			 temps=(temps+1)%temps_entre_2_clic;
+		 
 		 drawBackground();
 		 drawInfos();
 		 drawProjectiles();
@@ -558,7 +566,6 @@ public class World {
 				 {
 					 clean();
 					 win();
-					 //TODO gérer la fin du niveau
 				 }
 			 }
 
@@ -675,60 +682,68 @@ public class World {
 	 * @param y
 	 */
 	public void mouseClick(double x, double y) {
-		double normalizedX = (int)(x / squareWidth) * squareWidth + squareWidth / 2;
-		double normalizedY = (int)(y / squareHeight) * squareHeight + squareHeight / 2;
-		Position p = new Position(normalizedX, normalizedY);
-		PositionTab pt = Converter.positionToTab(p);
-		switch (key) {
-		case 'a':
-			//on vérifie qu'il peut construire à cette endroit et qu'il a assez d'or
-			if(niveau.peutConstruire(pt))
-				if(joueur.payerOr(Informations.prix_tour_archer)) 
-				{
-					System.out.println("Une tour d'archer a été créé !");
-					ArcherTower tower = new ArcherTower(Informations.prix_tour_archer,Informations.range_tour_archer, Informations.speed_tour_archer, new Position(p), 0);
-					towers.add(tower);
-				}
+		
+		if(temps==0) 
+		{
+			double normalizedX = (int)(x / squareWidth) * squareWidth + squareWidth / 2;
+			double normalizedY = (int)(y / squareHeight) * squareHeight + squareHeight / 2;
+			Position p = new Position(normalizedX, normalizedY);
+			PositionTab pt = Converter.positionToTab(p);
+			switch (key) {
+			case 'a':
+				//on vérifie qu'il peut construire à cette endroit et qu'il a assez d'or
+				if(niveau.peutConstruire(pt))
+					if(joueur.payerOr(Informations.prix_tour_archer)) 
+					{
+						System.out.println("Une tour d'archer a été créé !");
+						ArcherTower tower = new ArcherTower(Informations.prix_tour_archer,Informations.range_tour_archer, Informations.speed_tour_archer, new Position(p), 0);
+						towers.add(tower);
+					}
+					else
+						System.out.println("Vous n'avez pas assez d'or");
+						
 				else
-					System.out.println("Vous n'avez pas assez d'or");
-					
-			else
-				System.out.println("Vous ne pouvez pas construire ici");
-			break;
-			
-			
-		case 'b':
-			if(niveau.peutConstruire(pt))
-				if(joueur.payerOr(Informations.prix_tour_bombe)) 
-				{
-					System.out.println("Une tour de bombes a été créé !");
-					BombTower tower = new BombTower(Informations.prix_tour_bombe,Informations.range_tour_bombe, Informations.speed_tour_bombe, new Position(p), 0);
-					
-					towers.add(tower);
-				}
+					System.out.println("Vous ne pouvez pas construire ici");
+				break;
+				
+				
+			case 'b':
+				if(niveau.peutConstruire(pt))
+					if(joueur.payerOr(Informations.prix_tour_bombe)) 
+					{
+						System.out.println("Une tour de bombes a été créé !");
+						BombTower tower = new BombTower(Informations.prix_tour_bombe,Informations.range_tour_bombe, Informations.speed_tour_bombe, new Position(p), 0);
+						
+						towers.add(tower);
+					}
+					else
+						System.out.println("Vous n'avez pas assez d'or");
+						
 				else
-					System.out.println("Vous n'avez pas assez d'or");
-					
-			else
-				System.out.println("Vous ne pouvez pas construire ici");
-			break;
-			
-		case 'm':
-			if(niveau.peutConstruireMur(pt, monsters))
-				if(joueur.payerOr(Informations.cout_mur))
-				{
-					niveau.pose_mur(pt);
-					System.out.println("Un mur a été créé");
-					
-				}
+					System.out.println("Vous ne pouvez pas construire ici");
+				break;
+				
+			case 'm':
+				if(niveau.peutConstruireMur(pt, monsters))
+					if(joueur.payerOr(Informations.cout_mur))
+					{
+						niveau.pose_mur(pt);
+						System.out.println("Un mur a été créé");
+						
+					}
+					else
+						System.out.println("Vous n'avez pas assez d'or");
 				else
 					System.out.println("Pas le droit de faire un mur ici");
-			break;
-			
-		case 'e':
-			System.out.println("Ici il est possible de faire évolué une des tours");
-			break;
+				break;
+				
+			case 'e':
+				System.out.println("Ici il est possible de faire évolué une des tours");
+				break;
+			}
 		}
+		
+		temps=1;
 	}
 	
 	/**
