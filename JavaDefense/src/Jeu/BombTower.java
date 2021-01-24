@@ -24,7 +24,7 @@ public class BombTower extends Tower {
 
 	@Override
 	public void draw() {
-		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower2/Isometric/towerBomb.png");		
+		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower/towerBomb.png");		
 	}
 
 	@Override

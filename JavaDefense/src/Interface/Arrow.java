@@ -23,6 +23,6 @@ public class Arrow extends Projectile {
 	 * Le projectile est représenté par un cercle de couleur gris clair
 	 */
 	public void draw() {
-		StdDraw.picture(p.getX(), p.getY(),"../images/projectiles/arrow silver/sprite_1.png", angle);
+		StdDraw.picture(p.getX(), p.getY(),"../images/projectiles/arrow.png", angle);
 	}
 }

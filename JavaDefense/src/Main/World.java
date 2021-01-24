@@ -114,14 +114,14 @@ public class World {
 				 else if (niveau.getGrille()[i][j] == -10)
 				 {
 					 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/tiles/Road.png");
-					 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/Rock Pile.png");
+					 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/Rocher/Rocher.png");
 				 }
 				 else if (niveau.getGrille()[i][j] > 0)
 				 {
 					 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/tiles/Road.png");
 					 if (niveau.getGrille()[i][j] == 250) // Château
 					 {
-						 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/Tower2/Isometric/towerRound_crystals_E.png");
+						 StdDraw.picture(n*i+(double)(25./width),n*j+(double)(25./width),"../images/Tower/crystals.png");
 					 }
 				 }
 				 else 
@@ -440,9 +440,9 @@ public class World {
 	  */
 	 public void drawInfos() {
 		 StdDraw.setPenColor(StdDraw.BLACK);
-		 StdDraw.picture(0.9, 0.95, "../images/health_and_gold/TransparentPNG/Health/frame-1.png");
+		 StdDraw.picture(0.9, 0.95, "../images/Health/health.png");
 		 StdDraw.text(0.94,0.95,""+joueur.getPdv());
-		 StdDraw.picture(0.9, 0.9, "../images/health_and_gold/TransparentPNG/Coin/frame-1.png");
+		 StdDraw.picture(0.9, 0.9, "../images/Coin/coin.png");
 		 StdDraw.text(0.94,0.9,""+joueur.getOr());		 
 	 }
 		 

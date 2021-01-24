@@ -10,7 +10,7 @@ public class BossMonster extends Monster{
 	}
 
 	public void draw() {
-		StdDraw.picture(p.getX(),p.getY(),"../images/monsters/BossMonster1.png");		
+		StdDraw.picture(p.getX(),p.getY(),"../images/monsters/BossMonster.png");		
 	}
 
 	@Override
