@@ -23,6 +23,9 @@ public abstract class Tower {
 	//Vitesse de tir
 	double speed;
 	
+	//nombre d'update entre chaque apparition de monstre
+	int projectile_compteur; 
+
 	public Position getP()
 	{
 		return p;
@@ -38,13 +41,25 @@ public abstract class Tower {
 		return projectile;
 	}
 	
-	Tower(int prix,double range,double speed, Position p, Projectile projectile)
+	public int getCompteur()
+	{
+		return projectile_compteur;
+	}
+	
+	public void setCompteur(int compteur)
+	{
+		this.projectile_compteur = compteur;
+	}
+	
+	Tower(int prix,double range,double speed, Position p, Projectile projectile,int projectile_compteur)
 	{
 		this.prix=prix;
 		this.level=1;
 		this.range=range;
 		this.speed=speed;
 		this.p=p;
+		this.projectile=projectile;
+		this.projectile_compteur=projectile_compteur;
 	}
 	
 	public abstract void ameliorerTour();

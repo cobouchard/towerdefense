@@ -6,8 +6,8 @@ import Interface.StdDraw;
 
 public class BombTower extends Tower {
 
-	public BombTower(int prix, double range, double speed, Position p, Projectile projectile) {
-		super(prix, range, speed, p, projectile);
+	public BombTower(int prix, double range, double speed, Position p, Projectile projectile,int projectile_compteur) {
+		super(prix, range, speed, p, projectile,projectile_compteur);
 	}
 
 	@Override

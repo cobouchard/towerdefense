@@ -6,8 +6,8 @@ import Interface.StdDraw;
 
 public class ArcherTower extends Tower {
 
-	public ArcherTower(int prix, double range, double speed, Position p,Projectile projectile) {
-		super(prix, range, speed, p,projectile);
+	public ArcherTower(int prix, double range, double speed, Position p,Projectile projectile,int projectile_compteur) {
+		super(prix, range, speed, p,projectile,projectile_compteur);
 	}
 
 	@Override

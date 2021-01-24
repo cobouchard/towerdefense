@@ -50,7 +50,7 @@ public class World {
 	private int prix_tour_bombe = 60;
 	private double range_tour_bombe = 3.;
 	private double speed_tour_bombe = 3.;
-	
+
 	
 	
 	// Commande sur laquelle le joueur appuie (sur le clavier)
@@ -472,14 +472,7 @@ public class World {
 	  * @return un booléen indiquant si le monstre est à portée de la tour
 	  */
 	 public boolean checkMonster(Tower t, Monster m) {
-		 if (t.getP().dist(m.getP()) <= t.getRange())
-		 {
-			 return true;
-		 }	
-		 else
-		 {
-			 return false;
-		 }
+		 return (t.getP().dist(m.getP()) <= t.getRange());
 	 }
 	 
 	 /**
@@ -491,7 +484,11 @@ public class World {
 			 for (Monster m : monsters)
 			 {
 				 if (checkMonster(t,m)) {
-					 
+					 if (t.getCompteur() == 0)
+					 {
+						 Projectile projectile = t.getProjectile();
+						 t.setCompteur(t.getCompteur()+1);
+					 }
 				 }
 			 }
 		 }
@@ -506,7 +503,7 @@ public class World {
 		
 		drawBackground();
 		drawInfos();
-//		shotMonster();
+		shotMonster();
 //      double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
 //        
 //		StdDraw.picture(normalizedX2, normalizedX2, "../images/tiles/RoadBotAndLeft.png");
@@ -638,7 +635,7 @@ public class World {
 				if(joueur.payerOr(prix_tour_archer)) 
 				{
 					System.out.println("Une tour d'archer a été créé !");
-					ArcherTower tower = new ArcherTower(prix_tour_archer,range_tour_archer, speed_tour_archer, p, new Arrow(p));
+					ArcherTower tower = new ArcherTower(prix_tour_archer,range_tour_archer, speed_tour_archer, p, new Arrow(p), 0);
 					towers.add(tower);
 				}
 				else
@@ -654,7 +651,7 @@ public class World {
 				if(joueur.payerOr(prix_tour_bombe)) 
 				{
 					System.out.println("Une tour de bombes a été créé !");
-					BombTower tower = new BombTower(prix_tour_bombe,range_tour_bombe, speed_tour_bombe, p,new Bomb(p));
+					BombTower tower = new BombTower(prix_tour_bombe,range_tour_bombe, speed_tour_bombe, p,new Bomb(p), 0);
 					towers.add(tower);
 				}
 				else
