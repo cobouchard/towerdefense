@@ -534,7 +534,7 @@ public class World {
 		 {
 			 compteur_apparition = (compteur_apparition+1)%apparition_temps;
 			 updateMonsters();
-			 if(current_vague==null) 
+			 if(current_vague==null)
 			 {
 				 current_vague = niveau.getNextVague();
 				 if(current_vague==null) 
