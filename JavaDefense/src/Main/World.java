@@ -508,6 +508,34 @@ public class World {
 		 }
 	 }
 	 
+	 /**
+	  * affiche Perdu si le niveau est perdu
+	  * @return un booléen indicant si le niveau est perdu
+	  */
+	 public boolean lose() {
+		 
+		 if (joueur.getPdv() <= 0)
+		 {
+			 StdDraw.setPenColor(StdDraw.BLACK);
+			 StdDraw.text(0.5,0.5,"PERDU");
+			 return true;
+		 }
+		 else return false;
+	 }
+	 
+	 /**
+	  * affiche Gagné si le niveau est gagné
+	  * @return un booléen indicant si le niveau est gagné
+	  */
+	 public boolean win() {
+		 if ((niveau.getNextVague() == null)&&(lose() == false)&&(demarre))
+		 {
+			 StdDraw.setPenColor(StdDraw.BLACK);
+			 StdDraw.text(0.5,0.5,"GAGNÉ");
+			 return true;
+		 }
+		 else return false;
+	 }
 	 
 	 /**
 	  * Met à jour toutes les informations du plateau de jeu ainsi que les déplacements des monstres et les attaques des tours.
@@ -519,6 +547,8 @@ public class World {
 		drawInfos();
 		drawProjectiles();
 		shotMonster();
+		lose();
+//		win();
 		
 		if(demarre) 
 		{
