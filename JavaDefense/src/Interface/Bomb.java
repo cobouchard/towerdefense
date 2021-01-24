@@ -17,6 +17,6 @@ public class Bomb extends Projectile {
 	 * Le projectile est représenté par un triangle de couleur grise
 	 */
 	public void draw() {
-		StdDraw.picture(p.getX(),p.getY(),"../images/monsters/FlyingMonster1.png");
+		StdDraw.picture(p.getX(),p.getY(),"../images/projectiles/bombas.png");
 	}
 }
