@@ -113,7 +113,7 @@ public abstract class Monster {
 	public abstract void draw();
 	
 	protected abstract Monster createMonster(Position p);
-	protected abstract void updateStat(int difficulte);
+	protected abstract void updateStat();
 	public abstract boolean perdrePv(int degats);
 	
 }

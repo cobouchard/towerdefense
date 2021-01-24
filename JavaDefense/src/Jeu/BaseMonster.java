@@ -22,14 +22,21 @@ public class BaseMonster extends Monster {
 		return new BaseMonster(p);
 	}
 
+	/**
+	 * met à jour les caractéristiques du monstre
+	 */
 	@Override
-	protected void updateStat(int difficulte) {
+	protected void updateStat() {
 		speed = Informations.speedBase;
 		degats = Informations.degatsBase;
 		or = Informations.orBase;
 		pdv = Informations.pdvBase;
 	}
 
+	/**
+	 * @param degats infliges au monstre
+	 * @return renvoie true si le monstre est mort
+	 */
 	@Override
 	public boolean perdrePv(int degats) {
 		pdv-=degats;

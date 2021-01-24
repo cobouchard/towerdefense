@@ -50,6 +50,9 @@ public class Niveau {
 		return v;
 	}
 	
+	/*
+	 * @return renvoie un spawn au hasard parmi la liste des spawns du niveau
+	 */
 	public PositionTab getRandomSpawn() 
 	{
 		int rand = Randomizer.randomInt(0, spawns.size()-1);
@@ -94,6 +97,11 @@ public class Niveau {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param pt position ou le joueur essaye de poser une tour
+	 * @return renvoie vrai si on peut poser une tour sur la case pt
+	 */
 	public boolean peutConstruire(PositionTab pt) 
 	{
 		int x = pt.getX();
@@ -123,6 +131,12 @@ public class Niveau {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param pt position ou le joueur essaye de créer un mur
+	 * @param monstre_sur_le_plateau liste des monstres présents sur le plateau de jeu
+	 * @return renvoie vrai si construire un mur ne bloquera pas les monstres
+	 */
 	public boolean peutConstruireMur(PositionTab pt, HashSet<Monster> monstre_sur_le_plateau) 
 	{
 		if(grille[pt.getX()][pt.getY()]<=0 && grille[pt.getX()][pt.getY()]!=-5 && grille[pt.getX()][pt.getY()]!=-10) //on vérifie que le joueur essaye de faire un mur sur la route

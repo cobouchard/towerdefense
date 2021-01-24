@@ -19,7 +19,7 @@ public class BossMonster extends Monster{
 	}
 
 	@Override
-	protected void updateStat(int difficulte) {
+	protected void updateStat() {
 		speed = Informations.speedBoss;
 		degats = Informations.degatsBoss;
 		or = Informations.orBoss;

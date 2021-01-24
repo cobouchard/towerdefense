@@ -19,8 +19,7 @@ public class Arrow extends Projectile {
 	}
 	
 	/**
-	 * Affiche un projectile qui change de couleur au cours du temps
-	 * Le projectile est représenté par un cercle de couleur gris clair
+	 * Le projectile est représenté par une flèche
 	 */
 	public void draw() {
 		StdDraw.picture(p.getX(), p.getY(),"../images/projectiles/arrow.png", angle);

@@ -20,7 +20,7 @@ public class FlyingMonster extends Monster{
 	}
 
 	@Override
-	protected void updateStat(int difficulte) {
+	protected void updateStat() {
 		speed = Informations.speedVolant;
 		degats = Informations.degatsVolant;
 		or = Informations.orVolant;
