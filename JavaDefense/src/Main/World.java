@@ -54,6 +54,7 @@ public class World {
 	char key;
 	
 	// Condition pour terminer la partie
+	boolean perdu = false;
 	boolean end = false;
 	
 	
@@ -85,7 +86,7 @@ public class World {
 		squareHeight = (double) 1 / taille;
 		
 		try {
-			niveau = Reader.func("../niveaux/niveau3.niveau");
+			niveau = Reader.func("../niveaux/niveau2.niveau");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -447,16 +448,23 @@ public class World {
 	  */
 	 public void updateMonsters() {
 		HashSet<Monster> monstres_arrives = new HashSet<>();
+		
+		
 		for(Monster m : monsters)
 		{
 			m.update();
 			if(m.getP().dist(niveau.getPChateau()) < 0.008)
 			{
-				joueur.perdrePv(m.getDegats());
+				if(joueur.perdrePv(m.getDegats())) 
+				{
+					perdu = true;
+				}
+				
 				monstres_arrives.add(m);
 			}
 		}
-		monsters.removeAll(monstres_arrives);
+		if(demarre)
+			monsters.removeAll(monstres_arrives);
 	 }
 	 
 	 /**
@@ -490,32 +498,27 @@ public class World {
 	 }
 	 
 	 /**
-	  * affiche Perdu si le niveau est perdu
-	  * @return un booléen indicant si le niveau est perdu
+	  * 
 	  */
-	 public boolean lose() {
-		 
-		 if (joueur.getPdv() <= 0)
-		 {
-			 StdDraw.setPenColor(StdDraw.BLACK);
-			 StdDraw.text(0.5,0.5,"PERDU");
-			 return true;
-		 }
-		 else return false;
+	 public void lose() {
+		 StdDraw.setPenColor(StdDraw.BLACK);
+		 StdDraw.text(0.5,0.5,"PERDU");
 	 }
 	 
 	 /**
-	  * affiche Gagné si le niveau est gagné
-	  * @return un booléen indicant si le niveau est gagné
+	  * 
 	  */
-	 public boolean win() {
-		 if ((niveau.getNextVague() == null)&&(lose() == false)&&(demarre))
-		 {
-			 StdDraw.setPenColor(StdDraw.BLACK);
-			 StdDraw.text(0.5,0.5,"GAGNÉ");
-			 return true;
-		 }
-		 else return false;
+	 public void win() {
+		 StdDraw.setPenColor(StdDraw.BLACK);
+		 StdDraw.text(0.5,0.5,"GAGNÉ");
+	 }
+	 
+	 public void clean() 
+	 {
+		 demarre=false;
+		 projectiles.clear();
+		 monsters.clear();
+		 towers.clear();
 	 }
 	 
 	 /**
@@ -523,60 +526,59 @@ public class World {
 	  * @return les points de vie restants du joueur
 	  */
 	 public int update() {
-		
-		 if (lose())
+		 drawBackground();
+		 drawInfos();
+		 drawProjectiles();
+		 shotMonster();
+
+		 if(demarre) 
 		 {
-			drawBackground();
-			drawInfos();
-			lose();
+			 compteur_apparition = (compteur_apparition+1)%apparition_temps;
+			 updateMonsters();
+			 if(current_vague==null) 
+			 {
+				 current_vague = niveau.getNextVague();
+				 if(current_vague==null) 
+				 {
+					 System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
+					 clean();
+					 //TODO gérer la fin du niveau
+				 }
+			 }
+
+			 else if (compteur_apparition==0) 
+			 {
+				 Position spawn = Converter.tabToPosition(niveau.getRandomSpawn());
+				 Monster m = current_vague.getMonster(spawn);
+				 if(m!=null) //un nouveau monstre apparait
+				 {
+					 monsters.add(m);
+					 m.updateChemin(niveau.getGrille(), niveau.getPChateau());
+
+				 }
+				 else if (monsters.isEmpty()) //la vague est terminée 
+				 {
+					 System.out.println("Vague terminée !");
+					 current_vague=null;
+				 }
+
+			 }
+			 
+			 if(perdu) 
+			 {
+				 demarre = false;
+				 clean();
+				 System.out.println("vous n'avez plus de point de vie, vous avez perdu");
+			 }
 		 }
-		 else
-		 {
-			 drawBackground();
-				drawInfos();
-				drawProjectiles();
-				shotMonster();
-//				win();
-				
-				if(demarre) 
-				{
-					compteur_apparition = (compteur_apparition+1)%apparition_temps;
-					updateMonsters();
-					if(current_vague==null) 
-					{
-						current_vague = niveau.getNextVague();
-						if(current_vague==null) 
-						{
-							System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
-						}
-					}
-						
-					else if (compteur_apparition==0) 
-					{
-						Position spawn = Converter.tabToPosition(niveau.getRandomSpawn());
-						Monster m = current_vague.getMonster(spawn);
-						if(m!=null) //un nouveau monstre apparait
-						{
-							monsters.add(m);
-							m.updateChemin(niveau.getGrille(), niveau.getPChateau());
-							
-						}
-						else if (monsters.isEmpty()) //la vague est terminée 
-						{
-							System.out.println("Vague terminée !");
-							current_vague=null;
-						}
-						
-					}
-				}
-				drawInfos();
-				
-				drawTowers();
-		 }
-		
-		drawTowers();
-		
-		return -1;
+		 drawInfos();
+
+		 drawTowers();
+
+
+		 drawTowers();
+
+		 return -1;
 	 }
 	 
 	/**
