@@ -1397,6 +1397,24 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
         draw();
     }
+    
+    public static void pictureRad(double x, double y, String filename, double radians) {
+        // BufferedImage image = getImage(filename);
+        Image image = getImage(filename);
+        double xs = scaleX(x);
+        double ys = scaleY(y);
+        // int ws = image.getWidth();    // can call only if image is a BufferedImage
+        // int hs = image.getHeight();
+        int ws = image.getWidth(null);
+        int hs = image.getHeight(null);
+        if (ws < 0 || hs < 0) throw new IllegalArgumentException("image " + filename + " is corrupt");
+
+        offscreen.rotate(radians, xs, ys);
+        offscreen.drawImage(image, (int) Math.round(xs - ws/2.0), (int) Math.round(ys - hs/2.0), null);
+        offscreen.rotate(radians, xs, ys);
+
+        draw();
+    }
 
     /**
      * Draws the specified image centered at (<em>x</em>, <em>y</em>),

@@ -22,9 +22,9 @@ public class FlyingMonster extends Monster{
 
 	@Override
 	protected void updateStat(int difficulte) {
-		speed = 0.02;
-		degats=2;
-		or = 3;
+		speed = Informations.speedVolant;
+		degats = Informations.degatsVolant;
+		or = Informations.orVolant;
 	}
 
 	@Override

@@ -1,7 +1,9 @@
 package Jeu;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
+import AStar.Algorithm;
 import AStar.PositionTab;
 import Interface.Converter;
 import Interface.Position;
@@ -119,6 +121,58 @@ public class Niveau {
 		{
 			return false;
 		}
+	}
+	
+	public boolean peutConstruireMur(PositionTab pt, HashSet<Monster> monstre_sur_le_plateau) 
+	{
+		if(grille[pt.getX()][pt.getY()]<=0 && grille[pt.getX()][pt.getY()]!=-5 && grille[pt.getX()][pt.getY()]!=-10) //on vérifie que le joueur essaye de faire un mur sur la route
+			return false;
+		
+		else 
+		{
+			//on vérifie d'abord que l'on peut se déplacer du spawn jusqu'au chateau
+			int[][] grille_temp = new int[Informations.taille][Informations.taille];
+			
+			for(int ligne=0;ligne!=Reader.TAILLE; ligne++) 
+				for(int colonne=0; colonne!=Reader.TAILLE; colonne++)
+					grille_temp[ligne][colonne] = grille[ligne][colonne];
+			
+			
+			grille_temp[pt.getX()][pt.getY()]=-10;
+			Algorithm a_star = new Algorithm(grille_temp);
+			
+			for(PositionTab spawn : spawns) 
+			{
+				
+				
+				ArrayList<PositionTab> plusCourtChemin = a_star.fastestWay(spawn,Converter.positionToTab(pChateau));
+				
+				if(plusCourtChemin==null) 
+				{
+					return false;
+				}
+					
+			}
+			
+			
+			//on vérifie que les monstres sur la carte ne sont pas enfermés
+			for(Monster m : monstre_sur_le_plateau) 
+			{
+				ArrayList<PositionTab> plusCourtChemin = a_star.fastestWay(Converter.positionToTab(m.getP()),Converter.positionToTab(pChateau));
+				
+				if(plusCourtChemin==null)
+					return false;
+			}
+			
+		}
+		
+		return true;
+	}
+	
+	public void pose_mur(PositionTab pt) 
+	{
+		grille[pt.getX()][pt.getY()]=-10;
+		Informations.cout_mur++;
 	}
 	
 	
