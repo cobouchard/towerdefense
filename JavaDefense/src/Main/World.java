@@ -518,8 +518,7 @@ public class World {
 		 
 		 if (joueur.getPdv() <= 0)
 		 {
-			 StdDraw.setPenColor(StdDraw.BLACK);
-			 StdDraw.text(0.5,0.5,"PERDU");
+			 StdDraw.picture(0.5,0.5,"../images/VictoryDefeat/Defeat-4.png");
 			 return true;
 		 }
 		 else return false;
@@ -532,8 +531,7 @@ public class World {
 	 public boolean win() {
 		 if ((niveau.getNextVague() == null)&&(lose() == false)&&(demarre))
 		 {
-			 StdDraw.setPenColor(StdDraw.BLACK);
-			 StdDraw.text(0.5,0.5,"GAGNÉ");
+			 StdDraw.picture(0.5,0.5,"../images/VictoryDefeat/Victory - 4.png");
 			 return true;
 		 }
 		 else return false;
