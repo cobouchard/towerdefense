@@ -27,6 +27,7 @@ public class Informations {
 	public static int degatsVolant = 2;
 	public static int orVolant = 5;
 	public static double speedVolant = 0.02;
+	public static int pdvVolant = 5;
 	
 	//monstre volant
 	public static int degatsBase = 1;

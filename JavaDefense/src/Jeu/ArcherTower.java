@@ -32,10 +32,15 @@ public class ArcherTower extends Tower {
 	public void draw() {
 		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower2/Isometric/towerArcher.png");		
 	}
+	
+	private int degatInfliges() 
+	{
+		return degats*level;
+	}
 
 	@Override
 	public Projectile getProjectile(Monster m) {
-		return new Arrow(new Position(p),m, degats, angleEntreDeuxPoints((float)(p.getX()), 
+		return new Arrow(new Position(p),m, degatInfliges(), angleEntreDeuxPoints((float)(p.getX()), 
 				(float)(p.getY()),(float)(m.getP().getX()),(float)(m.getP().getY())));
 	}
 

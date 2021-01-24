@@ -6,8 +6,6 @@ public class Arrow extends Projectile {
 
 	//Float donnant l'orientation de la flèche
 	float angle;
-	// Entier donnant le nombre de points de vie retiré par la bombe
-	int damage;
 	
 	public Arrow(Position p,Monster monstre, int degats, float angle) {
 		super(p,monstre, degats);

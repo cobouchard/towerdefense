@@ -440,7 +440,7 @@ public class World {
 		for(Monster m : monsters)
 		{
 			m.update();
-			if(m.getP().dist(niveau.getPChateau()) < 0.008)
+			if(m.getP().dist(niveau.getPChateau()) < 0.01)
 			{
 				if(joueur.perdrePv(m.getDegats())) 
 				{
