@@ -36,6 +36,11 @@ public abstract class Tower {
 		return range;
 	}
 	
+	public double getSpeed()
+	{
+		return speed;
+	}
+	
 	public Projectile getProjectile()
 	{
 		return projectile;

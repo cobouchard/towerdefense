@@ -424,6 +424,14 @@ public class World {
 		 }
 	 }
 	 
+	 public void drawProjectiles() 
+	 {
+		 for(Projectile p : projectiles) 
+		 {
+			 p.draw();
+		 }
+	 }
+	 
 	 /**
 	  * Affiche certaines informations sur l'écran telles que les points de vie du joueur ou son or
 	  */
@@ -490,7 +498,12 @@ public class World {
 					 if (t.getCompteur() == 0)
 					 {
 						 Projectile projectile = t.getProjectile();
+						 projectiles.add(projectile);
 						 t.setCompteur(t.getCompteur()+1);
+					 }
+					 if (t.getCompteur() >= t.getSpeed())
+					 {
+						 t.setCompteur(0);
 					 }
 				 }
 			 }
@@ -506,6 +519,7 @@ public class World {
 		
 		drawBackground();
 		drawInfos();
+		drawProjectiles();
 		shotMonster();
 //      double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
 //        

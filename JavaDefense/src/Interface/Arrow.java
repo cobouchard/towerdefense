@@ -1,5 +1,7 @@
 package Interface;
 
+import Jeu.Monster;
+
 public class Arrow extends Projectile {
 
 	
@@ -7,6 +9,10 @@ public class Arrow extends Projectile {
 	int damage;
 	// Position des monstres touchés
 	Position p;
+	
+	public Arrow(Position p,Monster monstre) {
+		super(p, monstre);
+	}
 	
 	public Arrow(Position p) {
 		super(p);

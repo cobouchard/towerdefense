@@ -1,5 +1,7 @@
 package Interface;
 
+import Jeu.Monster;
+
 public abstract class Projectile {
 	// Position du projectile à l'instant t
 	Position p;
@@ -11,8 +13,17 @@ public abstract class Projectile {
 	boolean reached;
 	// Compteur de déplacement pour savoir si le projectile a atteint le monstre
 	int checkpoint = 0;
+	// Monstre visé par le projectile
+	Monster monstre;
 
-	public Projectile(Position p) {
+	public Projectile(Position p, Monster monstre) {
+		this.p = p;
+		this.nextP = monstre.getP();
+		this.monstre = monstre;
+	}
+	
+	public Projectile(Position p)
+	{
 		this.p = p;
 		this.nextP = new Position(p);
 	}
