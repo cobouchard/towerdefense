@@ -435,8 +435,10 @@ public class World {
 	  */
 	 public void drawInfos() {
 		 StdDraw.setPenColor(StdDraw.BLACK);
-		 StdDraw.text(0.8,0.9,"Health : " + joueur.getPdv());
-		 StdDraw.text(0.8,0.85,"Gold : " + joueur.getOr());		 
+		 StdDraw.picture(0.9, 0.95, "../images/health_and_gold/TransparentPNG/Health/frame-1.png");
+		 StdDraw.text(0.94,0.95,""+joueur.getPdv());
+		 StdDraw.picture(0.9, 0.9, "../images/health_and_gold/TransparentPNG/Coin/frame-1.png");
+		 StdDraw.text(0.94,0.9,""+joueur.getOr());		 
 	 }
 		 
 	 /**
@@ -487,6 +489,34 @@ public class World {
 		 }
 	 }
 	 
+	 /**
+	  * affiche Perdu si le niveau est perdu
+	  * @return un booléen indicant si le niveau est perdu
+	  */
+	 public boolean lose() {
+		 
+		 if (joueur.getPdv() <= 0)
+		 {
+			 StdDraw.setPenColor(StdDraw.BLACK);
+			 StdDraw.text(0.5,0.5,"PERDU");
+			 return true;
+		 }
+		 else return false;
+	 }
+	 
+	 /**
+	  * affiche Gagné si le niveau est gagné
+	  * @return un booléen indicant si le niveau est gagné
+	  */
+	 public boolean win() {
+		 if ((niveau.getNextVague() == null)&&(lose() == false)&&(demarre))
+		 {
+			 StdDraw.setPenColor(StdDraw.BLACK);
+			 StdDraw.text(0.5,0.5,"GAGNÉ");
+			 return true;
+		 }
+		 else return false;
+	 }
 	 
 	 /**
 	  * Met à jour toutes les informations du plateau de jeu ainsi que les déplacements des monstres et les attaques des tours.
@@ -494,43 +524,55 @@ public class World {
 	  */
 	 public int update() {
 		
-		drawBackground();
-		drawInfos();
-		drawProjectiles();
-		shotMonster();
-		
-		if(demarre) 
-		{
-			compteur_apparition = (compteur_apparition+1)%apparition_temps;
-			updateMonsters();
-			if(current_vague==null) 
-			{
-				current_vague = niveau.getNextVague();
-				if(current_vague==null) 
-				{
-					System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
-				}
-			}
+		 if (lose())
+		 {
+			drawBackground();
+			drawInfos();
+			lose();
+		 }
+		 else
+		 {
+			 drawBackground();
+				drawInfos();
+				drawProjectiles();
+				shotMonster();
+//				win();
 				
-			else if (compteur_apparition==0) 
-			{
-				Position spawn = Converter.tabToPosition(niveau.getRandomSpawn());
-				Monster m = current_vague.getMonster(spawn);
-				if(m!=null) //un nouveau monstre apparait
+				if(demarre) 
 				{
-					monsters.add(m);
-					m.updateChemin(niveau.getGrille(), niveau.getPChateau());
-					
+					compteur_apparition = (compteur_apparition+1)%apparition_temps;
+					updateMonsters();
+					if(current_vague==null) 
+					{
+						current_vague = niveau.getNextVague();
+						if(current_vague==null) 
+						{
+							System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
+						}
+					}
+						
+					else if (compteur_apparition==0) 
+					{
+						Position spawn = Converter.tabToPosition(niveau.getRandomSpawn());
+						Monster m = current_vague.getMonster(spawn);
+						if(m!=null) //un nouveau monstre apparait
+						{
+							monsters.add(m);
+							m.updateChemin(niveau.getGrille(), niveau.getPChateau());
+							
+						}
+						else if (monsters.isEmpty()) //la vague est terminée 
+						{
+							System.out.println("Vague terminée !");
+							current_vague=null;
+						}
+						
+					}
 				}
-				else if (monsters.isEmpty()) //la vague est terminée 
-				{
-					System.out.println("Vague terminée !");
-					current_vague=null;
-				}
+				drawInfos();
 				
-			}
-		}
-		drawInfos();
+				drawTowers();
+		 }
 		
 		drawTowers();
 		
