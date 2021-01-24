@@ -9,6 +9,7 @@ import Interface.Projectile;
 import Interface.StdDraw;
 import Jeu.ArcherTower;
 import Jeu.BombTower;
+import Jeu.FlyingMonster;
 import Jeu.Informations;
 import Jeu.Joueur;
 import Jeu.Monster;
@@ -486,6 +487,18 @@ public class World {
 	 }
 	 
 	 /**
+	  * Vérifie si le projectile a de l'effet sur le monstre
+	  */
+	 public boolean isEfficient(Monster m, Tower t)
+	 {
+		 if ((m instanceof FlyingMonster)&&(t instanceof BombTower))
+		 {
+			 return false;
+		 }
+		 else return true;
+	 }
+	 
+	 /**
 	  * Vérifie si des monstres sont à portée de chaque tour et tire si c'est le cas
 	  */
 	 public void shotMonster() {
@@ -493,13 +506,13 @@ public class World {
 		 {
 			 for (Monster m : monsters)
 			 {
-				 if (checkTowerRange(t,m)) {
+				 if ((checkTowerRange(t,m))&&(isEfficient(m,t))) {
 					 if (t.getCompteur() == 0)
 					 {
 						 Projectile projectile = t.getProjectile(m);
 						 projectiles.add(projectile);
 					 }
-					 t.updateCompteur();
+					 t.updateCompteur(); 
 				 } 
 				 
 			 }
@@ -507,14 +520,12 @@ public class World {
 	 }
 
 	 public void lose() {
-		 StdDraw.setPenColor(StdDraw.BLACK);
-		 StdDraw.text(0.5,0.5,"PERDU");
+		 System.out.println("Vous n'avez plus de points de vie, vous avez perdu !");;
 	}
 	 
 
 	 public void win() {
-		 StdDraw.setPenColor(StdDraw.BLACK);
-		 StdDraw.text(0.5,0.5,"GAGNÉ");
+		 System.out.println("Vous avez vaincu tous les monstres, vous avez gagné !");;
 	 }
 	 
 	 public void clean() 
@@ -540,13 +551,13 @@ public class World {
 			 Informations.compteur_apparition = (Informations.compteur_apparition+1)%Informations.apparition_temps;
 			 updateMonsters();
 			 checkProjectiles();
-			 if(current_vague==null) 
+			 if(current_vague==null)
 			 {
 				 current_vague = niveau.getNextVague();
 				 if(current_vague==null) 
 				 {
-					 System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
 					 clean();
+					 win();
 					 //TODO gérer la fin du niveau
 				 }
 			 }
@@ -571,9 +582,8 @@ public class World {
 			 
 			 if(perdu) 
 			 {
-				 demarre = false;
 				 clean();
-				 System.out.println("vous n'avez plus de point de vie, vous avez perdu");
+				 lose();
 			 }
 		 }
 		 drawInfos();
