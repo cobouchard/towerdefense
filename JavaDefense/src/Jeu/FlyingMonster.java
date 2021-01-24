@@ -7,7 +7,6 @@ public class FlyingMonster extends Monster{
 
 	public FlyingMonster(Position p) {
 		super(p);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -18,20 +17,17 @@ public class FlyingMonster extends Monster{
 
 	@Override
 	protected Monster createMonster(Position p) {
-		// TODO Auto-generated method stub
 		return new FlyingMonster(p);
 	}
 
 	@Override
 	protected void updateStat(int difficulte) {
-		// TODO Auto-generated method stub
 		speed = 0.02;
 		degats=2;
 	}
 
 	@Override
 	protected boolean perdrePv(int degats) {
-		// TODO Auto-generated method stub
 		if (degats == 0)
 		{
 			return false;

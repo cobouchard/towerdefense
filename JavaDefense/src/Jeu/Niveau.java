@@ -35,7 +35,6 @@ public class Niveau {
 		return pChateau;
 	}
 	
-	
 	/**
 	 * 
 	 * @return renvoie la prochaine vague de monstre et la supprime de la liste, renvoie null si le niveau est terminé
@@ -84,7 +83,6 @@ public class Niveau {
 			
 	}
 	public void poserTourArcher(PositionTab position_tab) {
-		// TODO Auto-generated method stub
 		//On attribue la valeur -5 à une tour dans la grille
 		int x = position_tab.getX();
 		int y = position_tab.getY();
@@ -96,7 +94,6 @@ public class Niveau {
 	
 	public boolean peutConstruire(PositionTab pt) 
 	{
-		// TODO Auto-generated method stub
 		int x = pt.getX();
 		int y = pt.getY();
 		if ((grille[x][y] < 0)&&(grille[x][y] != -5))

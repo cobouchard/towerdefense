@@ -17,7 +17,6 @@ public class Arrow extends Projectile {
 	 * Affiche un projectile qui change de couleur au cours du temps
 	 * Le projectile est représenté par un cercle de couleur gris clair
 	 */
-	//TODO
 	public void draw() {
 		StdDraw.setPenColor(StdDraw.BLUE);
 		StdDraw.filledCircle(p.getX(), p.getY(), 0.01);

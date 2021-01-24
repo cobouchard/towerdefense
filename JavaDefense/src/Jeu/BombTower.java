@@ -13,7 +13,6 @@ public class BombTower extends Tower {
 
 	@Override
 	public void ameliorerTour() {
-		// TODO Auto-generated method stub
 		range = range*1.75;
 		this.level++;
 	}
@@ -25,7 +24,6 @@ public class BombTower extends Tower {
 
 	@Override
 	public Projectile getProjectile(Monster m) {
-		// TODO Auto-generated method stub
 		return new Bomb(new Position(p), m);
 	}
 }

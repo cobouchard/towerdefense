@@ -23,11 +23,5 @@ public final class Converter {
 		double y = ((double)ypt*(double)(World.height/World.taille))/(double)World.height + (double)(1/(double)(World.taille*2));
 		return new Position(x,y);
 	}
-//	public static void main(String[] args) {
-//		Position p = new Position(0.5, 0.0);
-//		System.out.println(positionToTab(p).getX() + " " + positionToTab(p).getY());
-//		PositionTab pt = new PositionTab(0, 12);
-//		System.out.println(tabToPosition(pt).getX() + " " + tabToPosition(pt).getY());
-//	}
 
 }
