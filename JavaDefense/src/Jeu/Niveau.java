@@ -42,6 +42,8 @@ public class Niveau {
 	 */
 	public Vague getNextVague() 
 	{
+		if(vagues.isEmpty())
+			return null;
 		Vague v = vagues.get(0);
 		vagues.remove(0);
 		return v;

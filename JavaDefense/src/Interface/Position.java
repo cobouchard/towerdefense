@@ -1,6 +1,6 @@
 package Interface;
 
-import AStar.PositionTab;
+
 
 public class Position {
 	private double x;

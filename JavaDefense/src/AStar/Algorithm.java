@@ -206,10 +206,10 @@ public class Algorithm {
 					open_cells.add(temp_cell);
 				}
 			}
-			
 			//cellule du bas
 			if(current_pos.getX()+1 >=0 && current_pos.getX()+1 < TAILLE) 
 			{
+				
 				temp_cell = table[current_pos.getX()+1][current_pos.getY()];
 				if(temp_cell.getValue()>0 && !closed_cells.contains(temp_cell)) //la cellule courante est un chemin et pas déjà parcourue
 				{
@@ -246,12 +246,16 @@ public class Algorithm {
 				}
 			}
 			//on cherche la cellule open avec un f cost minimal (puis hcost pour départager)
+			closed_cells.add(current_cell);
+			open_cells.remove(current_cell);
+			
+			
 			Cell min = getMinCostCellInOpen();
 			
 			current_cell = min;
 			current_pos = findPosition(current_cell); 
-			closed_cells.add(current_cell);
-			open_cells.remove(current_cell);
+			
+			
 			
 			
 			if(current_cell.equals(findCell(arrivee))) // si on est arrivé
