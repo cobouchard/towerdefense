@@ -8,6 +8,7 @@ import java.util.Scanner;
 import AStar.PositionTab;
 import Jeu.BaseMonster;
 import Jeu.FlyingMonster;
+import Jeu.Informations;
 import Jeu.Niveau;
 import Jeu.Vague;
 
@@ -26,14 +27,13 @@ import Jeu.Vague;
  */
 public final class Reader {
 	
-	public static final int TAILLE = 15;
 	
 	public static Niveau func(String cheminNiveau) throws Exception
 	{
 		File niveau_file = new File(cheminNiveau);
 		Scanner sc = new Scanner(niveau_file);
 		String chaine;
-		int[][] grille = new int[TAILLE][TAILLE];
+		int[][] grille = new int[Informations.taille][Informations.taille];
 		ArrayList<Vague> vagues = new ArrayList<>();
 		int ligne;
 		int colonne;
@@ -55,7 +55,7 @@ public final class Reader {
 		
 		
 		//on récupère la grille
-		for(ligne=0; ligne!= TAILLE; ligne++) 
+		for(ligne=0; ligne!= Informations.taille; ligne++) 
 		{
 			colonne=0;
 			chaine=sc.nextLine();

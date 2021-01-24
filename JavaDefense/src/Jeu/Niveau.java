@@ -74,9 +74,9 @@ public class Niveau {
 	{
 		System.out.println("Niveau : " + nom);
 		System.out.println("Or de départ : " + or_depart);
-		for(int ligne=0;ligne!=Reader.TAILLE; ligne++) 
+		for(int ligne=0;ligne!=Informations.taille; ligne++) 
 		{
-			for(int colonne=0; colonne!=Reader.TAILLE; colonne++)
+			for(int colonne=0; colonne!=Informations.taille; colonne++)
 				System.out.print(grille[ligne][colonne] + ",");
 			System.out.println();
 		}
@@ -100,7 +100,7 @@ public class Niveau {
 		int y = pt.getY();
 		if ((grille[x][y] < 0)&&(grille[x][y] != -5))
 		{
-			if ((x > 0)&&(x < Reader.TAILLE- 1)&&(y > 0)&&(y < Reader.TAILLE -1))
+			if ((x > 0)&&(x < Informations.taille- 1)&&(y > 0)&&(y < Informations.taille -1))
 			{
 				if ((grille[x][y + 1] <= 0)&&(grille[x][y-1] <= 0)&&(grille[x+1][y] <= 0)&&(grille[x-1][y] <= 0)
 						&&(grille[x+1][y+1] <= 0)&&(grille[x+1][y-1] <= 0)&&(grille[x-1][y+1] <= 0)&&(grille[x-1][y-1] <= 0))
@@ -133,8 +133,8 @@ public class Niveau {
 			//on vérifie d'abord que l'on peut se déplacer du spawn jusqu'au chateau
 			int[][] grille_temp = new int[Informations.taille][Informations.taille];
 			
-			for(int ligne=0;ligne!=Reader.TAILLE; ligne++) 
-				for(int colonne=0; colonne!=Reader.TAILLE; colonne++)
+			for(int ligne=0;ligne!=Informations.taille; ligne++) 
+				for(int colonne=0; colonne!=Informations.taille; colonne++)
 					grille_temp[ligne][colonne] = grille[ligne][colonne];
 			
 			
