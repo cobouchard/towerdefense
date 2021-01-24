@@ -7,15 +7,10 @@ public class Arrow extends Projectile {
 	
 	// Entier donnant le nombre de points de vie retiré par la bombe
 	int damage;
-	// Position des monstres touchés
-	Position p;
 	
 	public Arrow(Position p,Monster monstre) {
-		super(p, monstre);
-	}
-	
-	public Arrow(Position p) {
-		super(p);
+		super(p,monstre);
+		speed = 0.03;
 	}
 	
 	/**
@@ -24,7 +19,7 @@ public class Arrow extends Projectile {
 	 */
 	//TODO
 	public void draw() {
-		StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
-		StdDraw.setCanvasSize(10, 10); // Valeurs à tester
+		StdDraw.setPenColor(StdDraw.BLUE);
+		StdDraw.filledCircle(p.getX(), p.getY(), 0.01);
 	}
 }

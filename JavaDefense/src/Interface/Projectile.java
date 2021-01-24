@@ -4,7 +4,7 @@ import Jeu.Monster;
 
 public abstract class Projectile {
 	// Position du projectile à l'instant t
-	Position p;
+	protected Position p;
 	// Vitesse du projectile
 	double speed;
 	// Position du projectile à l'instant t+1
@@ -22,11 +22,6 @@ public abstract class Projectile {
 		this.monstre = monstre;
 	}
 	
-	public Projectile(Position p)
-	{
-		this.p = p;
-		this.nextP = new Position(p);
-	}
 	
 //	/*
 //	 * Getter des dégats infligés par le projectile

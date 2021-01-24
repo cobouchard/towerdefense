@@ -8,6 +8,7 @@ import Interface.Position;
 import Interface.Projectile;
 import Interface.StdDraw;
 import Jeu.ArcherTower;
+import Jeu.BaseMonster;
 import Jeu.BombTower;
 import Jeu.Joueur;
 import Jeu.Monster;
@@ -43,12 +44,12 @@ public class World {
 	
 	// Informations sur les statistiques de départ des tours
 	private int prix_tour_archer = 50;
-	private double range_tour_archer = 3.;
-	private double speed_tour_archer = 3.;
+	private double range_tour_archer = 0.2;
+	private int speed_tour_archer = 100;
 	
 	private int prix_tour_bombe = 60;
-	private double range_tour_bombe = 3.;
-	private double speed_tour_bombe = 3.;
+	private double range_tour_bombe = 0.2;
+	private int speed_tour_bombe = 100;
 
 	
 	
@@ -497,15 +498,13 @@ public class World {
 				 if (checkMonster(t,m)) {
 					 if (t.getCompteur() == 0)
 					 {
-						 Projectile projectile = t.getProjectile();
+						 Projectile projectile = t.getProjectile(m);
 						 projectiles.add(projectile);
+						 System.out.println("projectile");
 					 }
-					 t.setCompteur(t.getCompteur()+1);
-					 if (t.getCompteur() >= t.getSpeed())
-					 {
-						 t.setCompteur(0);
-					 }
-				 }
+					 t.updateCompteur();
+				 } 
+				 
 			 }
 		 }
 	 }
@@ -521,10 +520,7 @@ public class World {
 		drawInfos();
 		drawProjectiles();
 		shotMonster();
-//      double normalizedY2 = (int)(7./15 / squareHeight) * squareHeight + squareHeight / 2;
-//        
-//		StdDraw.picture(normalizedX2, normalizedX2, "../images/tiles/RoadBotAndLeft.png");
-//		StdDraw.picture(normalizedY2,normalizedY2, "../images/tiles/RoadTopAndLeft.png");
+		
 		if(demarre) 
 		{
 			compteur_apparition = (compteur_apparition+1)%apparition_temps;
@@ -651,7 +647,7 @@ public class World {
 				if(joueur.payerOr(prix_tour_archer)) 
 				{
 					System.out.println("Une tour d'archer a été créé !");
-					ArcherTower tower = new ArcherTower(prix_tour_archer,range_tour_archer, speed_tour_archer, p, new Arrow(p), 0);
+					ArcherTower tower = new ArcherTower(prix_tour_archer,range_tour_archer, speed_tour_archer, new Position(p), 0);
 					towers.add(tower);
 				}
 				else
@@ -667,7 +663,8 @@ public class World {
 				if(joueur.payerOr(prix_tour_bombe)) 
 				{
 					System.out.println("Une tour de bombes a été créé !");
-					BombTower tower = new BombTower(prix_tour_bombe,range_tour_bombe, speed_tour_bombe, p,new Bomb(p), 0);
+					BombTower tower = new BombTower(prix_tour_bombe,range_tour_bombe, speed_tour_bombe, new Position(p), 0);
+					
 					towers.add(tower);
 				}
 				else

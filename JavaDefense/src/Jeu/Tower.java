@@ -6,10 +6,8 @@ import Interface.Projectile;
 
 public abstract class Tower {
 
-	//Projectile
-	Projectile projectile;
 	// Position de la tour
-	Position p;
+	protected Position p;
 	// Entier donnant le prix de la tour
 	int prix;
 	//Entier donnant le niveau de la tour
@@ -21,7 +19,7 @@ public abstract class Tower {
 	double range;
 	
 	//Vitesse de tir
-	double speed;
+	int speed;
 	
 	//nombre d'update entre chaque apparition de monstre
 	int projectile_compteur; 
@@ -41,34 +39,32 @@ public abstract class Tower {
 		return speed;
 	}
 	
-	public Projectile getProjectile()
-	{
-		return projectile;
-	}
+	
 	
 	public int getCompteur()
 	{
 		return projectile_compteur;
 	}
 	
-	public void setCompteur(int compteur)
+	public void updateCompteur()
 	{
-		this.projectile_compteur = compteur;
+		projectile_compteur = (projectile_compteur+1)%speed;
 	}
 	
-	Tower(int prix,double range,double speed, Position p, Projectile projectile,int projectile_compteur)
+	Tower(int prix,double range,int speed, Position p, int projectile_compteur)
 	{
 		this.prix=prix;
 		this.level=1;
 		this.range=range;
 		this.speed=speed;
 		this.p=p;
-		this.projectile=projectile;
 		this.projectile_compteur=projectile_compteur;
 	}
 	
 	public abstract void ameliorerTour();
 	
 	public abstract void draw();
+	
+	public abstract Projectile getProjectile(Monster m);
 	
 }
