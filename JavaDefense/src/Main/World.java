@@ -500,7 +500,6 @@ public class World {
 					 {
 						 Projectile projectile = t.getProjectile(m);
 						 projectiles.add(projectile);
-						 System.out.println("projectile");
 					 }
 					 t.updateCompteur();
 				 } 
