@@ -27,16 +27,9 @@ public class FlyingMonster extends Monster{
 	}
 
 	@Override
-	protected boolean perdrePv(int degats) {
-		if (degats == 0)
-		{
-			return false;
-		}
-		else
-		{
-			pdv = pdv - degats;
-			return true;
-		}
+	public boolean perdrePv(int degats) {
+		pdv-=degats;
+		return pdv<=0;
 	}
 
 }

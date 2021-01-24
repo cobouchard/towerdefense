@@ -22,6 +22,7 @@ public abstract class Monster {
 	int endroit_chemin =1;
 	
 	protected int degats;
+	protected int or;
 	
 	ArrayList<PositionTab> chemin;
 	
@@ -100,6 +101,11 @@ public abstract class Monster {
 		draw();
 	}
 	
+	public int getOr() 
+	{
+		return or;
+	}
+	
 	/**
 	 * Fonction abstraite qui sera instanciée dans les classes filles pour afficher le monstre sur le plateau de jeu.
 	 */
@@ -107,5 +113,6 @@ public abstract class Monster {
 	
 	protected abstract Monster createMonster(Position p);
 	protected abstract void updateStat(int difficulte);
-	protected abstract boolean perdrePv(int degats);
+	public abstract boolean perdrePv(int degats);
+	
 }

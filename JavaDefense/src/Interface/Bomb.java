@@ -7,8 +7,9 @@ public class Bomb extends Projectile {
 	// Entier donnant le nombre de points de vie retiré par la bombe
 	int damage;
 	
-	public Bomb(Position p, Monster monstre) {
-		super(p, monstre);
+	public Bomb(Position p, Monster monstre, int degats) {
+		super(p, monstre, degats);
+		speed = 0.03;
 	}
 	
 	/**

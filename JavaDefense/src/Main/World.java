@@ -9,6 +9,7 @@ import Interface.Projectile;
 import Interface.StdDraw;
 import Jeu.ArcherTower;
 import Jeu.BombTower;
+import Jeu.FlyingMonster;
 import Jeu.Joueur;
 import Jeu.Monster;
 import Jeu.Niveau;
@@ -42,11 +43,11 @@ public class World {
 	// Informations sur les statistiques de départ des tours
 	private int prix_tour_archer = 50;
 	private double range_tour_archer = 0.2;
-	private int speed_tour_archer = 100;
+	private int speed_tour_archer = 20;
 	
 	private int prix_tour_bombe = 60;
 	private double range_tour_bombe = 0.2;
-	private int speed_tour_bombe = 100;
+	private int speed_tour_bombe = 20;
 
 	
 	
@@ -472,8 +473,45 @@ public class World {
 	  * @param t une tour
 	  * @return un booléen indiquant si le monstre est à portée de la tour
 	  */
-	 public boolean checkMonster(Tower t, Monster m) {
+	 public boolean checkTowerRange(Tower t, Monster m) {
 		 return (t.getP().dist(m.getP()) <= t.getRange());
+	 }
+	 
+	 public boolean checkProjectileHit(Projectile proj) 
+	 {
+		 return proj.getP().dist(proj.getMonster().getP())<0.05;
+	 }
+	 
+	 public void checkProjectiles() 
+	 {
+		 HashSet<Projectile> proj_touches = new HashSet<>();
+		 for(Projectile proj : projectiles) 
+		 {
+			 if(checkProjectileHit(proj)) 
+			 {
+				 Monster m = proj.getMonster();
+				 if( m.perdrePv(proj.getDegats()) ) //si le monstre est mort
+				 {
+					 joueur.gagnerOr(m.getOr());
+					 monsters.remove(m);
+				 }
+				 proj_touches.add(proj);
+				 
+			 }
+		 }
+		 projectiles.removeAll(proj_touches);
+	 }
+	 
+	 /**
+	  * Vérifie si le projectile a de l'effet sur le monstre
+	  */
+	 public boolean isEfficient(Monster m, Tower t)
+	 {
+		 if ((m instanceof FlyingMonster)&&(t instanceof BombTower))
+		 {
+			 return false;
+		 }
+		 else return true;
 	 }
 	 
 	 /**
@@ -484,7 +522,7 @@ public class World {
 		 {
 			 for (Monster m : monsters)
 			 {
-				 if (checkMonster(t,m)) {
+				 if ((checkTowerRange(t,m))&&(isEfficient(m,t))) {
 					 if (t.getCompteur() == 0)
 					 {
 						 Projectile projectile = t.getProjectile(m);
@@ -496,20 +534,14 @@ public class World {
 			 }
 		 }
 	 }
-	 
-	 /**
-	  * 
-	  */
 
 	 public void lose() {
-		 StdDraw.setPenColor(StdDraw.BLACK);
-		 StdDraw.text(0.5,0.5,"PERDU");
+		 System.out.println("Vous n'avez plus de points de vie, vous avez perdu !");;
 	}
 	 
 
 	 public void win() {
-		 StdDraw.setPenColor(StdDraw.BLACK);
-		 StdDraw.text(0.5,0.5,"GAGNÉ");
+		 System.out.println("Vous avez vaincu tous les monstres, vous avez gagné !");;
 	 }
 	 
 	 public void clean() 
@@ -534,13 +566,14 @@ public class World {
 		 {
 			 compteur_apparition = (compteur_apparition+1)%apparition_temps;
 			 updateMonsters();
+			 checkProjectiles();
 			 if(current_vague==null)
 			 {
 				 current_vague = niveau.getNextVague();
 				 if(current_vague==null) 
 				 {
-					 System.out.println("Félicitations, vous avez terminé le niveau : \""+niveau.getNom()+"\" !");
 					 clean();
+					 win();
 					 //TODO gérer la fin du niveau
 				 }
 			 }
@@ -565,9 +598,8 @@ public class World {
 			 
 			 if(perdu) 
 			 {
-				 demarre = false;
 				 clean();
-				 System.out.println("vous n'avez plus de point de vie, vous avez perdu");
+				 lose();
 			 }
 		 }
 		 drawInfos();

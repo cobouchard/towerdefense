@@ -24,6 +24,6 @@ public class BombTower extends Tower {
 
 	@Override
 	public Projectile getProjectile(Monster m) {
-		return new Bomb(new Position(p), m);
+		return new Bomb(new Position(p), m, degats);
 	}
 }
