@@ -25,6 +25,11 @@ public class Joueur {
 		or+=or_supp;
 	}
 	
+	public void setOr(int or) 
+	{
+		this.or=or;
+	}
+	
 	/**
 	 * renvoie true si la transaction est autorisée i.e. le joueur a assez d'or (la transaction est effectuée)
 	 * @param prix

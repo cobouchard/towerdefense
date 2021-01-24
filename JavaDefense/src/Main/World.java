@@ -583,7 +583,10 @@ public class World {
 				 compteur_vague++;
 				 if(compteur_vague==5)
 					 Informations.apparition_temps=25;
+				 else if(compteur_vague==7)
+					 Informations.apparition_temps=15;
 				 if(current_vague==null) 
+					 
 				 {
 					 clean();
 					 win();
@@ -692,7 +695,7 @@ public class World {
 			e.printStackTrace();
 		}
 		
-		
+		joueur.setOr(niveau.getOrDepart());
 		
 	}
 	
@@ -768,7 +771,9 @@ public class World {
 				{
 					if(Converter.positionToTab(t.getP()).equals(pt)) //on cherche la tour 
 					{
-						if(joueur.payerOr(t.coutAmelioration())) 
+						if(t.getLevel()==3)
+							System.out.println("Cette tour est déjà niveau 3 ! (niveau max)");
+						else if(joueur.payerOr(t.coutAmelioration())) 
 						{
 							t.ameliorerTour();
 							System.out.println("La tour a été amélioré au niveau " + t.getLevel());
