@@ -27,6 +27,7 @@ public class BaseMonster extends Monster {
 		speed = Informations.speedBase;
 		degats = Informations.degatsBase;
 		or = Informations.orBase;
+		pdv = Informations.pdvBase;
 	}
 
 	@Override

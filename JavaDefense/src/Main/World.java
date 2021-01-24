@@ -32,8 +32,8 @@ public class World {
 	private final static Scanner sc = new Scanner(System.in);
 	
 	// Information sur la taille du plateau de jeu
-	public static final double width = 1000.;
-	public static final double height = 1000.;
+	public static final double width = 900.;
+	public static final double height = 900.;
 	double squareWidth = 25.;
 	double squareHeight = 25.;	
 	
@@ -57,7 +57,9 @@ public class World {
 	// empeche le double clic
 	private int temps=0;
 	private final int temps_entre_2_clic = 10;
-
+	
+	//temps entre 2 vagues
+	private int compteur_vague = 0;
 	
 	/**
 	 * Initialisation du monde en fonction de la largeur, la hauteur et le nombre de cases données
@@ -73,12 +75,12 @@ public class World {
 		squareHeight = (double) 1 / Informations.taille;
 		
 		try {
-			niveau = Reader.func("../niveaux/niveau2.niveau");
+			niveau = Reader.func("../niveaux/niveau1.niveau");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		joueur = new Joueur(niveau.getOrDepart(),20);
+		joueur = new Joueur(niveau.getOrDepart(),Informations.joueurPdv);
 				
 		StdDraw.setCanvasSize((int)width, (int)height);
 		StdDraw.enableDoubleBuffering();
@@ -534,6 +536,7 @@ public class World {
 
 	 public void win() {
 		 System.out.println("Vous avez vaincu tous les monstres, vous avez gagné !");;
+		 System.out.println("Vous avez battu le niveau : " + niveau.getNom());
 	 }
 	 
 	 public void clean() 
@@ -566,11 +569,16 @@ public class World {
 			 if(current_vague==null)
 			 {
 				 current_vague = niveau.getNextVague();
+				 compteur_vague++;
+				 if(compteur_vague==5)
+					 Informations.apparition_temps=25;
 				 if(current_vague==null) 
 				 {
 					 clean();
 					 win();
 				 }
+				 else
+					 System.out.println("Une nouvelle vague arrive !");
 			 }
 
 			 else if (Informations.compteur_apparition==0) 
@@ -616,26 +624,26 @@ public class World {
 		this.key = key;
 		switch (key) {
 		case 'a':
-			System.out.println("Arrow Tower selected (50g).");
+			System.out.println("Tour d'archer sélectionné ("+Informations.prix_tour_archer+"g).");
 			break;
 		case 'b':
-			System.out.println("Bomb Tower selected (60g).");
+			System.out.println("Bomb Tower selected ("+Informations.prix_tour_bombe+"g).");
 			break;
 		case 'e':
-			System.out.println("Evolution selected (40g).");
+			System.out.println("Evolution selected (Le prix varie selon la tour et son niveau).");
 			break;
 		case 's':
 			selectionNiveau();
 			break;
 		case 'm':
-			System.out.println("Mur séléctionné (" + Informations.cout_mur + "g).");
+			System.out.println("Mur séléctionné (" + Informations.cout_mur + "g). (+1g à chaque mur !) ");
 			break;
 		case 'r':
 			System.out.println("Le niveau démarre !");
 			demarre=true;
 			break;
 		case 'q':
-			System.out.println("Exiting.");
+			System.out.println("Aurevoir");
 			sc.close();
 		
 		}
@@ -700,7 +708,7 @@ public class World {
 					if(joueur.payerOr(Informations.prix_tour_archer)) 
 					{
 						System.out.println("Une tour d'archer a été créé !");
-						ArcherTower tower = new ArcherTower(Informations.prix_tour_archer,Informations.range_tour_archer, Informations.speed_tour_archer, new Position(p), 0);
+						ArcherTower tower = new ArcherTower(new Position(p));
 						towers.add(tower);
 					}
 					else
@@ -716,7 +724,7 @@ public class World {
 					if(joueur.payerOr(Informations.prix_tour_bombe)) 
 					{
 						System.out.println("Une tour de bombes a été créé !");
-						BombTower tower = new BombTower(Informations.prix_tour_bombe,Informations.range_tour_bombe, Informations.speed_tour_bombe, new Position(p), 0);
+						BombTower tower = new BombTower(new Position(p));
 						
 						towers.add(tower);
 					}
@@ -733,6 +741,8 @@ public class World {
 					{
 						niveau.pose_mur(pt);
 						System.out.println("Un mur a été créé");
+						for(Monster m : monsters)
+							m.updateChemin(niveau.getGrille(), niveau.getPChateau());
 						
 					}
 					else
@@ -772,13 +782,14 @@ public class World {
 	 * offertes au joueur pour intéragir avec le clavier
 	 */
 	public void printCommands() {
-		System.out.println("Press A to select Arrow Tower (cost "+Informations.prix_tour_archer+"g).");
-		System.out.println("Press B to select Cannon Tower (cost "+Informations.prix_tour_bombe+"g).");
-		System.out.println("Press E to update a tower (cost 40g).");
-		System.out.println("Click on the grass to build it.");
-		System.out.println("Press S to select a level.");
-		System.out.println("Press R if you're ready so start the level");
-		System.out.println("Appuez sur m pour selectionner les murs");
+		System.out.println("Appuyez sur A pour sélectionner la Tour d'archer (coût "+Informations.prix_tour_archer+"g)");
+		System.out.println("Appuyez sur B pour sélectionner la Tour de bombes (coût "+Informations.prix_tour_bombe+"g)");
+		System.out.println("Appuyez sur E pour sélectionner l'amélioration de tour (le coût varie)");
+		System.out.println("Appuez sur M pour sélectionner les murs");
+		System.out.println("Cliquer sur une case pour essayer de construire ou améliorer");
+		System.out.println("Appuyez sur S avant de lancer le niveau pour sélectionner un niveau (de base niveau 1)");
+		System.out.println("Appuyez sur R pour démarrer le niveau");
+		
 	}
 	
 	/**

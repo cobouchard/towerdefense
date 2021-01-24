@@ -7,11 +7,15 @@ import Interface.StdDraw;
 
 public class ArcherTower extends Tower {
 
-	public ArcherTower(int prix, double range, int speed, Position p,int projectile_compteur) {
-		super(prix, range, speed, p,projectile_compteur);
+	public ArcherTower(Position p) {
+		super(p);
+		range = Informations.range_tour_archer;
+		speed = Informations.speed_tour_archer;
+		degats = Informations.degats_tour_archer;
+		projectile_compteur=0;
 	}
 	
-	public static float angleEntreDeuxPoints(float x1, float x2, float y1, float y2) {
+	private static float angleEntreDeuxPoints(float x1, float x2, float y1, float y2) {
         float xDiff = x2 - x1;
         float yDiff = y2 - y1;
         float angle = (float) ((Math.atan2(yDiff, xDiff) * (180 / Math.PI))+Math.PI);
@@ -24,7 +28,8 @@ public class ArcherTower extends Tower {
 
 	@Override
 	public void ameliorerTour() {
-		range = range*1.25;
+		range = range*1.5;
+		speed = (int)(speed * 75. / 100.);
 		this.level++;
 	}
 
@@ -33,7 +38,7 @@ public class ArcherTower extends Tower {
 		 StdDraw.picture(p.getX(),p.getY(),"../images/Tower2/Isometric/towerArcher.png");		
 	}
 	
-	private int degatInfliges() 
+	protected int degatInfliges() 
 	{
 		return degats*level;
 	}

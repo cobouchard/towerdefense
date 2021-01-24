@@ -13,7 +13,7 @@ import java.util.HashSet;
  */
 public class Algorithm {
 	private Cell[][] table;
-	private final int TAILLE=15;
+	private final int TAILLE=18;
 	
 	private HashSet<Cell> open_cells;
 	private HashSet<Cell> closed_cells;

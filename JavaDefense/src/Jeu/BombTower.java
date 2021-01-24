@@ -7,8 +7,12 @@ import Interface.StdDraw;
 
 public class BombTower extends Tower {
 
-	public BombTower(int prix, double range, int speed, Position p,int projectile_compteur) {
-		super(prix, range, speed, p, projectile_compteur);
+	public BombTower(Position p) {
+		super(p);
+		range = Informations.range_tour_bombe;
+		speed = Informations.speed_tour_bombe;
+		degats = Informations.degats_tour_bombe;
+		projectile_compteur=0;
 	}
 
 	@Override
@@ -25,6 +29,12 @@ public class BombTower extends Tower {
 	@Override
 	public Projectile getProjectile(Monster m) {
 		return new Bomb(new Position(p), m, degats);
+	}
+	
+	@Override
+	protected int degatInfliges() 
+	{
+		return degats*level;
 	}
 
 	@Override

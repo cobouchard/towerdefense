@@ -24,6 +24,7 @@ public class FlyingMonster extends Monster{
 		speed = Informations.speedVolant;
 		degats = Informations.degatsVolant;
 		or = Informations.orVolant;
+		pdv = Informations.pdvVolant;
 	}
 
 	@Override

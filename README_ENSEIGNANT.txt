@@ -7,4 +7,19 @@ Un gitlab personnel a été utilisé pour le partage du code et l'échange d'inf
 
 Notre jeu :
 
-* expliquer toutes les fonctionnalités du jeu *
+Notre tower defense reprend la majorité des fonctionnalités du sujet :
+
+- Monstre de base, monstre volants
+- Tour d'archer tour de bombes
+- Amélioration des Tours
+- Perte de point de vie quand un monstre arrive au chateau
+
+Nouvelles fonctionnalités :
+
+- Monstre de type boss : plus fort, plus lent
+
+- Plusieurs niveaux : Utiliser S et entrer dans le terminal le numéro du niveau que l'on veut jouer
+
+- Plusieurs chemins pour les monstres
+
+- Création de murs pour bloquer des chemins (on ne peut pas bloquer complètement un monstre)
