@@ -29,7 +29,7 @@ public class BaseMonster extends Monster {
 	}
 
 	@Override
-	protected boolean perdrePv(int degats) {
+	public boolean perdrePv(int degats) {
 		if (degats == 0)
 		{
 			return false;

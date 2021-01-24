@@ -24,7 +24,7 @@ public class ArcherTower extends Tower {
 
 	@Override
 	public Projectile getProjectile(Monster m) {
-		return new Arrow(new Position(p),m);
+		return new Arrow(new Position(p),m, degats);
 	}
 	
 }

@@ -22,6 +22,8 @@ public abstract class Tower {
 	
 	//nombre d'update entre chaque apparition de monstre
 	int projectile_compteur; 
+	
+	int degats;
 
 	public Position getP()
 	{

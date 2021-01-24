@@ -15,11 +15,19 @@ public abstract class Projectile {
 	int checkpoint = 0;
 	// Monstre visé par le projectile
 	Monster monstre;
+	
+	private int degats;
 
-	public Projectile(Position p, Monster monstre) {
+	public Projectile(Position p, Monster monstre, int degats) {
 		this.p = p;
 		this.nextP = monstre.getP();
 		this.monstre = monstre;
+		this.degats=degats;
+	}
+	
+	public int getDegats() 
+	{
+		return degats;
 	}
 	
 	
@@ -45,6 +53,17 @@ public abstract class Projectile {
 		draw();
 		checkpoint++;
 	}
+	
+	public Position getP() 
+	{
+		return p;
+	}
+	
+	public Monster getMonster() 
+	{
+		return monstre;
+	}
+	
 	
 	/**
 	 * Fonction abstraite qui sera instanciée dans les classes filles pour afficher le projectile sur le plateau de jeu.

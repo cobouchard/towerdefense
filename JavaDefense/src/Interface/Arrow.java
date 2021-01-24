@@ -8,8 +8,8 @@ public class Arrow extends Projectile {
 	// Entier donnant le nombre de points de vie retiré par la bombe
 	int damage;
 	
-	public Arrow(Position p,Monster monstre) {
-		super(p,monstre);
+	public Arrow(Position p,Monster monstre, int degats) {
+		super(p,monstre, degats);
 		speed = 0.03;
 	}
 	
