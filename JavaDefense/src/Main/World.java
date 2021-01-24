@@ -8,7 +8,6 @@ import Interface.Position;
 import Interface.Projectile;
 import Interface.StdDraw;
 import Jeu.ArcherTower;
-import Jeu.BaseMonster;
 import Jeu.BombTower;
 import Jeu.Joueur;
 import Jeu.Monster;
@@ -16,8 +15,6 @@ import Jeu.Niveau;
 import Jeu.Tower;
 import Jeu.Vague;
 import Read.Reader;
-import Interface.Bomb;
-import Interface.Arrow;
 
 
 import java.util.HashSet;
@@ -441,24 +438,6 @@ public class World {
 		 StdDraw.text(0.8,0.9,"Health : " + joueur.getPdv());
 		 StdDraw.text(0.8,0.85,"Gold : " + joueur.getOr());		 
 	 }
-	 
-	 /**
-	  * Fonction qui récupère le positionnement de la souris et permet d'afficher une image de tour en temps réél
-	  *	lorsque le joueur appuie sur une des touches permettant la construction d'une tour.
-	  */
-	 public void drawMouse() { //a quoi nous sert cette fonction ??
-		double normalizedX = (int)(StdDraw.mouseX() / squareWidth) * squareWidth + squareWidth / 2;
-		double normalizedY = (int)(StdDraw.mouseY() / squareHeight) * squareHeight + squareHeight / 2;
-		String image = null;
-		switch (key) {
-		case 'a' : 
-			 // TODO Ajouter une image pour représenter une tour d'archers
-			 break;
-		case 'b' :
-			// TODO Ajouter une image pour représenter une tour à canon
-			 break;
-		}
-	 }
 		 
 	 /**
 	  * Pour chaque monstre de la liste de monstres de la vague, utilise la fonction update() qui appelle les fonctions run() et draw() de Monster.
@@ -553,7 +532,6 @@ public class World {
 		}
 		drawInfos();
 		
-		drawMouse();
 		drawTowers();
 		
 		return -1;

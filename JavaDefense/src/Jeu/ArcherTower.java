@@ -13,7 +13,6 @@ public class ArcherTower extends Tower {
 
 	@Override
 	public void ameliorerTour() {
-		// TODO Auto-generated method stub
 		range = range*1.25;
 		this.level++;
 	}

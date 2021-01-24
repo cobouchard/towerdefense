@@ -1,7 +1,6 @@
 package Jeu;
 
 import Interface.Position;
-import Interface.StdDraw;
 import Interface.Projectile;
 
 public abstract class Tower {

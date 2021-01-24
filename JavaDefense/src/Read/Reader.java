@@ -72,10 +72,6 @@ public final class Reader {
 			}
 		}
 		
-		
-		
-		
-		
 		//on récupère les vagues de monstre
 		while(sc.hasNextLine()) 
 		{

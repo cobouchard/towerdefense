@@ -23,19 +23,6 @@ public abstract class Projectile {
 	}
 	
 	
-//	/*
-//	 * Getter des dégats infligés par le projectile
-//	 */
-//	public int getDamage() {
-//		return this.damage;
-//	}
-//	/*
-//	 * Setter des dégats infligés par le projectile
-//	 */
-//	public void setDamage(int damage2) {
-//		this.damage = damage2;
-//	}
-	
 	/**
 	 * Déplace le projectile en fonction de sa vitesse sur l'axe des x et des y et de sa prochaine position.
 	 */
