@@ -38,5 +38,10 @@ public class ArcherTower extends Tower {
 		return new Arrow(new Position(p),m, degats, angleEntreDeuxPoints((float)(p.getX()), 
 				(float)(p.getY()),(float)(m.getP().getX()),(float)(m.getP().getY())));
 	}
+
+	@Override
+	public int coutAmelioration() {
+		return Informations.coutAmeliorationArcher + Informations.facteurAugmentationtCoutAmeliorationArcher*level;
+	}
 	
 }

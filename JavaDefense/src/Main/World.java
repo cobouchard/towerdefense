@@ -738,7 +738,24 @@ public class World {
 				break;
 				
 			case 'e':
-				System.out.println("Ici il est possible de faire évolué une des tours");
+				
+				for(Tower t : towers) 
+				{
+					if(Converter.positionToTab(t.getP()).equals(pt)) //on cherche la tour 
+					{
+						if(joueur.payerOr(t.coutAmelioration())) 
+						{
+							t.ameliorerTour();
+							System.out.println("La tour a été amélioré au niveau " + t.getLevel());
+						}
+							
+						else
+							System.out.println("Vous n'avez pas assez d'or pour améliorer la tour, coût = " + t.coutAmelioration() + "g.");
+						
+						break;
+					}
+				}
+				
 				break;
 			}
 		}

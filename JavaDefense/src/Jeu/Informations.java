@@ -7,11 +7,16 @@ public class Informations {
 	public static int prix_tour_archer = 50;
 	public static double range_tour_archer = 0.2;
 	public static int speed_tour_archer = 20;
+	public static int coutAmeliorationArcher = 20;
+	public static int facteurAugmentationtCoutAmeliorationArcher = 10;
 		
 	//bombardier
 	public static int prix_tour_bombe = 60;
 	public static double range_tour_bombe = 0.2;
 	public static int speed_tour_bombe = 20;
+	public static int coutAmeliorationBombe = 30;
+	public static int facteurAugmentationtCoutAmeliorationBombe = 20;
+	
 	
 
 	//vitesse d'apparition des monstres

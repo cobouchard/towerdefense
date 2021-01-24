@@ -26,4 +26,9 @@ public class BombTower extends Tower {
 	public Projectile getProjectile(Monster m) {
 		return new Bomb(new Position(p), m, degats);
 	}
+
+	@Override
+	public int coutAmelioration() {
+		return Informations.coutAmeliorationBombe + Informations.facteurAugmentationtCoutAmeliorationBombe*level;
+	}
 }
