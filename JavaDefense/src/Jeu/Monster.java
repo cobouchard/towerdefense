@@ -36,6 +36,7 @@ public abstract class Monster {
 	
 	public void updateChemin(int[][] grille, Position chateau) 
 	{
+		endroit_chemin=1;
 		Algorithm a = new Algorithm(grille);
 		
 		chemin = a.fastestWay(Converter.positionToTab(p), Converter.positionToTab(chateau));

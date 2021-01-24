@@ -23,6 +23,7 @@ public class BossMonster extends Monster{
 		speed = Informations.speedBoss;
 		degats = Informations.degatsBoss;
 		or = Informations.orBoss;
+		pdv = Informations.pdvBoss;
 	}
 
 	@Override
